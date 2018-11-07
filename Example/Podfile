@@ -1,0 +1,6 @@
+use_frameworks!
+
+target 'PayPlugin_Example' do
+  pod 'PayPlugin', :path => '../'
+
+end

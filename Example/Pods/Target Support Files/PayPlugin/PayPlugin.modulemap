@@ -1,0 +1,6 @@
+framework module PayPlugin {
+  umbrella header "PayPlugin-umbrella.h"
+
+  export *
+  module * { export * }
+}

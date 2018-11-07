@@ -1,0 +1,23 @@
+PODS:
+  - PayPlugin (0.1.0):
+    - SYWechatOpenSDK
+  - SYWechatOpenSDK (1.7.9)
+
+DEPENDENCIES:
+  - PayPlugin (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - SYWechatOpenSDK
+
+EXTERNAL SOURCES:
+  PayPlugin:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  PayPlugin: c001d3b4ad20e0254b370bfa5b6ed1023e73c372
+  SYWechatOpenSDK: f93b2e77a3ea8cdb70d535ec1605a5612bac72d6
+
+PODFILE CHECKSUM: 4e6bde89585899a336b1778d46ee2c71e233cd51
+
+COCOAPODS: 1.6.0.beta.1

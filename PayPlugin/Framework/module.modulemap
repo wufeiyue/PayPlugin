@@ -1,0 +1,19 @@
+module AlipaySDK {
+    header "AlipaySDK.framework/Headers/AlipaySDK.h"
+    export *
+}
+
+module CCBNetPaySDK {
+    header "CCBNetPaySDK.framework/Headers/CCBNetPaySDK.h"
+    export *
+}
+
+module UMSPPPayUnifyPayPlugin {
+    header "UMSPPPayUnifyPayPlugin.h"
+    export *
+}
+
+module UPPaymentControl {
+    header "UPPaymentControl.h"
+    export *
+}
