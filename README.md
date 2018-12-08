@@ -7,7 +7,7 @@
 
 ## 概述
 
-![Design](https://raw.githubusercontent.com/wufeiyue/PayPlugin/master/Design.png)
+![Design](https://raw.githubusercontent.com/wufeiyue/PayPlugin/master/Resources/Design.png)
 
 
 目前支持的支付方式有:
@@ -18,6 +18,14 @@
 - 一网通
 - 银联充值
 - 钱包
+
+## 准备工作
+1. 要想在App中打开第三方App,就需要再info.plist文件中完成参数配置:
+![Design](https://raw.githubusercontent.com/wufeiyue/PayPlugin/master/Resources/openURL@2x.png)
+
+2. 想要从第三方App中跳回到我们的App中,就需要在`URL Type`中添加我们App的Scheme,举例
+支付宝在返回商户时,需要依照Scheme唤醒我们的App, 所以这里需要在info中配置,如下图:
+![info](https://raw.githubusercontent.com/wufeiyue/PayPlugin/master/Resources/info@2x.png)
 
 ## 配置
 
@@ -87,7 +95,8 @@ class AlipayProvider: PayProviderCustomizer {
 
     //配置的支付类型, 依据此PayType会自动匹配SDK中支付宝支付相关的API
     var payType: PayType {
-        return .alipay(scheme: "约定的Scheme")
+        //这里填入我们的App的scheme, 便于从支付宝跳回到我们的App中 
+        return .alipay(scheme: "wmdl")
     }
 
     //签名配置类, 将签名结果回传给SDK中处理, 切记无论成功或失败都需要回传过去
