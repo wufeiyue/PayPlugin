@@ -1,5 +1,5 @@
 PODS:
-  - PayPlugin (0.1.0):
+  - PayPlugin (0.2.0):
     - SYWechatOpenSDK
   - SYWechatOpenSDK (1.7.9)
 
@@ -15,9 +15,9 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PayPlugin: c001d3b4ad20e0254b370bfa5b6ed1023e73c372
+  PayPlugin: 783d34a8febe4b5487df5cb795f406cc1611792b
   SYWechatOpenSDK: f93b2e77a3ea8cdb70d535ec1605a5612bac72d6
 
-PODFILE CHECKSUM: 4e6bde89585899a336b1778d46ee2c71e233cd51
+PODFILE CHECKSUM: d4cf45c9a417143618ce2be51838be080929f4d1
 
 COCOAPODS: 1.6.0.beta.1

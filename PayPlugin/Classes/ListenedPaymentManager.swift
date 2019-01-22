@@ -55,7 +55,7 @@ public class ListenedPaymentManager: NSObject {
             
             var canOpenURL: Bool = true
             
-            didEnterBackground = NotificationCenter.default.addObserver(forName: .UIApplicationDidEnterBackground, object: nil, queue: .main) { (notification) in
+            didEnterBackground = NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { (notification) in
                 
                 defer {
                     self.didEnterBackground.flatMap{ NotificationCenter.default.removeObserver($0) }
@@ -86,7 +86,7 @@ public class ListenerManager: NSObject {
         
         if applicationWillEnterForeground == nil {
             
-            applicationWillEnterForeground = NotificationCenter.default.addObserver(forName: .UIApplicationWillEnterForeground, object: nil, queue: .main) { [weak self](notification) in
+            applicationWillEnterForeground = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self](notification) in
                 
                 self?.isBusy = true
                 
@@ -95,7 +95,7 @@ public class ListenerManager: NSObject {
         
         if applicationDidBecomeActive == nil {
             
-            applicationDidBecomeActive = NotificationCenter.default.addObserver(forName: .UIApplicationDidBecomeActive, object: nil, queue: .main) { [weak self] (notification) in
+            applicationDidBecomeActive = NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: .main) { [weak self] (notification) in
                 
                 guard self?.isBusy == true else {
                     return

@@ -115,7 +115,7 @@ public final class PostFormWebViewController: UIViewController {
         
     }
     
-    private func makeConstraint(target: UIView, attr targetAttr: NSLayoutAttribute, toItem: Any? = nil, attr toAttr: NSLayoutAttribute? = nil, offset: CGFloat) -> NSLayoutConstraint {
+    private func makeConstraint(target: UIView, attr targetAttr: NSLayoutConstraint.Attribute, toItem: Any? = nil, attr toAttr: NSLayoutConstraint.Attribute? = nil, offset: CGFloat) -> NSLayoutConstraint {
         return NSLayoutConstraint(item: target, attribute: targetAttr, relatedBy: .equal, toItem: toItem, attribute: toAttr ?? targetAttr, multiplier: 1.0, constant: offset)
     }
     

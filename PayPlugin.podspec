@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PayPlugin'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.summary          = '集成有支付宝,微信,银联,建行支付渠道的开源库'
 
   s.description      = <<-DESC
@@ -21,7 +21,7 @@ Pod::Spec.new do |s|
   s.author           = { 'eppeo' => 'ieppeo@163.com' }
   s.source           = { :git => 'https://github.com/wufeiyue/PayPlugin.git', :tag => s.version.to_s }
   
-  s.swift_version = '4.0'
+  s.swift_version = '4.2'
   s.requires_arc = true
   s.platform = :ios
   s.ios.deployment_target = '8.0'
