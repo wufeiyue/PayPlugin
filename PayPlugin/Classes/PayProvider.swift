@@ -27,6 +27,9 @@ public enum PayPluginError: Error {
     //网络请求失败结果的输出
     case custom(String)
     case verifyReject
+    case userDidCancel
+    case lossData
+    case unknown
 }
 
 extension PayPluginError: Equatable {
@@ -49,6 +52,12 @@ extension PayPluginError: CustomStringConvertible {
             return value
         case .verifyReject:
             return "验证签名失败!"
+        case .userDidCancel:
+            return "用户取消支付"
+        case .lossData:
+            return "JSON解析失败"
+        case .unknown:
+            return "未知错误"
         }
     }
 }
@@ -56,11 +65,11 @@ extension PayPluginError: CustomStringConvertible {
 //MARK: - 支付状态
 public enum PaymentStatus {
     /// 支付成功
-    case paySuccess
+    case success
     /// 支付中
     case willPay
     /// 支付失败
-    case payFailure(PayPluginError)
+    case failure(PayPluginError)
 }
 
 

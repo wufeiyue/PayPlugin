@@ -228,7 +228,8 @@ final public class PayPlugin: NSObject {
                 
             case .failure(let error):
                 //网络请求失败,直接抛出异常
-                shared.payCompletionHandler?(.payFailure(.custom(error)))
+                shared.payCompletionHandler?(.failure(.custom(error)))
+                shared.reset()
             }
         }
     }
@@ -248,33 +249,40 @@ final public class PayPlugin: NSObject {
         //得到支付结果
         control.processCompletionHandler = { (state, dict) in
             
-            //开始验签
-            provider.verify(dict: dict, result: { (result) in
+            switch state {
+            case .success, .willPay: //本地SDK同步为支付成功/支付中
                 
-                switch result {
-                case .pass:
-                    //验签通过, 进入查询
-                    provider.query(result: { (status) in
-                        if case let .payFailure(error) = status, case .custom = error , state {
-                            //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
-                            self.payCompletionHandler?(.paySuccess)
-                            self.reset()
-                        }
-                        else {
-                            //将查询结果通知到外面, 整个支付过程结束
-                            self.payCompletionHandler?(status)
-                            self.reset()
-                        }
-                    })
-                case .reject:
-                    //验签未通过
-                    self.payCompletionHandler?(.payFailure(.verifyReject))
-                    self.reset()
-                }
-                
-            })
+                //开始验签
+                provider.verify(dict: dict, result: { verifyResult in
+                    
+                    switch verifyResult {
+                    case .pass: //验签通过, 进入查询
+                        provider.query(result: {
+                            if case let .failure(error) = $0, case .custom = error {
+                                //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
+                                self.payCompletionHandler?(.success)
+                                self.reset()
+                            }
+                            else {
+                                //将查询结果通知到外面, 整个支付过程结束
+                                self.payCompletionHandler?($0)
+                                self.reset()
+                            }
+                        })
+                    case .reject: //验签未通过
+                        self.payCompletionHandler?(.failure(.verifyReject))
+                        self.reset()
+                    }
+                    
+                })
+            case .failure(let error): //本地sdk状态码显示处理失败
+                self.payCompletionHandler?(.failure(error))
+                self.reset()
+            }
             
         }
+        
+        
     }
     
     private func asyncCallback(control: PaymentStrategy, provider: PaymentProvider) {
@@ -296,13 +304,13 @@ final public class PayPlugin: NSObject {
                     //整个支付过程结束
                     
                     switch result {
-                    case .paySuccess:
+                    case .success:
                         //支付成功
                         break
                     case .willPay:
                         //支付中
                         break
-                    case .payFailure:
+                    case .failure:
                         //支付失败
                         break
                     }
@@ -513,15 +521,13 @@ class ListenterManager {
 
 class PaymentStrategy {
     
-    typealias ProcessCompletionHandler = (_ state: Bool, _ jsonDict: Dictionary<AnyHashable, Any?>?) -> Void
+    typealias ProcessCompletionHandler = (_ result: PaymentStatus, _ jsonDict: Dictionary<AnyHashable, Any?>?) -> Void
     
     /// 支付结果
     var processCompletionHandler: ProcessCompletionHandler?
     
     //注册
-    func register(_ account: PayPlugin.Account) {
-        
-    }
+    func register(_ account: PayPlugin.Account) { }
     
     /// 传入签名,调起客户端
     func payOrder() {
@@ -558,16 +564,23 @@ class AlipayControl: PaymentStrategy {
         AlipaySDK.defaultService().processOrder(withPaymentResult: url) { dict in
             
             guard let payStatus = dict?["resultStatus"] as? String else {
-                //TODO: 处理失败结果
-                self.processCompletionHandler?(false, dict)
+                self.processCompletionHandler?(.failure(.lossData), dict)
                 return
             }
-
-            if payStatus == "9000" {
-                self.processCompletionHandler?(true, dict)
-            }
-            else {
-                self.processCompletionHandler?(false, dict)
+            
+            switch payStatus {
+            case "9000":
+                //支付成功
+                self.processCompletionHandler?(.success, dict)
+            case "8000":
+                //支付中
+                self.processCompletionHandler?(.willPay, dict)
+            case "6001":
+                //用户取消
+                self.processCompletionHandler?(.failure(.userDidCancel), dict)
+            default:
+                //未知状态
+                self.processCompletionHandler?(.failure(.unknown), dict)
             }
             
         }
