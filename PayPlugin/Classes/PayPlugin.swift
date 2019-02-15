@@ -460,7 +460,7 @@ open class PaymentProvider {
     
     /// 查询
     open func query(result: @escaping QueryCompletionHandler) {
-        result(.paySuccess)
+        result(.success)
     }
     
 }
@@ -640,13 +640,13 @@ class WeChatControl: PaymentStrategy {
         let queryDictionary = url.queryDictionary
         guard let ret = queryDictionary["ret"] as? String else {
             //TODO: 处理失败结果
-            processCompletionHandler?(false, queryDictionary)
+            processCompletionHandler?(.failure(.lossData), queryDictionary)
             return
         }
         
         let result = (ret == "0")
-        
-        processCompletionHandler?(result, queryDictionary)
+        //TODO: - 待处理
+//        processCompletionHandler?(result, queryDictionary)
         
     }
     
@@ -670,10 +670,11 @@ class CCBPayControl: PaymentStrategy {
             if let status = unwrappedDict["SUCCESS"] as? String, status.isEmpty == false {
                 switch status {
                 case "Y":
-                    self.processCompletionHandler?(true, dict)
+                    self.processCompletionHandler?(.success, dict)
                     return
                 case "N":
-                    self.processCompletionHandler?(false, dict)
+                    //TODO: - 待处理
+//                    self.processCompletionHandler?(false, dict)
                     return
                 default:
                     break
@@ -681,7 +682,7 @@ class CCBPayControl: PaymentStrategy {
             }
             
             if let epayStatus = unwrappedDict["epayStatus"] as? String, epayStatus == "Y" {
-                self.processCompletionHandler?(true, dict)
+                self.processCompletionHandler?(.success, dict)
                 return
             }
             
@@ -713,10 +714,11 @@ class CCBPayControl: PaymentStrategy {
             if let status = unwrappedDict["SUCCESS"] as? String, status.isEmpty == false {
                 switch status {
                 case "Y":
-                    self.processCompletionHandler?(true, dict)
+                    self.processCompletionHandler?(.success, dict)
                     return
                 case "N":
-                    self.processCompletionHandler?(false, dict)
+                    //TODO: - 待处理
+//                    self.processCompletionHandler?(false, dict)
                     return
                 default:
                     break
@@ -724,7 +726,7 @@ class CCBPayControl: PaymentStrategy {
             }
             
             if let epayStatus = unwrappedDict["epayStatus"] as? String, epayStatus == "Y" {
-                self.processCompletionHandler?(true, dict)
+                self.processCompletionHandler?(.success, dict)
                 return
             }
             
