@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import PayPlugin
 
 class ViewController: UIViewController {
 
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,4 +26,25 @@ class ViewController: UIViewController {
     }
 
 }
+/*
+class AlipayProvider: Provider {
+    
+    var successFlag: Bool = true
+    
+    override func sign(result: @escaping (Result<Business, NSError>) -> Void) {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            
+            if self.successFlag {
+                result(.success(.alipayClient(orderInfo: "orderInfo", scheme: "scheme")))
+            }
+            else {
+                result(.failure(NSError(domain: "", code: -99, userInfo: nil)))
+            }
+        }
+        
+    }
+    
+}
 
+*/

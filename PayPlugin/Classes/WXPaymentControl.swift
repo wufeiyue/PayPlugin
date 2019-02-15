@@ -7,7 +7,7 @@
 
 import UIKit
 import SYWechatOpenSDK
-
+/*
 public class WXPaymentControl: MultipartPayControl {
     
     private var result: ResponseCompletion?
@@ -34,9 +34,9 @@ extension WXPaymentControl: WXApiDelegate {
 
         guard resp is PayResp else { return }
 
-        let response = PayResponse(code: .weixin(resp.errCode), payResult: .weixin(resp.errCode), descriptor: nil)
-
-        result?(response)
+//        let response = PayResponse(code: .weixin(resp.errCode), payResult: .weixin(resp.errCode), descriptor: nil)
+//
+//        result?(response)
     }
 
 }
@@ -65,47 +65,21 @@ extension PayError {
     
 }
 
-extension PaymentStatus {
-    
-    fileprivate static func weixin(_ code: Int32) -> PaymentStatus {
-        switch code {
-        case WXSuccess.rawValue:
-            return .paySuccess
-        default:
-            return .payFailure
-        }
-    }
-    
-}
+//extension PaymentStatus {
+//
+//    fileprivate static func weixin(_ code: Int32) -> PaymentStatus {
+//        switch code {
+//        case WXSuccess.rawValue:
+//            return .paySuccess
+//        default:
+//            return .payFailure
+//        }
+//    }
+//
+//}
 
-struct WeixinSignResult: Codable {
-    
-    var package: String
-    var partnerid: String
-    var noncestr: String
-    var prepayid: String
-    var appid: String
-    var timestamp: String
-    var sign: String
-    
-}
 
-extension WeixinSignResult {
-    
-    var payRequest: PayReq {
-        
-        let req = PayReq()
-        req.openID = appid
-        req.partnerId = partnerid
-        req.prepayId = prepayid
-        req.nonceStr = noncestr
-        req.timeStamp = UInt32(timestamp)!
-        req.package = package
-        req.sign = sign
-        return req
-        
-    }
-}
+
 
 extension OrderInfoProfile {
     
@@ -113,11 +87,11 @@ extension OrderInfoProfile {
         
         do {
             
-            let data = try JSONSerialization.data(withJSONObject: params, options: [])
-            let coder = JSONDecoder()
-            let result = try coder.decode(WeixinSignResult.self, from: data)
-            
-            return result.payRequest
+//            let data = try JSONSerialization.data(withJSONObject: params, options: [])
+//            let coder = JSONDecoder()
+//            let result = try coder.decode(WeixinSignResult.self, from: data)
+//            
+//            return result.payRequest
         }
         catch {
             fatalError("解析出错")
@@ -126,3 +100,4 @@ extension OrderInfoProfile {
         
     }
 }
+*/

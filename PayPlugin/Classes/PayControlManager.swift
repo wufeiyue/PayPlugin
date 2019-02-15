@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 public class PayControlManager {
     
     var payPrepare = PayPrepareManager()
@@ -156,3 +156,4 @@ extension PayControlManager {
         }
     }
 }
+*/

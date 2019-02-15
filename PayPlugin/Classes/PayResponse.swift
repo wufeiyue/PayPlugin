@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 public struct PayResponse {
     
     var code: PayError?
@@ -46,3 +46,4 @@ public struct PayPrepare {
     }
     
 }
+*/

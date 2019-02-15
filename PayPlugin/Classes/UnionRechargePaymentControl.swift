@@ -24,7 +24,7 @@ extension PayClient {
         }
     }
 }
-
+/*
 public class UnionRechargePaymentControl: MultipartPayControl {
     
     static func register(model: String) {
@@ -44,3 +44,4 @@ public class UnionRechargePaymentControl: MultipartPayControl {
     }
 }
 
+*/

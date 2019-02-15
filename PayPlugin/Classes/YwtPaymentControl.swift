@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 class YwtPaymentControl: MultipartPayControl {
     
 }
@@ -114,3 +114,4 @@ class YwtPaymentControl: MultipartPayControl {
 //
 //    }
 //}
+*/

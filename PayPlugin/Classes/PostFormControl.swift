@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 public class PostFormControl {
     
     /// 支付视图控制器
@@ -36,3 +36,4 @@ public class PostFormControl {
     }
     
 }
+*/

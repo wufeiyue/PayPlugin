@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 public class MultipartPayControl: NSObject {
     
     /// 支付类型
@@ -23,3 +23,4 @@ public class MultipartPayControl: NSObject {
     
 }
 
+*/

@@ -7,7 +7,7 @@
 
 import Foundation
 import AlipaySDK
-
+/*
 public class AlipayPaymentControl: MultipartPayControl {
     
     override func payOrder(profile: OrderInfoProfile, result: @escaping ResponseCompletion) {
@@ -88,3 +88,4 @@ extension PaymentStatus {
 }
 
 
+*/

@@ -7,229 +7,262 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00FAFC71665DD8849B0A497B407F035B /* PayPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B538A0CA278180E61FF1380C7C40F9 /* PayPlugin.swift */; };
-		0204A882841D23EB01A2CAAA63F04436 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45B28716591974EB68DF82193A1FA09 /* CFNetwork.framework */; };
-		034F83DCBAA44764C45AE5EAAA688598 /* SYWechatOpenSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D4B6143034D3FC6514779207DC659673 /* SYWechatOpenSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		070D1E0C99E6B130E6CFDA15C6EE2D35 /* WXPaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8E31920DF3B9D784D3CD57AB241E5 /* WXPaymentControl.swift */; };
-		0DFB6570E2803CAC357F5128530263C8 /* PayPrepareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC233824C4F35A5675FED3B8C4CFDC3E /* PayPrepareManager.swift */; };
-		192BE4EBA71C6450F7AC07EFA1A9C48C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E0F6A0DBC69B2E3A6586E6A6414BA6 /* Security.framework */; };
-		19FDD430B827B3CDB41647EB6884DCDE /* PayProviderCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6DA4992AA51E480777F4BEE31330A7 /* PayProviderCustomizer.swift */; };
-		1AC0DE79C03AC2B46B73A646C5EAD11E /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9702A3A91B57D0A9255F5F57BCDEF7A /* Bundle+Extension.swift */; };
-		1F0E826ECF95009AEF392B723F002111 /* WXApiObject.h in Headers */ = {isa = PBXBuildFile; fileRef = ADD7178995265FB405A18A4C63987DDA /* WXApiObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		1F16449D311A7B41F08940FBF327DFBF /* Pods-PayPlugin_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F088825A5E6D9B1D67ACC2DEF5073DD6 /* Pods-PayPlugin_Example-dummy.m */; };
-		268541FD65ED70CDC1FE90E58C878118 /* AlipayPaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075212C078D8E8452E59475C65A4EC65 /* AlipayPaymentControl.swift */; };
-		2C311F9940FBBEBB27DCC47D745AC1BB /* PostFormControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A222B400D28F361E1B5C0B2AD7D752C /* PostFormControl.swift */; };
-		3832A34D47563F5EDF9DCEF2B8841597 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 475946C778E70CFCB8851E0426219C34 /* Images */; };
-		3A8D5E6F25237193EBC3F5FCDE483D0F /* PayAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B2DF58348331DAEDA771AE94E4359D2A /* PayAssets.bundle */; };
-		415146DF84817B854E1E4812F9BA23A1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD8A257CB56B64D6D0B5809EA17CB65 /* SystemConfiguration.framework */; };
-		42084278918B75D282604821BCD0D7D5 /* PayProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB5472D6D85FFE8AF799667D5CAAD44 /* PayProvider.swift */; };
-		4449C881C8F134B3287DC5BAB837CA7B /* PayResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E5F60065EC851AB96EF39C15AEC49 /* PayResult.swift */; };
-		44B1A1397BB239A7403C1E15A724274B /* SYWechatOpenSDKDummp.h in Headers */ = {isa = PBXBuildFile; fileRef = 77B38D136CA95599B29F920FE93F214A /* SYWechatOpenSDKDummp.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		63C0918D46709094A71C92F8E99135B5 /* PayConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE8CFEF1E7871319A4E1662D9D5B908 /* PayConfig.swift */; };
-		660F74F20E97FFF6B3ED769D7123E27D /* UnionpayPaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F0041107C8B25DEB228FEDD14CAEAD /* UnionpayPaymentControl.swift */; };
-		69BCB0ACD87F82C9D105F39597897F3C /* PayControlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7176E48745755F228F19C6B6E7052D55 /* PayControlManager.swift */; };
-		6A64A82268683E28140FEF1DACF04937 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67E0F6A0DBC69B2E3A6586E6A6414BA6 /* Security.framework */; };
-		6BA8053D88BF5994646B287028976D21 /* ListenedPaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5A3470AA61DFCEF2233B6ACA3C657 /* ListenedPaymentManager.swift */; };
-		7174987E0F3A1D11F5B2BE8CB5C8B898 /* MultipartPayResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B7F9A7D2EDA7BA41933A851F2ED88 /* MultipartPayResult.swift */; };
-		7733BE795338AEA1A29DC7660673AE5A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85756595BCE72D6B80189A5AEB23FF6C /* UIKit.framework */; };
-		8282C5892912FF1E0E37CBAB37A4BB47 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 825005EB2EBA2C70A9FD0680A9ABA0B6 /* CoreTelephony.framework */; };
-		83FE0EEB355FBB4240EAFBD49CFB8169 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23A507262708D638E9B67778BF4FEF3 /* Foundation.framework */; };
-		86B680445D000DBD5AE093CF921E1C2B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 211364EA6B44B0B833873C7D19616E55 /* CoreMotion.framework */; };
-		8C494FAE2681E9B6A4A3D304606018D1 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45B28716591974EB68DF82193A1FA09 /* CFNetwork.framework */; };
-		8C7FD75460A68CA6BD32AD2D4DF59AD0 /* PayPlugin-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F3073DB348959499DD7FA243EB67DD6A /* PayPlugin-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		93189CAAEABE0344DE2CB0E5885E389B /* SYWechatOpenSDKDummp.m in Sources */ = {isa = PBXBuildFile; fileRef = 564F1BE33F15EF97ACF92AA6E2AEF630 /* SYWechatOpenSDKDummp.m */; };
-		AD50A0BD9B6DA18D8376BD91D5404F1C /* MultipartPayControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706B801357D76136A078360CE2CB459 /* MultipartPayControl.swift */; };
-		B75A720B95197FAC4D1C9ECC3533A560 /* WXApi.h in Headers */ = {isa = PBXBuildFile; fileRef = B56002B84E883C266D382E35D32F1DAE /* WXApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B7DDCD8F797AA10AD04B5ADB5A103D33 /* UnionRechargePaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224F6DAF7286B907169C356A4369B845 /* UnionRechargePaymentControl.swift */; };
-		B815682BB3F380F9C4855506760DF6B3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD8A257CB56B64D6D0B5809EA17CB65 /* SystemConfiguration.framework */; };
-		C6CE204347C6765BC0C26653DFEB2C9E /* CCBPaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DB55E0F02E83359573D1031518D896 /* CCBPaymentControl.swift */; };
-		C7724DB58F985F2AB3C81EA6E4078F22 /* WechatAuthSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 575B5FE5F986366B10F830D162ACD1AB /* WechatAuthSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C9CF98824E35965C3331D83BD4220013 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23A507262708D638E9B67778BF4FEF3 /* Foundation.framework */; };
-		CB80C4FAE3798FD2803723B8E0AF5A24 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23A507262708D638E9B67778BF4FEF3 /* Foundation.framework */; };
-		CD028CA5E940BBB2DC8B6FDF3E6DF67A /* Pods-PayPlugin_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EE5BAACF4A433AA8B05C25AE6339E306 /* Pods-PayPlugin_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CE4FCBDDF076047407A34F8ED134714F /* SYWechatOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73C880D17E83419CF7B0D65634506D91 /* SYWechatOpenSDK.framework */; };
-		CF27D4691D328D5233E362A410564472 /* PayPlugin-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B1159D7F5580068076F48D0F2A7EABA6 /* PayPlugin-dummy.m */; };
-		DA1FF1E3894E1669F2134367BCC51EF3 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 825005EB2EBA2C70A9FD0680A9ABA0B6 /* CoreTelephony.framework */; };
-		DA520BE8F19AE6E6832CC8F32DFEC953 /* PayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21FC7448EC318249A28EE0391DC109C /* PayType.swift */; };
-		E1EC49A8B49F167017CA9384BF579354 /* SYWechatOpenSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F48F16CFF34DC5F961687D20D52194 /* SYWechatOpenSDK-dummy.m */; };
-		E82E2BAB2E5FF326EDB530C7C5E0FC22 /* YwtPaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48593B8D5268D37FD5AA09AA4A30DD8 /* YwtPaymentControl.swift */; };
-		F2285FED5FA424410E457B7EBA4004D2 /* PayResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68E21EB23F82FD7D5E0CC1A25A6583C /* PayResponse.swift */; };
-		FFFACE8007F35532BF214E8FE2D86CBF /* PostFormWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C4A952BC92B153F236E55CD6BF2DD2 /* PostFormWebViewController.swift */; };
+		04EEA7348AEDB95519D2088AB874ABCA /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FBF17FE62CE0D4E7BE58B1C845BCA8 /* Security.framework */; };
+		070FB0E4B199EE7048579EDC08C9FD02 /* SYWechatOpenSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DA9F09A7F6AB6B98A587ACDC67092E4 /* SYWechatOpenSDK.framework */; };
+		07C3B98681E51DA873FE2E3076B27040 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B530315C2DD192171B2A447CCA877C64 /* Foundation.framework */; };
+		1236C0AB413C25E82751033C9D566CAD /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8840EB81EC8019988900620B93B6A940 /* CoreTelephony.framework */; };
+		197408AD2CA117D648D118CD19E4B2CC /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F40DD90D27FD4C0C9299AA9C7804BC3 /* Result.swift */; };
+		258B16E30BC851C43E7B27DF1EF950E2 /* Result-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D5F933421100E274A0E7D676377F0A4A /* Result-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2605186ED28D5156F72D80D5827BED38 /* WXApiObject.h in Headers */ = {isa = PBXBuildFile; fileRef = 8FFB7155342EE1B68EDBF1BB994519E6 /* WXApiObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		279A8B65C4A83E8177F57D277B14EFFD /* YwtPaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48593B8D5268D37FD5AA09AA4A30DD8 /* YwtPaymentControl.swift */; };
+		27AAE08052FEEFECD7EBC2BB2888384D /* Pods-PayPlugin_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = EE5BAACF4A433AA8B05C25AE6339E306 /* Pods-PayPlugin_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		29933ABEF2B9830685EACB761CEFBEE5 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9702A3A91B57D0A9255F5F57BCDEF7A /* Bundle+Extension.swift */; };
+		2AE2755B0D57C4F0E41170DA77A2FF6C /* UnionpayPaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58F0041107C8B25DEB228FEDD14CAEAD /* UnionpayPaymentControl.swift */; };
+		2C97905549227F5C62BF23A12ED5AF03 /* SYWechatOpenSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 880702CF745B9EBCC88F0750D622C55F /* SYWechatOpenSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2CA4F8510BFE0E6492637974EABE5621 /* PayControlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7176E48745755F228F19C6B6E7052D55 /* PayControlManager.swift */; };
+		36CDB68F4BC1EE812626CFB356E6A38B /* PayConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE8CFEF1E7871319A4E1662D9D5B908 /* PayConfig.swift */; };
+		37D1D4422415D180ED511A03C8468C4C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 102218E9F989006BD3EAA9F86F5A83AF /* CFNetwork.framework */; };
+		3D8E8AE423575F137ECFD3FB2CD919BE /* SYWechatOpenSDKDummp.h in Headers */ = {isa = PBXBuildFile; fileRef = 22BD6D6B28F9029FB591B8A3D0BDA917 /* SYWechatOpenSDKDummp.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		515A9E925B7609594A5FAF86C62DBFF8 /* PostFormControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A222B400D28F361E1B5C0B2AD7D752C /* PostFormControl.swift */; };
+		543B4EE863EA17C7BD2A9F5FAC5F9053 /* WXApi.h in Headers */ = {isa = PBXBuildFile; fileRef = B84DC1CFB4524A64BDCF12782251C793 /* WXApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		57BC2A8EBEFE1A851004CFF1B11BB49A /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E273733097B0204886D2AAEE0D69FD /* SystemConfiguration.framework */; };
+		5E4B5D3D930E1A22E83139307F47940F /* PayType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B21FC7448EC318249A28EE0391DC109C /* PayType.swift */; };
+		60AF2DC2E5FB438EB29398512ED373A5 /* ListenedPaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AA5A3470AA61DFCEF2233B6ACA3C657 /* ListenedPaymentManager.swift */; };
+		664A520D7850589AC7439C7C80D5CB38 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4773C741EC1A70DD8EC599C9BA0923E /* CoreMotion.framework */; };
+		68B41420BAE9022F916EBC8995128963 /* PayAssets.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 907C4E9FB2C9F0E1B361FAB82E1BF40A /* PayAssets.bundle */; };
+		6B2F37281F205F3CB274E9767E5CA5C1 /* AlipayPaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 075212C078D8E8452E59475C65A4EC65 /* AlipayPaymentControl.swift */; };
+		74747FB20ACF8626228917545D1D80BC /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BD091E4739823EEEDFA28C064A948A7 /* UIKit.framework */; };
+		753EFE377D1BCF61CEA0B04B4B9B9679 /* Images in Resources */ = {isa = PBXBuildFile; fileRef = 475946C778E70CFCB8851E0426219C34 /* Images */; };
+		7715AD1D8B04C0786B6C1262733667EF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8840EB81EC8019988900620B93B6A940 /* CoreTelephony.framework */; };
+		7DAD79167935D7E1D679CAD62EF5871A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B530315C2DD192171B2A447CCA877C64 /* Foundation.framework */; };
+		85FD60F524E0CBC3C73A99B78339523C /* Result-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F7851AD25F95DA8CB20B50F6D409 /* Result-dummy.m */; };
+		8A863C4DFB0B862CE69BD483027A4C83 /* SYWechatOpenSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F111CBC382A9752137DE9BB6D956E3 /* SYWechatOpenSDK-dummy.m */; };
+		8C8B583004235379334F6D3D6C9C070E /* MultipartPayControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706B801357D76136A078360CE2CB459 /* MultipartPayControl.swift */; };
+		8CA78241913D3EED5006114139EC711A /* MultipartPayResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B7F9A7D2EDA7BA41933A851F2ED88 /* MultipartPayResult.swift */; };
+		90321B4020657C4EDE9207DA912F7105 /* CCBPaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DB55E0F02E83359573D1031518D896 /* CCBPaymentControl.swift */; };
+		999DD35423891B95ED0EE4C64563E234 /* PayProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB5472D6D85FFE8AF799667D5CAAD44 /* PayProvider.swift */; };
+		9CDC8C21604E3107EC60704E3A994FFD /* PayResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E5F60065EC851AB96EF39C15AEC49 /* PayResult.swift */; };
+		9F8F89B9E32FD83B8B68684DE7598D96 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FBF17FE62CE0D4E7BE58B1C845BCA8 /* Security.framework */; };
+		A2F4C2D8E2F9D81BDA1D51441312B175 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 102218E9F989006BD3EAA9F86F5A83AF /* CFNetwork.framework */; };
+		A3026B1B81324FD4CA8CB86FDD52CF30 /* PayPrepareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC233824C4F35A5675FED3B8C4CFDC3E /* PayPrepareManager.swift */; };
+		A7924907D66FC8F71794F57906BF440D /* UnionRechargePaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224F6DAF7286B907169C356A4369B845 /* UnionRechargePaymentControl.swift */; };
+		A8BCCAAC2279AAA9E984EC68CA892BED /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77A2F4DEABE63E2413FF6B743C749DD6 /* Result.framework */; };
+		AB014E1C2A2B6E1288E702E701976828 /* ResultProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F42B8382ADF546312162104A8B823E /* ResultProtocol.swift */; };
+		AC89EE5AAA6D1A74D37D3873E31006CD /* WechatAuthSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 16DDA0EAB3FD6DACD34F658C37CF9AB1 /* WechatAuthSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADE42814B8065095DB11CD82847C931B /* Pods-PayPlugin_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = F088825A5E6D9B1D67ACC2DEF5073DD6 /* Pods-PayPlugin_Example-dummy.m */; };
+		B026E65BCB0D4EED99EE70482BC0DBB5 /* WXPaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0E8E31920DF3B9D784D3CD57AB241E5 /* WXPaymentControl.swift */; };
+		B38E748740FFF00BEAE9DB52147188A3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88E273733097B0204886D2AAEE0D69FD /* SystemConfiguration.framework */; };
+		B6F67A141FB8CFA317A24A2C1EE08B87 /* SYWechatOpenSDKDummp.m in Sources */ = {isa = PBXBuildFile; fileRef = EF2DDC1A736E99D34DEC5E041265C000 /* SYWechatOpenSDKDummp.m */; };
+		BC0CE334CCC5240AB0DB2BC66BFC3784 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B530315C2DD192171B2A447CCA877C64 /* Foundation.framework */; };
+		C3B6024D0E988575BC31CD63BC92F9E4 /* PostFormWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C4A952BC92B153F236E55CD6BF2DD2 /* PostFormWebViewController.swift */; };
+		CFA36F5733C7BA467164371D0537B1D2 /* PayResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68E21EB23F82FD7D5E0CC1A25A6583C /* PayResponse.swift */; };
+		D15BCB6B697F8A26AFCFDDA112E04C9F /* PayPlugin-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B1159D7F5580068076F48D0F2A7EABA6 /* PayPlugin-dummy.m */; };
+		DBCECEA865F86FB35075042ACBBD931F /* NoError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53A2AD83C022A6A47CD9BD0994BD1A9D /* NoError.swift */; };
+		DDF987FED7090314BCF2A4E3242B3146 /* AnyError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0885A8ECD7A008DE1B75BCFB61C68120 /* AnyError.swift */; };
+		DE1D7F45CA8B853282A3572660933210 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B530315C2DD192171B2A447CCA877C64 /* Foundation.framework */; };
+		E0BA62CE818B11D0942B2FF015A94762 /* PayPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B538A0CA278180E61FF1380C7C40F9 /* PayPlugin.swift */; };
+		E18562B007D0FD6E763B21EA64A214EA /* PayPlugin-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = F3073DB348959499DD7FA243EB67DD6A /* PayPlugin-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F3FA0D8A63FAD2B99B3C0AB86F6719F9 /* PayProviderCustomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6DA4992AA51E480777F4BEE31330A7 /* PayProviderCustomizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2CDCD840CD179BB133EC65299ABB5E61 /* PBXContainerItemProxy */ = {
+		60F7B531476AF4E8763479D5DF156F1B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 45BC32881CD078D68E8D496326160A2A;
+			remoteGlobalIDString = 9D7DEE84A3D1298A0D04B7624A00CEB0;
 			remoteInfo = SYWechatOpenSDK;
 		};
-		96E709D95ECC79925C5A83DEAB8472DB /* PBXContainerItemProxy */ = {
+		824B0D2F990EF86181496FC839FBDE5F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 0AD34DC7ECA856B6639890AEFFA99346;
+			remoteGlobalIDString = 6625100CA0B2E8418BF9047E42FC4D27;
 			remoteInfo = PayPlugin;
 		};
-		9987BD35B13A630616255952D899FB90 /* PBXContainerItemProxy */ = {
+		AE6CF965A2CC3DF3AA04395E2D0924E2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 22F13905E0DDA1194D2B6DCD756F15E9;
+			remoteGlobalIDString = 1089D58968FE941F5BD3459994B5C512;
 			remoteInfo = "PayPlugin-PayAssets";
 		};
-		F0626FE676593DB6FF45D0435091F671 /* PBXContainerItemProxy */ = {
+		AF924D023DD8F9E6D65D5191303E7F78 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 45BC32881CD078D68E8D496326160A2A;
+			remoteGlobalIDString = 927CBCC55311EA69639B30C2B425D3BA;
+			remoteInfo = Result;
+		};
+		CF0FA7540387F118777EAC550CA8E438 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9D7DEE84A3D1298A0D04B7624A00CEB0;
 			remoteInfo = SYWechatOpenSDK;
+		};
+		FE8236EB2AD6987E9E11BA041263C561 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 927CBCC55311EA69639B30C2B425D3BA;
+			remoteInfo = Result;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00D49FD18B826B25861994859CECA995 /* SYWechatOpenSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SYWechatOpenSDK-prefix.pch"; sourceTree = "<group>"; };
 		075212C078D8E8452E59475C65A4EC65 /* AlipayPaymentControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AlipayPaymentControl.swift; path = PayPlugin/Classes/AlipayPaymentControl.swift; sourceTree = "<group>"; };
+		0885A8ECD7A008DE1B75BCFB61C68120 /* AnyError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AnyError.swift; path = Result/AnyError.swift; sourceTree = "<group>"; };
 		096EBA219839E395035AA74382BD3417 /* Pods-PayPlugin_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PayPlugin_Example-frameworks.sh"; sourceTree = "<group>"; };
 		0B7478CDEE22A067E7F1D26204119526 /* Pods-PayPlugin_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PayPlugin_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		0EC0E7071AD8D88E952B8506A48D4BD7 /* PayPlugin-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PayPlugin-prefix.pch"; sourceTree = "<group>"; };
-		0F8537C3D810C4B4529A0ED8C310227F /* PayPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PayPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		10F48F16CFF34DC5F961687D20D52194 /* SYWechatOpenSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SYWechatOpenSDK-dummy.m"; sourceTree = "<group>"; };
-		132042042A4D9CD6CF365C3321E2A369 /* SYWechatOpenSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SYWechatOpenSDK-prefix.pch"; sourceTree = "<group>"; };
+		102218E9F989006BD3EAA9F86F5A83AF /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		14E0F7851AD25F95DA8CB20B50F6D409 /* Result-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Result-dummy.m"; sourceTree = "<group>"; };
+		16DDA0EAB3FD6DACD34F658C37CF9AB1 /* WechatAuthSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WechatAuthSDK.h; path = SYWechatOpenSDK/WechatAuthSDK.h; sourceTree = "<group>"; };
 		1F519104925B0AA52AC81CA80C40C256 /* PayPlugin.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PayPlugin.xcconfig; sourceTree = "<group>"; };
-		211364EA6B44B0B833873C7D19616E55 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		2162B735F53722116F3E5FAA87DE25BD /* ResourceBundle-PayAssets-PayPlugin-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-PayAssets-PayPlugin-Info.plist"; sourceTree = "<group>"; };
 		224F6DAF7286B907169C356A4369B845 /* UnionRechargePaymentControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnionRechargePaymentControl.swift; path = PayPlugin/Classes/UnionRechargePaymentControl.swift; sourceTree = "<group>"; };
+		22BD6D6B28F9029FB591B8A3D0BDA917 /* SYWechatOpenSDKDummp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYWechatOpenSDKDummp.h; path = SYWechatOpenSDK/SYWechatOpenSDKDummp.h; sourceTree = "<group>"; };
 		2464E5B82AD22109D868C5AC6460627B /* libUMSPosPayOnly.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libUMSPosPayOnly.a; path = PayPlugin/Framework/libUMSPosPayOnly.a; sourceTree = "<group>"; };
-		251364FDE6637C76E17415959BF880A5 /* SYWechatOpenSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SYWechatOpenSDK.xcconfig; sourceTree = "<group>"; };
 		27DB55E0F02E83359573D1031518D896 /* CCBPaymentControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CCBPaymentControl.swift; path = PayPlugin/Classes/CCBPaymentControl.swift; sourceTree = "<group>"; };
-		314ECBE84150FF1789723DA4C0304DBC /* libWeChatSDK.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = SYWechatOpenSDK/libWeChatSDK.a; sourceTree = "<group>"; };
 		3A222B400D28F361E1B5C0B2AD7D752C /* PostFormControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PostFormControl.swift; path = PayPlugin/Classes/PostFormControl.swift; sourceTree = "<group>"; };
-		475946C778E70CFCB8851E0426219C34 /* Images */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = Images; path = PayPlugin/Assets/PayAssets.bundle/Images; sourceTree = "<group>"; };
+		3DA9F09A7F6AB6B98A587ACDC67092E4 /* SYWechatOpenSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SYWechatOpenSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		475946C778E70CFCB8851E0426219C34 /* Images */ = {isa = PBXFileReference; includeInIndex = 1; name = Images; path = PayPlugin/Assets/PayAssets.bundle/Images; sourceTree = "<group>"; };
 		47705EAACF2E4AF3A14023A69A398FDA /* PayPlugin.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PayPlugin.modulemap; sourceTree = "<group>"; };
-		4CCC3B0D3B5F8F86F9A8F30B19DF2054 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		480B0EB1FC200FEC03A8A8B99EB7F2B1 /* PayPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PayPlugin.framework; path = PayPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BD091E4739823EEEDFA28C064A948A7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		4CCC3B0D3B5F8F86F9A8F30B19DF2054 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		53A2AD83C022A6A47CD9BD0994BD1A9D /* NoError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NoError.swift; path = Result/NoError.swift; sourceTree = "<group>"; };
 		54B538A0CA278180E61FF1380C7C40F9 /* PayPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayPlugin.swift; path = PayPlugin/Classes/PayPlugin.swift; sourceTree = "<group>"; };
-		564F1BE33F15EF97ACF92AA6E2AEF630 /* SYWechatOpenSDKDummp.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYWechatOpenSDKDummp.m; path = SYWechatOpenSDK/SYWechatOpenSDKDummp.m; sourceTree = "<group>"; };
-		575B5FE5F986366B10F830D162ACD1AB /* WechatAuthSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WechatAuthSDK.h; path = SYWechatOpenSDK/WechatAuthSDK.h; sourceTree = "<group>"; };
 		58F0041107C8B25DEB228FEDD14CAEAD /* UnionpayPaymentControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnionpayPaymentControl.swift; path = PayPlugin/Classes/UnionpayPaymentControl.swift; sourceTree = "<group>"; };
+		669213247D38C789AC9533DB4E3A9F2F /* SYWechatOpenSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SYWechatOpenSDK.modulemap; sourceTree = "<group>"; };
 		6706B801357D76136A078360CE2CB459 /* MultipartPayControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartPayControl.swift; path = PayPlugin/Classes/MultipartPayControl.swift; sourceTree = "<group>"; };
-		67E0F6A0DBC69B2E3A6586E6A6414BA6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		691F74DD9C79DBFCBA4D7F7F52A74D76 /* Result-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Result-prefix.pch"; sourceTree = "<group>"; };
+		6F40DD90D27FD4C0C9299AA9C7804BC3 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Result/Result.swift; sourceTree = "<group>"; };
 		7176E48745755F228F19C6B6E7052D55 /* PayControlManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayControlManager.swift; path = PayPlugin/Classes/PayControlManager.swift; sourceTree = "<group>"; };
-		73C880D17E83419CF7B0D65634506D91 /* SYWechatOpenSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SYWechatOpenSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		77B38D136CA95599B29F920FE93F214A /* SYWechatOpenSDKDummp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYWechatOpenSDKDummp.h; path = SYWechatOpenSDK/SYWechatOpenSDKDummp.h; sourceTree = "<group>"; };
-		79B3EF7E8DA9FFA0306261840207E11F /* Pods_PayPlugin_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayPlugin_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		77A2F4DEABE63E2413FF6B743C749DD6 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		793C87C4FB8CF910B1FD5E5F23224A6B /* SYWechatOpenSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SYWechatOpenSDK-Info.plist"; sourceTree = "<group>"; };
 		7A6DA4992AA51E480777F4BEE31330A7 /* PayProviderCustomizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayProviderCustomizer.swift; path = PayPlugin/Classes/PayProviderCustomizer.swift; sourceTree = "<group>"; };
-		7C2B22C25A4AF9D4D8D65914810F1A82 /* PayPlugin.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = PayPlugin.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		825005EB2EBA2C70A9FD0680A9ABA0B6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		7C2B22C25A4AF9D4D8D65914810F1A82 /* PayPlugin.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = PayPlugin.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		825B3D61E04863C0220576D721AF4CEC /* Result.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Result.xcconfig; sourceTree = "<group>"; };
 		8279F1F6D106DA50616C51431F966A21 /* Pods-PayPlugin_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PayPlugin_Example.modulemap"; sourceTree = "<group>"; };
+		84F42B8382ADF546312162104A8B823E /* ResultProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ResultProtocol.swift; path = Result/ResultProtocol.swift; sourceTree = "<group>"; };
 		8505A9ADBFA45995419E32ADFE318293 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlipaySDK.framework; path = PayPlugin/Framework/AlipaySDK.framework; sourceTree = "<group>"; };
-		85756595BCE72D6B80189A5AEB23FF6C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
+		880702CF745B9EBCC88F0750D622C55F /* SYWechatOpenSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SYWechatOpenSDK-umbrella.h"; sourceTree = "<group>"; };
+		8840EB81EC8019988900620B93B6A940 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
+		88E273733097B0204886D2AAEE0D69FD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		8AA5A3470AA61DFCEF2233B6ACA3C657 /* ListenedPaymentManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListenedPaymentManager.swift; path = PayPlugin/Classes/ListenedPaymentManager.swift; sourceTree = "<group>"; };
-		8FD8A257CB56B64D6D0B5809EA17CB65 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		8CCC3ADFF094943A5DE33FACD84C4D9E /* SYWechatOpenSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SYWechatOpenSDK.xcconfig; sourceTree = "<group>"; };
+		8FFB7155342EE1B68EDBF1BB994519E6 /* WXApiObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WXApiObject.h; path = SYWechatOpenSDK/WXApiObject.h; sourceTree = "<group>"; };
+		907C4E9FB2C9F0E1B361FAB82E1BF40A /* PayAssets.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PayAssets.bundle; path = "PayPlugin-PayAssets.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
 		928E5F60065EC851AB96EF39C15AEC49 /* PayResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayResult.swift; path = PayPlugin/Classes/PayResult.swift; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		97C4A952BC92B153F236E55CD6BF2DD2 /* PostFormWebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PostFormWebViewController.swift; path = PayPlugin/Classes/PostFormWebViewController.swift; sourceTree = "<group>"; };
 		98175EEF1B7EAAB58663BAC02F580299 /* PayPlugin-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PayPlugin-Info.plist"; sourceTree = "<group>"; };
 		984DB11F3EFE818399BF36617E90B4E5 /* Pods-PayPlugin_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PayPlugin_Example-Info.plist"; sourceTree = "<group>"; };
+		98F111CBC382A9752137DE9BB6D956E3 /* SYWechatOpenSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SYWechatOpenSDK-dummy.m"; sourceTree = "<group>"; };
+		992B9CFBD11F23DBC5650DC45F22D185 /* Pods_PayPlugin_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PayPlugin_Example.framework; path = "Pods-PayPlugin_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		99DBC306536DBD1FBD2895AD18DD85B5 /* Pods-PayPlugin_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PayPlugin_Example.release.xcconfig"; sourceTree = "<group>"; };
 		A4DB02175C31AA5D68E8CE6F1F3DC620 /* Pods-PayPlugin_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PayPlugin_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		AB3B7F9A7D2EDA7BA41933A851F2ED88 /* MultipartPayResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartPayResult.swift; path = PayPlugin/Classes/MultipartPayResult.swift; sourceTree = "<group>"; };
 		AC233824C4F35A5675FED3B8C4CFDC3E /* PayPrepareManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayPrepareManager.swift; path = PayPlugin/Classes/PayPrepareManager.swift; sourceTree = "<group>"; };
-		ADD7178995265FB405A18A4C63987DDA /* WXApiObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WXApiObject.h; path = SYWechatOpenSDK/WXApiObject.h; sourceTree = "<group>"; };
+		ADE2E149AF0A1459920149406DE2C3B0 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Result.framework; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1159D7F5580068076F48D0F2A7EABA6 /* PayPlugin-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PayPlugin-dummy.m"; sourceTree = "<group>"; };
 		B21FC7448EC318249A28EE0391DC109C /* PayType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayType.swift; path = PayPlugin/Classes/PayType.swift; sourceTree = "<group>"; };
-		B2DF58348331DAEDA771AE94E4359D2A /* PayAssets.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PayAssets.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		B48593B8D5268D37FD5AA09AA4A30DD8 /* YwtPaymentControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = YwtPaymentControl.swift; path = PayPlugin/Classes/YwtPaymentControl.swift; sourceTree = "<group>"; };
-		B56002B84E883C266D382E35D32F1DAE /* WXApi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WXApi.h; path = SYWechatOpenSDK/WXApi.h; sourceTree = "<group>"; };
+		B530315C2DD192171B2A447CCA877C64 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		B68E21EB23F82FD7D5E0CC1A25A6583C /* PayResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayResponse.swift; path = PayPlugin/Classes/PayResponse.swift; sourceTree = "<group>"; };
 		B7F24FF54DAA906A28BE21D4B57F66BD /* CCBNetPaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CCBNetPaySDK.framework; path = PayPlugin/Framework/CCBNetPaySDK.framework; sourceTree = "<group>"; };
+		B84DC1CFB4524A64BDCF12782251C793 /* WXApi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WXApi.h; path = SYWechatOpenSDK/WXApi.h; sourceTree = "<group>"; };
 		B9A2DFA7001E972EBFCA4BCD85516171 /* Pods-PayPlugin_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PayPlugin_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		BE656430236F380475FB6B5088395927 /* SYWechatOpenSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SYWechatOpenSDK-Info.plist"; sourceTree = "<group>"; };
-		BEA21C35200305C341A91A4C612905E8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BA58D920CBC08F0BC86AB13735AA0C53 /* libWeChatSDK.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = SYWechatOpenSDK/libWeChatSDK.a; sourceTree = "<group>"; };
+		BB51F0881D98D08AD6C1BA3819AC434C /* SYWechatOpenSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SYWechatOpenSDK.framework; path = SYWechatOpenSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD5B388720A85046E149E1AF4299F464 /* Result-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Result-Info.plist"; sourceTree = "<group>"; };
+		BEA21C35200305C341A91A4C612905E8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		BEE8CFEF1E7871319A4E1662D9D5B908 /* PayConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayConfig.swift; path = PayPlugin/Classes/PayConfig.swift; sourceTree = "<group>"; };
-		C23A507262708D638E9B67778BF4FEF3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		C45B28716591974EB68DF82193A1FA09 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		C7FBF17FE62CE0D4E7BE58B1C845BCA8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		C9702A3A91B57D0A9255F5F57BCDEF7A /* Bundle+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Bundle+Extension.swift"; path = "PayPlugin/Classes/Bundle+Extension.swift"; sourceTree = "<group>"; };
 		CA821F559AF8BF26A5D5DA23B193419B /* libPaymentControl.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libPaymentControl.a; path = PayPlugin/Framework/libPaymentControl.a; sourceTree = "<group>"; };
+		CCB670F02DF91A88350D59504AA93080 /* Result.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Result.modulemap; sourceTree = "<group>"; };
 		CDB5472D6D85FFE8AF799667D5CAAD44 /* PayProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayProvider.swift; path = PayPlugin/Classes/PayProvider.swift; sourceTree = "<group>"; };
 		D0E8E31920DF3B9D784D3CD57AB241E5 /* WXPaymentControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WXPaymentControl.swift; path = PayPlugin/Classes/WXPaymentControl.swift; sourceTree = "<group>"; };
-		D4B6143034D3FC6514779207DC659673 /* SYWechatOpenSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SYWechatOpenSDK-umbrella.h"; sourceTree = "<group>"; };
-		DDB1777F22F665A4E9C0114E6EDE3DA5 /* SYWechatOpenSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SYWechatOpenSDK.modulemap; sourceTree = "<group>"; };
-		EA0783454DC43C3AC18A98F7CAD80CDA /* SYWechatOpenSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SYWechatOpenSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4773C741EC1A70DD8EC599C9BA0923E /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
+		D5F933421100E274A0E7D676377F0A4A /* Result-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Result-umbrella.h"; sourceTree = "<group>"; };
 		EE5BAACF4A433AA8B05C25AE6339E306 /* Pods-PayPlugin_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PayPlugin_Example-umbrella.h"; sourceTree = "<group>"; };
+		EF2DDC1A736E99D34DEC5E041265C000 /* SYWechatOpenSDKDummp.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYWechatOpenSDKDummp.m; path = SYWechatOpenSDK/SYWechatOpenSDKDummp.m; sourceTree = "<group>"; };
 		F088825A5E6D9B1D67ACC2DEF5073DD6 /* Pods-PayPlugin_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PayPlugin_Example-dummy.m"; sourceTree = "<group>"; };
 		F3073DB348959499DD7FA243EB67DD6A /* PayPlugin-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PayPlugin-umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7405FB4E85997510CE1E133CEA892AB0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8C494FAE2681E9B6A4A3D304606018D1 /* CFNetwork.framework in Frameworks */,
-				8282C5892912FF1E0E37CBAB37A4BB47 /* CoreTelephony.framework in Frameworks */,
-				83FE0EEB355FBB4240EAFBD49CFB8169 /* Foundation.framework in Frameworks */,
-				6A64A82268683E28140FEF1DACF04937 /* Security.framework in Frameworks */,
-				B815682BB3F380F9C4855506760DF6B3 /* SystemConfiguration.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D5E8F3DC930F67D2AC1FF74130F9094E /* Frameworks */ = {
+		2384487667675C12BB2B3A253FF35102 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E1229E6E09B15276443843A5E183E319 /* Frameworks */ = {
+		453EC3C4FCBEF911EF63590485B1220C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C9CF98824E35965C3331D83BD4220013 /* Foundation.framework in Frameworks */,
+				07C3B98681E51DA873FE2E3076B27040 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E891B04C2B6301A1F6F3347D47F396EE /* Frameworks */ = {
+		65DC2DFABCFFA23201031A315B8606BB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0204A882841D23EB01A2CAAA63F04436 /* CFNetwork.framework in Frameworks */,
-				86B680445D000DBD5AE093CF921E1C2B /* CoreMotion.framework in Frameworks */,
-				DA1FF1E3894E1669F2134367BCC51EF3 /* CoreTelephony.framework in Frameworks */,
-				CB80C4FAE3798FD2803723B8E0AF5A24 /* Foundation.framework in Frameworks */,
-				192BE4EBA71C6450F7AC07EFA1A9C48C /* Security.framework in Frameworks */,
-				415146DF84817B854E1E4812F9BA23A1 /* SystemConfiguration.framework in Frameworks */,
-				CE4FCBDDF076047407A34F8ED134714F /* SYWechatOpenSDK.framework in Frameworks */,
-				7733BE795338AEA1A29DC7660673AE5A /* UIKit.framework in Frameworks */,
+				37D1D4422415D180ED511A03C8468C4C /* CFNetwork.framework in Frameworks */,
+				7715AD1D8B04C0786B6C1262733667EF /* CoreTelephony.framework in Frameworks */,
+				7DAD79167935D7E1D679CAD62EF5871A /* Foundation.framework in Frameworks */,
+				9F8F89B9E32FD83B8B68684DE7598D96 /* Security.framework in Frameworks */,
+				57BC2A8EBEFE1A851004CFF1B11BB49A /* SystemConfiguration.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B76F91897072253118681176F95B2FC8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC0CE334CCC5240AB0DB2BC66BFC3784 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EC99A4EC56AC34FEFB891496074A09B2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2F4C2D8E2F9D81BDA1D51441312B175 /* CFNetwork.framework in Frameworks */,
+				664A520D7850589AC7439C7C80D5CB38 /* CoreMotion.framework in Frameworks */,
+				1236C0AB413C25E82751033C9D566CAD /* CoreTelephony.framework in Frameworks */,
+				DE1D7F45CA8B853282A3572660933210 /* Foundation.framework in Frameworks */,
+				A8BCCAAC2279AAA9E984EC68CA892BED /* Result.framework in Frameworks */,
+				04EEA7348AEDB95519D2088AB874ABCA /* Security.framework in Frameworks */,
+				B38E748740FFF00BEAE9DB52147188A3 /* SystemConfiguration.framework in Frameworks */,
+				070FB0E4B199EE7048579EDC08C9FD02 /* SYWechatOpenSDK.framework in Frameworks */,
+				74747FB20ACF8626228917545D1D80BC /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		11E8C2E7FE050F6047644267E98C5639 /* SYWechatOpenSDK */ = {
+		1BB9B73ED14E033C449D9B376F24E2FB /* SYWechatOpenSDK */ = {
 			isa = PBXGroup;
 			children = (
-				77B38D136CA95599B29F920FE93F214A /* SYWechatOpenSDKDummp.h */,
-				564F1BE33F15EF97ACF92AA6E2AEF630 /* SYWechatOpenSDKDummp.m */,
-				575B5FE5F986366B10F830D162ACD1AB /* WechatAuthSDK.h */,
-				B56002B84E883C266D382E35D32F1DAE /* WXApi.h */,
-				ADD7178995265FB405A18A4C63987DDA /* WXApiObject.h */,
-				7DCBE0C17328F759E19C66C11EF96404 /* Frameworks */,
-				E3642C54F0A04C4B992D2B75F67E6F49 /* Support Files */,
+				22BD6D6B28F9029FB591B8A3D0BDA917 /* SYWechatOpenSDKDummp.h */,
+				EF2DDC1A736E99D34DEC5E041265C000 /* SYWechatOpenSDKDummp.m */,
+				16DDA0EAB3FD6DACD34F658C37CF9AB1 /* WechatAuthSDK.h */,
+				B84DC1CFB4524A64BDCF12782251C793 /* WXApi.h */,
+				8FFB7155342EE1B68EDBF1BB994519E6 /* WXApiObject.h */,
+				539E364E6509EC9CDB3DA248EB820A6B /* Frameworks */,
+				AE1D4CEDF73E3F849E034E2040C04838 /* Support Files */,
 			);
+			name = SYWechatOpenSDK;
 			path = SYWechatOpenSDK;
-			sourceTree = "<group>";
-		};
-		1BA052697078E84FD6444C608AF10C29 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B2DF58348331DAEDA771AE94E4359D2A /* PayAssets.bundle */,
-				0F8537C3D810C4B4529A0ED8C310227F /* PayPlugin.framework */,
-				79B3EF7E8DA9FFA0306261840207E11F /* Pods_PayPlugin_Example.framework */,
-				EA0783454DC43C3AC18A98F7CAD80CDA /* SYWechatOpenSDK.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		2388D3AAA0C5A9312679E1B54907837B /* Targets Support Files */ = {
@@ -248,21 +281,18 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
-		3B9ED48859B2CC80AF31F8D87D4583F9 /* Frameworks */ = {
+		2A7597058B2C1FB4B17AAA111AC6C874 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				73C880D17E83419CF7B0D65634506D91 /* SYWechatOpenSDK.framework */,
-				80444378A8C21888ACA4439DC86F1753 /* iOS */,
+				CCB670F02DF91A88350D59504AA93080 /* Result.modulemap */,
+				825B3D61E04863C0220576D721AF4CEC /* Result.xcconfig */,
+				14E0F7851AD25F95DA8CB20B50F6D409 /* Result-dummy.m */,
+				BD5B388720A85046E149E1AF4299F464 /* Result-Info.plist */,
+				691F74DD9C79DBFCBA4D7F7F52A74D76 /* Result-prefix.pch */,
+				D5F933421100E274A0E7D676377F0A4A /* Result-umbrella.h */,
 			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		443811B1BE7E68A2F15FB86EB9E8D502 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				11E8C2E7FE050F6047644267E98C5639 /* SYWechatOpenSDK */,
-			);
-			name = Pods;
+			name = "Support Files";
+			path = "../Target Support Files/Result";
 			sourceTree = "<group>";
 		};
 		504A79C49D3C73268136E5BEE6E58BE2 /* Pod */ = {
@@ -275,38 +305,24 @@
 			name = Pod;
 			sourceTree = "<group>";
 		};
+		539E364E6509EC9CDB3DA248EB820A6B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BA58D920CBC08F0BC86AB13735AA0C53 /* libWeChatSDK.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				E8C2D0C2985F61D2316BDDEA97406F3F /* Development Pods */,
-				3B9ED48859B2CC80AF31F8D87D4583F9 /* Frameworks */,
-				443811B1BE7E68A2F15FB86EB9E8D502 /* Pods */,
-				1BA052697078E84FD6444C608AF10C29 /* Products */,
+				BF0C137075DC21C6E4A4C1465478D087 /* Frameworks */,
+				DE7AFB0708B5248051FC6AF97CF062E6 /* Pods */,
+				E425ECC7B33828CCF58FC7BCD500C6B9 /* Products */,
 				2388D3AAA0C5A9312679E1B54907837B /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		7DCBE0C17328F759E19C66C11EF96404 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				314ECBE84150FF1789723DA4C0304DBC /* libWeChatSDK.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		80444378A8C21888ACA4439DC86F1753 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				C45B28716591974EB68DF82193A1FA09 /* CFNetwork.framework */,
-				211364EA6B44B0B833873C7D19616E55 /* CoreMotion.framework */,
-				825005EB2EBA2C70A9FD0680A9ABA0B6 /* CoreTelephony.framework */,
-				C23A507262708D638E9B67778BF4FEF3 /* Foundation.framework */,
-				67E0F6A0DBC69B2E3A6586E6A6414BA6 /* Security.framework */,
-				8FD8A257CB56B64D6D0B5809EA17CB65 /* SystemConfiguration.framework */,
-				85756595BCE72D6B80189A5AEB23FF6C /* UIKit.framework */,
-			);
-			name = iOS;
 			sourceTree = "<group>";
 		};
 		858D369C48DE2F50B14A8C80943D221F /* Frameworks */ = {
@@ -318,6 +334,33 @@
 				2464E5B82AD22109D868C5AC6460627B /* libUMSPosPayOnly.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A19BB02C00597061AB49645C23F169F8 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				0885A8ECD7A008DE1B75BCFB61C68120 /* AnyError.swift */,
+				53A2AD83C022A6A47CD9BD0994BD1A9D /* NoError.swift */,
+				6F40DD90D27FD4C0C9299AA9C7804BC3 /* Result.swift */,
+				84F42B8382ADF546312162104A8B823E /* ResultProtocol.swift */,
+				2A7597058B2C1FB4B17AAA111AC6C874 /* Support Files */,
+			);
+			name = Result;
+			path = Result;
+			sourceTree = "<group>";
+		};
+		A599914764CD6AEDB47FD5751425F04C /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				102218E9F989006BD3EAA9F86F5A83AF /* CFNetwork.framework */,
+				D4773C741EC1A70DD8EC599C9BA0923E /* CoreMotion.framework */,
+				8840EB81EC8019988900620B93B6A940 /* CoreTelephony.framework */,
+				B530315C2DD192171B2A447CCA877C64 /* Foundation.framework */,
+				C7FBF17FE62CE0D4E7BE58B1C845BCA8 /* Security.framework */,
+				88E273733097B0204886D2AAEE0D69FD /* SystemConfiguration.framework */,
+				4BD091E4739823EEEDFA28C064A948A7 /* UIKit.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		A61146965CB5403C6E84B559A3A7C3B4 /* PayPlugin */ = {
@@ -353,6 +396,30 @@
 			path = ../..;
 			sourceTree = "<group>";
 		};
+		AE1D4CEDF73E3F849E034E2040C04838 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				669213247D38C789AC9533DB4E3A9F2F /* SYWechatOpenSDK.modulemap */,
+				8CCC3ADFF094943A5DE33FACD84C4D9E /* SYWechatOpenSDK.xcconfig */,
+				98F111CBC382A9752137DE9BB6D956E3 /* SYWechatOpenSDK-dummy.m */,
+				793C87C4FB8CF910B1FD5E5F23224A6B /* SYWechatOpenSDK-Info.plist */,
+				00D49FD18B826B25861994859CECA995 /* SYWechatOpenSDK-prefix.pch */,
+				880702CF745B9EBCC88F0750D622C55F /* SYWechatOpenSDK-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SYWechatOpenSDK";
+			sourceTree = "<group>";
+		};
+		BF0C137075DC21C6E4A4C1465478D087 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				77A2F4DEABE63E2413FF6B743C749DD6 /* Result.framework */,
+				3DA9F09A7F6AB6B98A587ACDC67092E4 /* SYWechatOpenSDK.framework */,
+				A599914764CD6AEDB47FD5751425F04C /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		C4C0E462EF476CDDC8B48DD80384634A /* Pods-PayPlugin_Example */ = {
 			isa = PBXGroup;
 			children = (
@@ -385,18 +452,25 @@
 			path = "Example/Pods/Target Support Files/PayPlugin";
 			sourceTree = "<group>";
 		};
-		E3642C54F0A04C4B992D2B75F67E6F49 /* Support Files */ = {
+		DE7AFB0708B5248051FC6AF97CF062E6 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DDB1777F22F665A4E9C0114E6EDE3DA5 /* SYWechatOpenSDK.modulemap */,
-				251364FDE6637C76E17415959BF880A5 /* SYWechatOpenSDK.xcconfig */,
-				10F48F16CFF34DC5F961687D20D52194 /* SYWechatOpenSDK-dummy.m */,
-				BE656430236F380475FB6B5088395927 /* SYWechatOpenSDK-Info.plist */,
-				132042042A4D9CD6CF365C3321E2A369 /* SYWechatOpenSDK-prefix.pch */,
-				D4B6143034D3FC6514779207DC659673 /* SYWechatOpenSDK-umbrella.h */,
+				A19BB02C00597061AB49645C23F169F8 /* Result */,
+				1BB9B73ED14E033C449D9B376F24E2FB /* SYWechatOpenSDK */,
 			);
-			name = "Support Files";
-			path = "../Target Support Files/SYWechatOpenSDK";
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E425ECC7B33828CCF58FC7BCD500C6B9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				907C4E9FB2C9F0E1B361FAB82E1BF40A /* PayAssets.bundle */,
+				480B0EB1FC200FEC03A8A8B99EB7F2B1 /* PayPlugin.framework */,
+				992B9CFBD11F23DBC5650DC45F22D185 /* Pods_PayPlugin_Example.framework */,
+				ADE2E149AF0A1459920149406DE2C3B0 /* Result.framework */,
+				BB51F0881D98D08AD6C1BA3819AC434C /* SYWechatOpenSDK.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		E8C2D0C2985F61D2316BDDEA97406F3F /* Development Pods */ = {
@@ -410,64 +484,52 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		331C4A823011CF0C1669CBBF8AA082D4 /* Headers */ = {
+		2B7841476F83A95E80899EE6EB5F2850 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C7FD75460A68CA6BD32AD2D4DF59AD0 /* PayPlugin-umbrella.h in Headers */,
+				2C97905549227F5C62BF23A12ED5AF03 /* SYWechatOpenSDK-umbrella.h in Headers */,
+				3D8E8AE423575F137ECFD3FB2CD919BE /* SYWechatOpenSDKDummp.h in Headers */,
+				AC89EE5AAA6D1A74D37D3873E31006CD /* WechatAuthSDK.h in Headers */,
+				543B4EE863EA17C7BD2A9F5FAC5F9053 /* WXApi.h in Headers */,
+				2605186ED28D5156F72D80D5827BED38 /* WXApiObject.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5FFAD1BE5EDBAB690E60BFC6BF21F41F /* Headers */ = {
+		6B551137024182544536DFD9DA8FD500 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CD028CA5E940BBB2DC8B6FDF3E6DF67A /* Pods-PayPlugin_Example-umbrella.h in Headers */,
+				258B16E30BC851C43E7B27DF1EF950E2 /* Result-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		EBC8696F138BA6BD53FD2221922DD7DD /* Headers */ = {
+		6D6F13F9D1FA34394F4D2AA4D849E4D2 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				034F83DCBAA44764C45AE5EAAA688598 /* SYWechatOpenSDK-umbrella.h in Headers */,
-				44B1A1397BB239A7403C1E15A724274B /* SYWechatOpenSDKDummp.h in Headers */,
-				C7724DB58F985F2AB3C81EA6E4078F22 /* WechatAuthSDK.h in Headers */,
-				B75A720B95197FAC4D1C9ECC3533A560 /* WXApi.h in Headers */,
-				1F0E826ECF95009AEF392B723F002111 /* WXApiObject.h in Headers */,
+				27AAE08052FEEFECD7EBC2BB2888384D /* Pods-PayPlugin_Example-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6F8207E4103DFDA5FCDA32CF9A2561B5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E18562B007D0FD6E763B21EA64A214EA /* PayPlugin-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0AD34DC7ECA856B6639890AEFFA99346 /* PayPlugin */ = {
+		1089D58968FE941F5BD3459994B5C512 /* PayPlugin-PayAssets */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6F400FAEEC0C77A4C65EC4A70CB86FE3 /* Build configuration list for PBXNativeTarget "PayPlugin" */;
+			buildConfigurationList = 5A92E147B17AEFA10A5A43E6EF77C149 /* Build configuration list for PBXNativeTarget "PayPlugin-PayAssets" */;
 			buildPhases = (
-				331C4A823011CF0C1669CBBF8AA082D4 /* Headers */,
-				95D82BE47420EEF96CC3E64DEE29412F /* Sources */,
-				E891B04C2B6301A1F6F3347D47F396EE /* Frameworks */,
-				220855A3713A575288EE9C0F71A7AC81 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				8444E0FEB57D5572E75B02878CA78848 /* PBXTargetDependency */,
-				0CF336F337EECFD4E2395B65EEB82DE9 /* PBXTargetDependency */,
-			);
-			name = PayPlugin;
-			productName = PayPlugin;
-			productReference = 0F8537C3D810C4B4529A0ED8C310227F /* PayPlugin.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		22F13905E0DDA1194D2B6DCD756F15E9 /* PayPlugin-PayAssets */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 0A585DF208CBDE495F04FB65514DD14C /* Build configuration list for PBXNativeTarget "PayPlugin-PayAssets" */;
-			buildPhases = (
-				139DD149EF49D66A993B636324C9768B /* Sources */,
-				D5E8F3DC930F67D2AC1FF74130F9094E /* Frameworks */,
-				362172EAFAAE0CC430533DB0C92EB4A0 /* Resources */,
+				6641A0AF7615E65552BA14A2B4DBA452 /* Sources */,
+				2384487667675C12BB2B3A253FF35102 /* Frameworks */,
+				8024834184C24B1C83068E4AFB02276F /* Resources */,
 			);
 			buildRules = (
 			);
@@ -475,37 +537,56 @@
 			);
 			name = "PayPlugin-PayAssets";
 			productName = "PayPlugin-PayAssets";
-			productReference = B2DF58348331DAEDA771AE94E4359D2A /* PayAssets.bundle */;
+			productReference = 907C4E9FB2C9F0E1B361FAB82E1BF40A /* PayAssets.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
-		4463F7E1481F9AD9F98959139DFDE969 /* Pods-PayPlugin_Example */ = {
+		6625100CA0B2E8418BF9047E42FC4D27 /* PayPlugin */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1C2116D6F498B8ADB578252778B1CD61 /* Build configuration list for PBXNativeTarget "Pods-PayPlugin_Example" */;
+			buildConfigurationList = C97C95DC6C7E8626F1430114D7977908 /* Build configuration list for PBXNativeTarget "PayPlugin" */;
 			buildPhases = (
-				5FFAD1BE5EDBAB690E60BFC6BF21F41F /* Headers */,
-				AFA759EB80F74B3A7CC5D8D72FEB2545 /* Sources */,
-				E1229E6E09B15276443843A5E183E319 /* Frameworks */,
-				3AC6611A9C007F42FE95450C8FF8BE45 /* Resources */,
+				6F8207E4103DFDA5FCDA32CF9A2561B5 /* Headers */,
+				7D46BCCB7902375448E21B3DCB110B4F /* Sources */,
+				EC99A4EC56AC34FEFB891496074A09B2 /* Frameworks */,
+				4EE97787C031960E7115ED033B292AFE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				21B62ADD8381A980D049C15C509B1BCB /* PBXTargetDependency */,
-				E6EED12860984422E6D7845911BB8E3C /* PBXTargetDependency */,
+				0E28845B43C0A87E8ADF90FD1BC11E08 /* PBXTargetDependency */,
+				4424AB3CF04289D5BB12EFD9EC564443 /* PBXTargetDependency */,
+				554541F63B32741338A31D1BCBDAFEB7 /* PBXTargetDependency */,
 			);
-			name = "Pods-PayPlugin_Example";
-			productName = "Pods-PayPlugin_Example";
-			productReference = 79B3EF7E8DA9FFA0306261840207E11F /* Pods_PayPlugin_Example.framework */;
+			name = PayPlugin;
+			productName = PayPlugin;
+			productReference = 480B0EB1FC200FEC03A8A8B99EB7F2B1 /* PayPlugin.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		45BC32881CD078D68E8D496326160A2A /* SYWechatOpenSDK */ = {
+		927CBCC55311EA69639B30C2B425D3BA /* Result */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = A98EDE727140DAC86D5C434FA33F7CCF /* Build configuration list for PBXNativeTarget "SYWechatOpenSDK" */;
+			buildConfigurationList = 619FCAB648F6DA522B8F102EA2905900 /* Build configuration list for PBXNativeTarget "Result" */;
 			buildPhases = (
-				EBC8696F138BA6BD53FD2221922DD7DD /* Headers */,
-				563A54D30F626328BFFE962F18F36A19 /* Sources */,
-				7405FB4E85997510CE1E133CEA892AB0 /* Frameworks */,
-				F4082AEEA1FBC4F19315E387C2F6BF5E /* Resources */,
+				6B551137024182544536DFD9DA8FD500 /* Headers */,
+				D2E14C676B1D2A7FFBAFC72F370FC9E3 /* Sources */,
+				B76F91897072253118681176F95B2FC8 /* Frameworks */,
+				D37055A499237E88D27C4025FFD2E7E6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Result;
+			productName = Result;
+			productReference = ADE2E149AF0A1459920149406DE2C3B0 /* Result.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		9D7DEE84A3D1298A0D04B7624A00CEB0 /* SYWechatOpenSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 92140F2684C022C52560B778078A76ED /* Build configuration list for PBXNativeTarget "SYWechatOpenSDK" */;
+			buildPhases = (
+				2B7841476F83A95E80899EE6EB5F2850 /* Headers */,
+				18E90662FCF4DD15CC042EDAB5E87AE2 /* Sources */,
+				65DC2DFABCFFA23201031A315B8606BB /* Frameworks */,
+				D4C12966A6C3DED73FCBA39F964706F9 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -513,7 +594,28 @@
 			);
 			name = SYWechatOpenSDK;
 			productName = SYWechatOpenSDK;
-			productReference = EA0783454DC43C3AC18A98F7CAD80CDA /* SYWechatOpenSDK.framework */;
+			productReference = BB51F0881D98D08AD6C1BA3819AC434C /* SYWechatOpenSDK.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		AFF6772B04B3B3C40813EEF49628CF10 /* Pods-PayPlugin_Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC2296DE435A2F6A0753473A7B69DC82 /* Build configuration list for PBXNativeTarget "Pods-PayPlugin_Example" */;
+			buildPhases = (
+				6D6F13F9D1FA34394F4D2AA4D849E4D2 /* Headers */,
+				2B63BF1C145FFE847D2BE070C17E01FB /* Sources */,
+				453EC3C4FCBEF911EF63590485B1220C /* Frameworks */,
+				07330329A64B52A20BD79AD838903EFF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0BD08FBBE0990742B85DF1FC2239854B /* PBXTargetDependency */,
+				1FF51DB57DC714D94413052C2C2EA10F /* PBXTargetDependency */,
+				5905BFEA76F22F71E2132D0E3E599B36 /* PBXTargetDependency */,
+			);
+			name = "Pods-PayPlugin_Example";
+			productName = "Pods-PayPlugin_Example";
+			productReference = 992B9CFBD11F23DBC5650DC45F22D185 /* Pods_PayPlugin_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -523,7 +625,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 1010;
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -533,43 +635,51 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 1BA052697078E84FD6444C608AF10C29 /* Products */;
+			productRefGroup = E425ECC7B33828CCF58FC7BCD500C6B9 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0AD34DC7ECA856B6639890AEFFA99346 /* PayPlugin */,
-				22F13905E0DDA1194D2B6DCD756F15E9 /* PayPlugin-PayAssets */,
-				4463F7E1481F9AD9F98959139DFDE969 /* Pods-PayPlugin_Example */,
-				45BC32881CD078D68E8D496326160A2A /* SYWechatOpenSDK */,
+				6625100CA0B2E8418BF9047E42FC4D27 /* PayPlugin */,
+				1089D58968FE941F5BD3459994B5C512 /* PayPlugin-PayAssets */,
+				AFF6772B04B3B3C40813EEF49628CF10 /* Pods-PayPlugin_Example */,
+				927CBCC55311EA69639B30C2B425D3BA /* Result */,
+				9D7DEE84A3D1298A0D04B7624A00CEB0 /* SYWechatOpenSDK */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		220855A3713A575288EE9C0F71A7AC81 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3A8D5E6F25237193EBC3F5FCDE483D0F /* PayAssets.bundle in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		362172EAFAAE0CC430533DB0C92EB4A0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3832A34D47563F5EDF9DCEF2B8841597 /* Images in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3AC6611A9C007F42FE95450C8FF8BE45 /* Resources */ = {
+		07330329A64B52A20BD79AD838903EFF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F4082AEEA1FBC4F19315E387C2F6BF5E /* Resources */ = {
+		4EE97787C031960E7115ED033B292AFE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				68B41420BAE9022F916EBC8995128963 /* PayAssets.bundle in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8024834184C24B1C83068E4AFB02276F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				753EFE377D1BCF61CEA0B04B4B9B9679 /* Images in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D37055A499237E88D27C4025FFD2E7E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4C12966A6C3DED73FCBA39F964706F9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -579,90 +689,114 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		139DD149EF49D66A993B636324C9768B /* Sources */ = {
+		18E90662FCF4DD15CC042EDAB5E87AE2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8A863C4DFB0B862CE69BD483027A4C83 /* SYWechatOpenSDK-dummy.m in Sources */,
+				B6F67A141FB8CFA317A24A2C1EE08B87 /* SYWechatOpenSDKDummp.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2B63BF1C145FFE847D2BE070C17E01FB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADE42814B8065095DB11CD82847C931B /* Pods-PayPlugin_Example-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6641A0AF7615E65552BA14A2B4DBA452 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		563A54D30F626328BFFE962F18F36A19 /* Sources */ = {
+		7D46BCCB7902375448E21B3DCB110B4F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1EC49A8B49F167017CA9384BF579354 /* SYWechatOpenSDK-dummy.m in Sources */,
-				93189CAAEABE0344DE2CB0E5885E389B /* SYWechatOpenSDKDummp.m in Sources */,
+				6B2F37281F205F3CB274E9767E5CA5C1 /* AlipayPaymentControl.swift in Sources */,
+				29933ABEF2B9830685EACB761CEFBEE5 /* Bundle+Extension.swift in Sources */,
+				90321B4020657C4EDE9207DA912F7105 /* CCBPaymentControl.swift in Sources */,
+				60AF2DC2E5FB438EB29398512ED373A5 /* ListenedPaymentManager.swift in Sources */,
+				8C8B583004235379334F6D3D6C9C070E /* MultipartPayControl.swift in Sources */,
+				8CA78241913D3EED5006114139EC711A /* MultipartPayResult.swift in Sources */,
+				36CDB68F4BC1EE812626CFB356E6A38B /* PayConfig.swift in Sources */,
+				2CA4F8510BFE0E6492637974EABE5621 /* PayControlManager.swift in Sources */,
+				D15BCB6B697F8A26AFCFDDA112E04C9F /* PayPlugin-dummy.m in Sources */,
+				E0BA62CE818B11D0942B2FF015A94762 /* PayPlugin.swift in Sources */,
+				A3026B1B81324FD4CA8CB86FDD52CF30 /* PayPrepareManager.swift in Sources */,
+				999DD35423891B95ED0EE4C64563E234 /* PayProvider.swift in Sources */,
+				F3FA0D8A63FAD2B99B3C0AB86F6719F9 /* PayProviderCustomizer.swift in Sources */,
+				CFA36F5733C7BA467164371D0537B1D2 /* PayResponse.swift in Sources */,
+				9CDC8C21604E3107EC60704E3A994FFD /* PayResult.swift in Sources */,
+				5E4B5D3D930E1A22E83139307F47940F /* PayType.swift in Sources */,
+				515A9E925B7609594A5FAF86C62DBFF8 /* PostFormControl.swift in Sources */,
+				C3B6024D0E988575BC31CD63BC92F9E4 /* PostFormWebViewController.swift in Sources */,
+				2AE2755B0D57C4F0E41170DA77A2FF6C /* UnionpayPaymentControl.swift in Sources */,
+				A7924907D66FC8F71794F57906BF440D /* UnionRechargePaymentControl.swift in Sources */,
+				B026E65BCB0D4EED99EE70482BC0DBB5 /* WXPaymentControl.swift in Sources */,
+				279A8B65C4A83E8177F57D277B14EFFD /* YwtPaymentControl.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		95D82BE47420EEF96CC3E64DEE29412F /* Sources */ = {
+		D2E14C676B1D2A7FFBAFC72F370FC9E3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				268541FD65ED70CDC1FE90E58C878118 /* AlipayPaymentControl.swift in Sources */,
-				1AC0DE79C03AC2B46B73A646C5EAD11E /* Bundle+Extension.swift in Sources */,
-				C6CE204347C6765BC0C26653DFEB2C9E /* CCBPaymentControl.swift in Sources */,
-				6BA8053D88BF5994646B287028976D21 /* ListenedPaymentManager.swift in Sources */,
-				AD50A0BD9B6DA18D8376BD91D5404F1C /* MultipartPayControl.swift in Sources */,
-				7174987E0F3A1D11F5B2BE8CB5C8B898 /* MultipartPayResult.swift in Sources */,
-				63C0918D46709094A71C92F8E99135B5 /* PayConfig.swift in Sources */,
-				69BCB0ACD87F82C9D105F39597897F3C /* PayControlManager.swift in Sources */,
-				CF27D4691D328D5233E362A410564472 /* PayPlugin-dummy.m in Sources */,
-				00FAFC71665DD8849B0A497B407F035B /* PayPlugin.swift in Sources */,
-				0DFB6570E2803CAC357F5128530263C8 /* PayPrepareManager.swift in Sources */,
-				42084278918B75D282604821BCD0D7D5 /* PayProvider.swift in Sources */,
-				19FDD430B827B3CDB41647EB6884DCDE /* PayProviderCustomizer.swift in Sources */,
-				F2285FED5FA424410E457B7EBA4004D2 /* PayResponse.swift in Sources */,
-				4449C881C8F134B3287DC5BAB837CA7B /* PayResult.swift in Sources */,
-				DA520BE8F19AE6E6832CC8F32DFEC953 /* PayType.swift in Sources */,
-				2C311F9940FBBEBB27DCC47D745AC1BB /* PostFormControl.swift in Sources */,
-				FFFACE8007F35532BF214E8FE2D86CBF /* PostFormWebViewController.swift in Sources */,
-				660F74F20E97FFF6B3ED769D7123E27D /* UnionpayPaymentControl.swift in Sources */,
-				B7DDCD8F797AA10AD04B5ADB5A103D33 /* UnionRechargePaymentControl.swift in Sources */,
-				070D1E0C99E6B130E6CFDA15C6EE2D35 /* WXPaymentControl.swift in Sources */,
-				E82E2BAB2E5FF326EDB530C7C5E0FC22 /* YwtPaymentControl.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		AFA759EB80F74B3A7CC5D8D72FEB2545 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1F16449D311A7B41F08940FBF327DFBF /* Pods-PayPlugin_Example-dummy.m in Sources */,
+				DDF987FED7090314BCF2A4E3242B3146 /* AnyError.swift in Sources */,
+				DBCECEA865F86FB35075042ACBBD931F /* NoError.swift in Sources */,
+				85FD60F524E0CBC3C73A99B78339523C /* Result-dummy.m in Sources */,
+				197408AD2CA117D648D118CD19E4B2CC /* Result.swift in Sources */,
+				AB014E1C2A2B6E1288E702E701976828 /* ResultProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0CF336F337EECFD4E2395B65EEB82DE9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SYWechatOpenSDK;
-			target = 45BC32881CD078D68E8D496326160A2A /* SYWechatOpenSDK */;
-			targetProxy = 2CDCD840CD179BB133EC65299ABB5E61 /* PBXContainerItemProxy */;
-		};
-		21B62ADD8381A980D049C15C509B1BCB /* PBXTargetDependency */ = {
+		0BD08FBBE0990742B85DF1FC2239854B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = PayPlugin;
-			target = 0AD34DC7ECA856B6639890AEFFA99346 /* PayPlugin */;
-			targetProxy = 96E709D95ECC79925C5A83DEAB8472DB /* PBXContainerItemProxy */;
+			target = 6625100CA0B2E8418BF9047E42FC4D27 /* PayPlugin */;
+			targetProxy = 824B0D2F990EF86181496FC839FBDE5F /* PBXContainerItemProxy */;
 		};
-		8444E0FEB57D5572E75B02878CA78848 /* PBXTargetDependency */ = {
+		0E28845B43C0A87E8ADF90FD1BC11E08 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "PayPlugin-PayAssets";
-			target = 22F13905E0DDA1194D2B6DCD756F15E9 /* PayPlugin-PayAssets */;
-			targetProxy = 9987BD35B13A630616255952D899FB90 /* PBXContainerItemProxy */;
+			target = 1089D58968FE941F5BD3459994B5C512 /* PayPlugin-PayAssets */;
+			targetProxy = AE6CF965A2CC3DF3AA04395E2D0924E2 /* PBXContainerItemProxy */;
 		};
-		E6EED12860984422E6D7845911BB8E3C /* PBXTargetDependency */ = {
+		1FF51DB57DC714D94413052C2C2EA10F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Result;
+			target = 927CBCC55311EA69639B30C2B425D3BA /* Result */;
+			targetProxy = AF924D023DD8F9E6D65D5191303E7F78 /* PBXContainerItemProxy */;
+		};
+		4424AB3CF04289D5BB12EFD9EC564443 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Result;
+			target = 927CBCC55311EA69639B30C2B425D3BA /* Result */;
+			targetProxy = FE8236EB2AD6987E9E11BA041263C561 /* PBXContainerItemProxy */;
+		};
+		554541F63B32741338A31D1BCBDAFEB7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SYWechatOpenSDK;
-			target = 45BC32881CD078D68E8D496326160A2A /* SYWechatOpenSDK */;
-			targetProxy = F0626FE676593DB6FF45D0435091F671 /* PBXContainerItemProxy */;
+			target = 9D7DEE84A3D1298A0D04B7624A00CEB0 /* SYWechatOpenSDK */;
+			targetProxy = 60F7B531476AF4E8763479D5DF156F1B /* PBXContainerItemProxy */;
+		};
+		5905BFEA76F22F71E2132D0E3E599B36 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SYWechatOpenSDK;
+			target = 9D7DEE84A3D1298A0D04B7624A00CEB0 /* SYWechatOpenSDK */;
+			targetProxy = CF0FA7540387F118777EAC550CA8E438 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		3B4D7D5DA32D7B622D3039C8997F832F /* Debug */ = {
+		1018FB2A8F4AF786E82B8B3370A6A2C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1F519104925B0AA52AC81CA80C40C256 /* PayPlugin.xcconfig */;
 			buildSettings = {
@@ -694,56 +828,9 @@
 			};
 			name = Debug;
 		};
-		450A7EE6692A72FB0B5A92A70136A4B2 /* Release */ = {
+		1EE10940FA329A88005498A2A8DFD8DB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F519104925B0AA52AC81CA80C40C256 /* PayPlugin.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/PayPlugin";
-				INFOPLIST_FILE = "Target Support Files/PayPlugin/ResourceBundle-PayAssets-PayPlugin-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PRODUCT_NAME = PayAssets;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				WRAPPER_EXTENSION = bundle;
-			};
-			name = Release;
-		};
-		6EDE392A1761566F3D2E1A9F566EE2B4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 251364FDE6637C76E17415959BF880A5 /* SYWechatOpenSDK.xcconfig */;
-			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/SYWechatOpenSDK/SYWechatOpenSDK-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SYWechatOpenSDK/SYWechatOpenSDK-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SYWechatOpenSDK/SYWechatOpenSDK.modulemap";
-				PRODUCT_MODULE_NAME = SYWechatOpenSDK;
-				PRODUCT_NAME = SYWechatOpenSDK;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		93CEC9E1BC2E77D5966863FDD17C9B85 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 251364FDE6637C76E17415959BF880A5 /* SYWechatOpenSDK.xcconfig */;
+			baseConfigurationReference = 8CCC3ADFF094943A5DE33FACD84C4D9E /* SYWechatOpenSDK.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -772,6 +859,73 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
+		};
+		2049CA79818912504BA3690903C9FA4E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 99DBC306536DBD1FBD2895AD18DD85B5 /* Pods-PayPlugin_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-PayPlugin_Example/Pods-PayPlugin_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-PayPlugin_Example/Pods-PayPlugin_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		3E64D0F10EB61849B3E64C1A50EA9ACB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8CCC3ADFF094943A5DE33FACD84C4D9E /* SYWechatOpenSDK.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SYWechatOpenSDK/SYWechatOpenSDK-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SYWechatOpenSDK/SYWechatOpenSDK-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SYWechatOpenSDK/SYWechatOpenSDK.modulemap";
+				PRODUCT_MODULE_NAME = SYWechatOpenSDK;
+				PRODUCT_NAME = SYWechatOpenSDK;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
 		};
 		96434B6C8FF320C976A10DAD7174A4BB /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -828,12 +982,45 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_COMPILATION_MODE = wholemodule;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
-		BE66D9CB21FC30B8CCC956E789EB5BD2 /* Debug */ = {
+		9A73CB7D5764D8170AEB6D398361396B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 825B3D61E04863C0220576D721AF4CEC /* Result.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Result/Result-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Result/Result-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Result/Result.modulemap";
+				PRODUCT_MODULE_NAME = Result;
+				PRODUCT_NAME = Result;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A1B6B8EC7B372424032D112CF2BCC884 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1F519104925B0AA52AC81CA80C40C256 /* PayPlugin.xcconfig */;
 			buildSettings = {
@@ -847,13 +1034,12 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = bundle;
 			};
-			name = Debug;
+			name = Release;
 		};
-		C253DE56C75043C820ECADA7947D3602 /* Release */ = {
+		BD12A457E972EEC282A61F74599C9AE5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 99DBC306536DBD1FBD2895AD18DD85B5 /* Pods-PayPlugin_Example.release.xcconfig */;
+			baseConfigurationReference = 1F519104925B0AA52AC81CA80C40C256 /* PayPlugin.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -863,20 +1049,20 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-PayPlugin_Example/Pods-PayPlugin_Example-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/PayPlugin/PayPlugin-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/PayPlugin/PayPlugin-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-PayPlugin_Example/Pods-PayPlugin_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/PayPlugin/PayPlugin.modulemap";
+				PRODUCT_MODULE_NAME = PayPlugin;
+				PRODUCT_NAME = PayPlugin;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -884,11 +1070,10 @@
 			};
 			name = Release;
 		};
-		CE12733D9EE67F230841870110EC153F /* Debug */ = {
+		BEFED7F4C84A0E88529A0E6856F47F54 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0B7478CDEE22A067E7F1D26204119526 /* Pods-PayPlugin_Example.debug.xcconfig */;
+			baseConfigurationReference = 825B3D61E04863C0220576D721AF4CEC /* Result.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -898,21 +1083,19 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-PayPlugin_Example/Pods-PayPlugin_Example-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/Result/Result-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Result/Result-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-PayPlugin_Example/Pods-PayPlugin_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				MODULEMAP_FILE = "Target Support Files/Result/Result.modulemap";
+				PRODUCT_MODULE_NAME = Result;
+				PRODUCT_NAME = Result;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -983,10 +1166,11 @@
 			};
 			name = Debug;
 		};
-		EF0E08EF83A3A0B59885B61589F72CC3 /* Release */ = {
+		D7F29DC53B675941B2000BA37150C494 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1F519104925B0AA52AC81CA80C40C256 /* PayPlugin.xcconfig */;
+			baseConfigurationReference = 0B7478CDEE22A067E7F1D26204119526 /* Pods-PayPlugin_Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -996,47 +1180,46 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/PayPlugin/PayPlugin-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/PayPlugin/PayPlugin-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-PayPlugin_Example/Pods-PayPlugin_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/PayPlugin/PayPlugin.modulemap";
-				PRODUCT_MODULE_NAME = PayPlugin;
-				PRODUCT_NAME = PayPlugin;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-PayPlugin_Example/Pods-PayPlugin_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 4.2;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
+		};
+		F7E3C4E7D44B7C516871D88A7896EBBA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1F519104925B0AA52AC81CA80C40C256 /* PayPlugin.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)/PayPlugin";
+				INFOPLIST_FILE = "Target Support Files/PayPlugin/ResourceBundle-PayAssets-PayPlugin-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				PRODUCT_NAME = PayAssets;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A585DF208CBDE495F04FB65514DD14C /* Build configuration list for PBXNativeTarget "PayPlugin-PayAssets" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BE66D9CB21FC30B8CCC956E789EB5BD2 /* Debug */,
-				450A7EE6692A72FB0B5A92A70136A4B2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		1C2116D6F498B8ADB578252778B1CD61 /* Build configuration list for PBXNativeTarget "Pods-PayPlugin_Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CE12733D9EE67F230841870110EC153F /* Debug */,
-				C253DE56C75043C820ECADA7947D3602 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1046,20 +1229,47 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6F400FAEEC0C77A4C65EC4A70CB86FE3 /* Build configuration list for PBXNativeTarget "PayPlugin" */ = {
+		5A92E147B17AEFA10A5A43E6EF77C149 /* Build configuration list for PBXNativeTarget "PayPlugin-PayAssets" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3B4D7D5DA32D7B622D3039C8997F832F /* Debug */,
-				EF0E08EF83A3A0B59885B61589F72CC3 /* Release */,
+				F7E3C4E7D44B7C516871D88A7896EBBA /* Debug */,
+				A1B6B8EC7B372424032D112CF2BCC884 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		A98EDE727140DAC86D5C434FA33F7CCF /* Build configuration list for PBXNativeTarget "SYWechatOpenSDK" */ = {
+		619FCAB648F6DA522B8F102EA2905900 /* Build configuration list for PBXNativeTarget "Result" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				6EDE392A1761566F3D2E1A9F566EE2B4 /* Debug */,
-				93CEC9E1BC2E77D5966863FDD17C9B85 /* Release */,
+				BEFED7F4C84A0E88529A0E6856F47F54 /* Debug */,
+				9A73CB7D5764D8170AEB6D398361396B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		92140F2684C022C52560B778078A76ED /* Build configuration list for PBXNativeTarget "SYWechatOpenSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3E64D0F10EB61849B3E64C1A50EA9ACB /* Debug */,
+				1EE10940FA329A88005498A2A8DFD8DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C97C95DC6C7E8626F1430114D7977908 /* Build configuration list for PBXNativeTarget "PayPlugin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1018FB2A8F4AF786E82B8B3370A6A2C8 /* Debug */,
+				BD12A457E972EEC282A61F74599C9AE5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC2296DE435A2F6A0753473A7B69DC82 /* Build configuration list for PBXNativeTarget "Pods-PayPlugin_Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7F29DC53B675941B2000BA37150C494 /* Debug */,
+				2049CA79818912504BA3690903C9FA4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

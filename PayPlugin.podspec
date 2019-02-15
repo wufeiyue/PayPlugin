@@ -41,4 +41,6 @@ Pod::Spec.new do |s|
   s.preserve_paths = 'PayPlugin/Framework/module.modulemap', 'PayPlugin/Framework/*.h'
   
   s.dependency 'SYWechatOpenSDK'
+  s.dependency 'Result'
+  
 end

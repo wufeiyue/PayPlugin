@@ -17,6 +17,47 @@ import Foundation
  
  */
 
+//
+private final class ClientRoute {
+    
+    private var didEnterBackground: NSObjectProtocol?
+    
+    /// 能否打开 第三方客户端的回调  已经打开, 或者不可以打开
+    private var completion: (Bool) -> Void
+    
+    init(completion: @escaping (Bool) -> Void) {
+        self.completion = completion
+    }
+    
+    /// 打开客户端
+    func open(with url: URL) {
+        
+        guard UIApplication.shared.canOpenURL(url) else {
+            completion(false)
+            return
+        }
+        
+        if #available(iOS 10, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: completion)
+        }
+        else {
+            
+            let canOpenURL = UIApplication.shared.openURL(url)
+            
+            didEnterBackground = NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: .main) { [weak self] (notification) in
+                
+                defer {
+                    self?.didEnterBackground.flatMap{ NotificationCenter.default.removeObserver($0) }
+                }
+                
+                self?.completion(canOpenURL)
+            }
+            
+        }
+        
+    }
+}
+
 public class ListenedPaymentManager: NSObject {
     
     private var listener = ListenerManager()

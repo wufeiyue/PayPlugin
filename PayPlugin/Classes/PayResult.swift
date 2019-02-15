@@ -21,6 +21,12 @@ public enum ResponseResult<T> {
 
 public enum PayError: Error {
     
+    //支付宝客户端没有安装
+    case alipayNeverInstall
+    //微信客户端没有安装
+    case wechatNeverInstall
+    
+    
     /// 余额不足
     case lackBalance
     
@@ -114,6 +120,10 @@ extension PayError: CustomStringConvertible {
             return message ?? ""
         case .notFountClient(let client):
             return "没有安装\(client.name)"
+        case .alipayNeverInstall:
+            return "没有安装支付宝"
+        case .wechatNeverInstall:
+            return "没有安装微信"
         }
     }
     
@@ -145,6 +155,10 @@ extension PayError: CustomStringConvertible {
             return message ?? ""
         case .notFountClient(let client):
             return "没有安装\(client.name)"
+        case .alipayNeverInstall:
+            return "没有安装支付宝"
+        case .wechatNeverInstall:
+            return "没有安装微信"
         }
     }
     

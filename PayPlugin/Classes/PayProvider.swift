@@ -19,18 +19,48 @@ import Foundation
  6.返回结果
  
  */
-
+/*
 public typealias ResponseCompletion = (PayResponse) -> Void
 public typealias PaymentStatusCompletion = (PayResult<PaymentStatus>) -> Void
+*/
+public enum PayPluginError: Error {
+    //网络请求失败结果的输出
+    case custom(String)
+    case verifyReject
+}
+
+extension PayPluginError: Equatable {
+    static public func ==(lhs: PayPluginError, rhs: PayPluginError) -> Bool {
+        switch (lhs, rhs) {
+        case (.custom, .custom):
+            return true
+        case (.verifyReject, .verifyReject):
+            return true
+        default:
+            return false
+        }
+    }
+}
+
+extension PayPluginError: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .custom(let value):
+            return value
+        case .verifyReject:
+            return "验证签名失败!"
+        }
+    }
+}
 
 //MARK: - 支付状态
-public enum PaymentStatus: Int {
+public enum PaymentStatus {
     /// 支付成功
-    case paySuccess = 1
+    case paySuccess
     /// 支付中
-    case willPay = 0
-    /// 未支付
-    case payFailure = 2
+    case willPay
+    /// 支付失败
+    case payFailure(PayPluginError)
 }
 
 

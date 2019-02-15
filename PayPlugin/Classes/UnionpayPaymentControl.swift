@@ -17,7 +17,7 @@ extension PayMode {
         }
     }
 }
-
+/*
 public class UnionPayPaymentControl: MultipartPayControl {
     
     public var scheme: String = ""
@@ -33,6 +33,6 @@ public class UnionPayPaymentControl: MultipartPayControl {
     
     
 }
-
+*/
 
 

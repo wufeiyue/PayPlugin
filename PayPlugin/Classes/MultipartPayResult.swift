@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 public class MultipartPayResult<T: PayProviderCustomizer> {
     
     let result: (PayResult<T.Model>) -> Void
@@ -59,3 +59,4 @@ public class MultipartPayResult<T: PayProviderCustomizer> {
     }
     
 }
+*/

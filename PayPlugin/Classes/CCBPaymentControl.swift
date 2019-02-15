@@ -7,7 +7,7 @@
 
 import Foundation
 import CCBNetPaySDK
-
+/*
 class CCBPaymentControl: MultipartPayControl {
     
     override func payOrder(profile: OrderInfoProfile, result: @escaping ResponseCompletion) {
@@ -97,3 +97,4 @@ extension PaymentStatus {
     }
     
 }
+*/

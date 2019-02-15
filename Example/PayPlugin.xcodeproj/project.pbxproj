@@ -235,11 +235,13 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PayPlugin_Example/Pods-PayPlugin_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/PayPlugin/PayPlugin.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SYWechatOpenSDK/SYWechatOpenSDK.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PayPlugin.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SYWechatOpenSDK.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
