@@ -6,11 +6,16 @@
 //
 
 import Foundation
-import Result
+//import Result
 import AlipaySDK
 import SYWechatOpenSDK
 import CCBNetPaySDK
 import UMSPPPayUnifyPayPlugin
+
+public enum PaymentResult<T> {
+    case success(T)
+    case failure(String)
+}
 
 /*
 public final class oldPayPlugin {
@@ -94,10 +99,10 @@ public final class oldPayPlugin {
 //////////////
 
 
-class PayPlugin: NSObject {
+final public class PayPlugin: NSObject {
     
     //支付结果
-    typealias PaymentCompletionHandler = (PaymentStatus) -> Void
+    public typealias PaymentCompletionHandler = (PaymentStatus) -> Void
     
     public enum SupportedPlatform {
         //微信
@@ -152,7 +157,7 @@ class PayPlugin: NSObject {
         
         case weChat(appId: String)
         
-        var hashValue: Int {
+        public var hashValue: Int {
             switch self {
             case .weChat(let id):
                 return id.hashValue
@@ -166,7 +171,7 @@ class PayPlugin: NSObject {
     public private(set) var active: Bool = false
     public private(set) var accountList: Set<Account>?
     
-    static let shared = PayPlugin()
+    public static let shared = PayPlugin()
     
     private override init() { }
     
@@ -184,7 +189,7 @@ class PayPlugin: NSObject {
         return true
     }
     
-    public class func deliver(provider: Provider, result: @escaping PaymentCompletionHandler) {
+    public class func deliver(provider: PaymentProvider, result: @escaping PaymentCompletionHandler) {
         
         shared.payCompletionHandler = result
         shared.active = true
@@ -223,13 +228,13 @@ class PayPlugin: NSObject {
                 
             case .failure(let error):
                 //网络请求失败,直接抛出异常
-                break
+                shared.payCompletionHandler?(.payFailure(.custom(error)))
             }
         }
     }
     
     // 依靠客户端同步回调拿到支付结果
-    private func syncCallback(control: PaymentStrategy, provider: Provider) {
+    private func syncCallback(control: PaymentStrategy, provider: PaymentProvider) {
         
         //调起SDK并跳转到第三方客户端
         control.payOrder()
@@ -272,7 +277,7 @@ class PayPlugin: NSObject {
         }
     }
     
-    private func asyncCallback(control: PaymentStrategy, provider: Provider) {
+    private func asyncCallback(control: PaymentStrategy, provider: PaymentProvider) {
         
         //调起SDK并跳转到第三方客户端
         control.payOrder()
@@ -364,14 +369,14 @@ extension PayPlugin {
     
 }
 
-enum Business {
+public enum PaymentBusiness {
     /// 支付宝客户端
     case alipayClient(orderInfo: String, scheme: String)
     /// 微信客户端
     case wechat(params: Dictionary<String, Any>)
 }
 
-enum VerifyResult {
+public enum VerifyResult {
     //拒绝
     case reject
     //通过
@@ -422,33 +427,31 @@ enum VerifyResult {
 //
 //}
 
-class Provider {
+open class PaymentProvider {
     
     //签名回调
-    typealias SignCompletionHandler = (Result<Business, PayPluginError>) -> Void
+    public typealias SignCompletionHandler = (PaymentResult<PaymentBusiness>) -> Void
     //验签回调
-    typealias VerifyCompletionHandler = (VerifyResult) -> Void
+    public typealias VerifyCompletionHandler = (VerifyResult) -> Void
     //查询回调
-    typealias QueryCompletionHandler = (PaymentStatus) -> Void
+    public typealias QueryCompletionHandler = (PaymentStatus) -> Void
     
-    var business: PayPlugin.PayBusiness?
-    
-    init() {
+    public init() {
         
     }
     
     /// 签名
-    func sign(result: @escaping SignCompletionHandler) {
-        fatalError("需交由子类重写")
+    open func sign(result: @escaping SignCompletionHandler) {
+        fatalError("需由子类实现")
     }
     
     /// 验签
-    func verify(dict: Dictionary<AnyHashable, Any?>?, result: @escaping VerifyCompletionHandler) {
+    open func verify(dict: Dictionary<AnyHashable, Any?>?, result: @escaping VerifyCompletionHandler) {
         result(.pass)
     }
     
     /// 查询
-    func query(result: @escaping QueryCompletionHandler) {
+    open func query(result: @escaping QueryCompletionHandler) {
         result(.paySuccess)
     }
     
