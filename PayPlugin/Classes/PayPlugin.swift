@@ -209,9 +209,15 @@ final public class PayPlugin: NSObject {
                     //支付宝客户端签名成功
                     control = AlipayControl(orderInfo: orderInfo, scheme: scheme)
                     
-                case .wechat(let params):
+                case let .wechat(openId, partnerId, prepayId, nonceStr, timeStamp, package, sign):
                     //微信客户端签名成功
-                    control = WeChatControl(params: params)
+                    control = WeChatControl(package: package,
+                                            partnerid: partnerId,
+                                            noncestr: nonceStr,
+                                            prepayid: prepayId,
+                                            openId: openId,
+                                            timestamp: timeStamp,
+                                            sign: sign)
                 }
 
                 //初始化参数配置
@@ -381,7 +387,8 @@ public enum PaymentBusiness {
     /// 支付宝客户端
     case alipayClient(orderInfo: String, scheme: String)
     /// 微信客户端
-    case wechat(params: Dictionary<String, Any>)
+    case wechat(openId: String, partnerId: String, prepayId: String, nonceStr: String, timeStamp: UInt32, package: String, sign: String)
+    
 }
 
 public enum VerifyResult {
@@ -588,51 +595,27 @@ class AlipayControl: PaymentStrategy {
     
 }
 
-public struct WeixinSignResult: Codable {
-    
-    var package: String
-    var partnerid: String
-    var noncestr: String
-    var prepayid: String
-    var appid: String
-    var timestamp: String
-    var sign: String
- 
-    fileprivate var payRequest: PayReq {
-        let req = PayReq()
-        req.openID = appid
-        req.partnerId = partnerid
-        req.prepayId = prepayid
-        req.nonceStr = noncestr
-        req.timeStamp = UInt32(timestamp)!
-        req.package = package
-        req.sign = sign
-        return req
-    }
-}
-
-
 //MARK:- 微信
 class WeChatControl: PaymentStrategy {
     
-    let params: Dictionary<String, Any>
+    let payRequest: PayReq
     
-    init(params: Dictionary<String, Any>) {
-        self.params = params
+    init(package: String, partnerid: String, noncestr: String, prepayid: String, openId: String, timestamp: UInt32, sign: String) {
+        
+        let req = PayReq()
+        req.openID = openId
+        req.partnerId = partnerid
+        req.prepayId = prepayid
+        req.nonceStr = noncestr
+        req.timeStamp = timestamp
+        req.package = package
+        req.sign = sign
+        
+        self.payRequest = req
     }
     
     override func payOrder() {
-        
-        do {
-            let data = try JSONSerialization.data(withJSONObject: params, options: [])
-            let coder = JSONDecoder()
-            let result = try coder.decode(WeixinSignResult.self, from: data)
-            WXApi.send(result.payRequest)
-        }
-        catch {
-            fatalError("解析出错")
-        }
-        
+        WXApi.send(payRequest)
     }
     
     override func processOrder(with url: URL) {
