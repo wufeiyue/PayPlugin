@@ -229,6 +229,7 @@ final public class PayPlugin: NSObject {
                     shared.syncCallback(control: control, provider: provider)
                 case .wechat:
                     //TODO: - 执行微信逻辑
+                    shared.syncCallback(control: control, provider: provider)
                     break
                 }
                 
