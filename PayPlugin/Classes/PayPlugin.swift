@@ -634,10 +634,17 @@ class WeChatControl: PaymentStrategy {
             return
         }
         
-        let result = (ret == "0")
-        //TODO: - 待处理
-//        processCompletionHandler?(result, queryDictionary)
-        
+        switch ret {
+        case "0":
+            //支付成功
+            processCompletionHandler?(.success, queryDictionary)
+        case "-2":
+            //用户取消支付
+            processCompletionHandler?(.failure(.userDidCancel), queryDictionary)
+        default:
+            //支付失败
+            processCompletionHandler?(.failure(.unknown), queryDictionary)
+        }
     }
     
 }
