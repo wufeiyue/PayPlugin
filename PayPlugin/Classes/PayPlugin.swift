@@ -218,6 +218,8 @@ final public class PayPlugin: NSObject {
                                             openId: openId,
                                             timestamp: timeStamp,
                                             sign: sign)
+                case .ccbpay(let orderInfo):
+                    control = CCBPayControl(orderInfo: orderInfo)
                 }
 
                 //初始化参数配置
@@ -225,12 +227,11 @@ final public class PayPlugin: NSObject {
                 
                 switch business {
                 case .alipayClient:
-                    //开始执行逻辑
                     shared.syncCallback(control: control, provider: provider)
                 case .wechat:
-                    //TODO: - 执行微信逻辑
                     shared.syncCallback(control: control, provider: provider)
-                    break
+                case .ccbpay:
+                    shared.syncCallback(control: control, provider: provider)
                 }
                 
             case .failure(let error):
@@ -387,7 +388,8 @@ public enum PaymentBusiness {
     case alipayClient(orderInfo: String, scheme: String)
     /// 微信客户端
     case wechat(openId: String, partnerId: String, prepayId: String, nonceStr: String, timeStamp: UInt32, package: String, sign: String)
-    
+    /// 建行
+    case ccbpay(orderInfo: String)
 }
 
 public enum VerifyResult {
@@ -408,39 +410,6 @@ public enum VerifyResult {
 //    }
 //}
 
-//class PayControl {
-//
-//    var provider: Provider
-//
-//    init(_ provider: Provider) {
-//        self.provider = provider
-//    }
-//
-//    func request() {
-//
-//        provider.sign { (result) in
-//
-//            switch result {
-//            case .success(let business):
-//                switch business {
-//                case .alipayClient:
-//                    //支付宝客户端
-//                    break
-//                case .alipayWeb:
-//                    //支付宝网页
-//                    break
-//                }
-//
-//            case .failure(let error):
-//                break
-//            }
-//
-//        }
-//
-//    }
-//
-//}
-
 open class PaymentProvider {
     
     //签名回调
@@ -450,9 +419,7 @@ open class PaymentProvider {
     //查询回调
     public typealias QueryCompletionHandler = (PaymentStatus) -> Void
     
-    public init() {
-        
-    }
+    public init() { }
     
     /// 签名
     open func sign(result: @escaping SignCompletionHandler) {
@@ -650,7 +617,11 @@ class WeChatControl: PaymentStrategy {
 //MARK: - 建行
 class CCBPayControl: PaymentStrategy {
     
-    var orderInfo: String!
+    let orderInfo: String
+    
+    init(orderInfo: String) {
+        self.orderInfo = orderInfo
+    }
     
     override func payOrder() {
         
@@ -658,7 +629,7 @@ class CCBPayControl: PaymentStrategy {
             //支付完成回调方法，该方法回调结果需要在processOrderWithPaymentResult方法实现的前提下才能在completionBlock拿到支付结果。将在支付结果获取与处理中详细说明
             
             guard let unwrappedDict = dict else {
-                //FIXME: - 字典为空时
+                self.processCompletionHandler?(.failure(.lossData), dict)
                 return
             }
             
@@ -703,6 +674,7 @@ class CCBPayControl: PaymentStrategy {
             //FIXME: - 会不会触发两次回调
             guard let unwrappedDict = dict else {
                 //FIXME: - 字典为空时
+                self.processCompletionHandler?(.failure(.lossData), dict)
                 return
             }
             
