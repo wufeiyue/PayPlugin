@@ -247,12 +247,6 @@ final public class PayPlugin: NSObject {
         //调起SDK并跳转到第三方客户端
         control.payOrder()
         
-        // 增加返回第三方客户端的监听
-        listenterManager.singleHandleOpenURLCompletion { (url) in
-            //通过第三方客户端传回,需要传入SDK再做一次校对
-            control.processOrder(with: url)
-        }
-        
         //得到支付结果
         control.processCompletionHandler = { (state, dict) in
             
@@ -289,7 +283,11 @@ final public class PayPlugin: NSObject {
             
         }
         
-        
+        // 增加返回第三方客户端的监听
+        listenterManager.singleHandleOpenURLCompletion { (url) in
+            //通过第三方客户端传回,需要传入SDK再做一次校对
+            control.processOrder(with: url)
+        }
     }
     
     private func asyncCallback(control: PaymentStrategy, provider: PaymentProvider) {
@@ -483,16 +481,16 @@ class ListenterManager {
     /// 仅接收一次来自切回前台的通知,如果后面收到第三方客户端的回调将不处理
     func singleHandleForegroundNotification(_ result: @escaping () -> Void) {
         applicationWillEnterForeground = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self](notification) in
-            defer { self?.applicationWillEnterForeground = nil }
             result()
+            self?.applicationWillEnterForeground = nil
         }
     }
     
     /// 仅接收一次来自第三方客户端的回调,如果后面切回前台的通知过来将不处理
     func singleHandleOpenURLCompletion(_ result: @escaping (URL) -> Void) {
-        didReceiveHandleOpenURLCompletion = { [unowned self] in
-            defer { self.didReceiveHandleOpenURLCompletion = nil }
+        didReceiveHandleOpenURLCompletion = { [weak self] in
             result($0)
+            self?.didReceiveHandleOpenURLCompletion = nil
         }
     }
     
