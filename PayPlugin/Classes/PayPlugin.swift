@@ -615,6 +615,12 @@ class WeChatControl: PaymentStrategy {
         self.payRequest = req
     }
     
+    override func register(_ account: PayPlugin.Account) {
+        if case .weChat(let id) = account {
+            WXApi.registerApp(id)
+        }
+    }
+    
     override func payOrder() {
         WXApi.send(payRequest)
     }
