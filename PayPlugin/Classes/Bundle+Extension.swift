@@ -10,7 +10,7 @@ import Foundation
 extension Bundle {
     
     static var formAssetBundle: Bundle {
-        let podBundle = Bundle(for: PostFormWebViewController.self)
+        let podBundle = Bundle(for: PostFormNavigationView.self)
         
         guard let resourceBundleUrl = podBundle.url(forResource: "PayAssets", withExtension: "bundle") else {
             fatalError("资源Bundle的路径不对")

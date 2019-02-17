@@ -8,6 +8,96 @@
 import Foundation
 import WebKit
 
+protocol PostFormNavigationViewDelegate: class {
+    func didBackTapped()
+    func didCloseTapped()
+}
+
+class PostFormNavigationView: UIView {
+    
+    weak var delegate: PostFormNavigationViewDelegate?
+    
+    private var backBtn: UIButton?
+    private var closeBtn: UIButton?
+    var titleLab: UILabel!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+    }
+    
+    func setupView() {
+        
+        if let imagePath = Bundle.formAssetBundle.path(forResource: "icon_back@2x", ofType: "png", inDirectory: "Images") {
+            if let back_nor = UIImage(contentsOfFile: imagePath) {
+                
+                let backBtn = UIButton()
+                backBtn.setImage(back_nor, for: .normal)
+                backBtn.addTarget(self, action: #selector(backTapped), for: .touchUpInside)
+                addSubview(backBtn)
+                
+                self.backBtn = backBtn
+            }
+            
+        }
+        
+        if let imagePath = Bundle.formAssetBundle.path(forResource: "icon_blackClose@2x", ofType: "png", inDirectory: "Images") {
+            if let back_nor = UIImage(contentsOfFile: imagePath) {
+                
+                let closeBtn = UIButton()
+                closeBtn.setImage(back_nor, for: .normal)
+                closeBtn.addTarget(self, action: #selector(closeTapped), for: .touchUpInside)
+                addSubview(closeBtn)
+                
+                self.closeBtn = closeBtn
+            }
+        
+        }
+        
+        let titleLab = UILabel()
+        titleLab.textAlignment = .center
+        titleLab.font = UIFont.systemFont(ofSize: 16)
+        titleLab.textColor = .black
+        addSubview(titleLab)
+        
+        self.titleLab = titleLab
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        titleLab.frame.size = CGSize(width: 200, height: 20)
+        titleLab.center.x = bounds.midX
+        titleLab.frame.origin.y = bounds.height - titleLab.bounds.height - 6
+        
+        backBtn?.frame.size = CGSize(width: 30, height: 30)
+        backBtn?.frame.origin = CGPoint(x: 15, y: bounds.height - 30 - 10)
+        
+        closeBtn?.frame.size = CGSize(width: 30, height: 30)
+        
+        if let backBtn = backBtn {
+            closeBtn?.frame.origin = CGPoint(x: backBtn.frame.maxX + 15, y: bounds.height - 30 - 10)
+        }
+        else {
+            closeBtn?.frame.origin = CGPoint(x: 15, y: bounds.height - 30 - 10)
+        }
+    }
+    
+    @objc
+    private func backTapped() {
+        delegate?.didBackTapped()
+    }
+    
+    @objc
+    private func closeTapped() {
+        delegate?.didCloseTapped()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        return nil
+    }
+}
+
 public final class PostFormWebViewController: UIViewController {
 
     //初始化实现
@@ -26,6 +116,7 @@ public final class PostFormWebViewController: UIViewController {
     private let configuration: WKWebViewConfiguration = WKWebViewConfiguration()
     /// 进度条
     private var progressView: UIProgressView!
+    private var navigationView: PostFormNavigationView!
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +128,15 @@ public final class PostFormWebViewController: UIViewController {
         super.viewWillAppear(animated)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         webView.navigationDelegate = self
+        
+        let navigationRect = CGRect(x: 0, y: 0, width: view.bounds.width, height: iPhoneXTopInset + 64)
+        navigationView.frame = navigationRect
+        
+        let progressRect = CGRect(x: 0, y: navigationRect.maxY, width: view.bounds.width, height: 3)
+        progressView.frame = progressRect
+        
+        let webViewRect = CGRect(x: 0, y: progressRect.maxY, width: view.bounds.width, height: view.bounds.height - progressRect.maxY )
+        webView.frame = webViewRect
     }
     
     override public func viewWillDisappear(_ animated: Bool) {
@@ -59,73 +159,44 @@ public final class PostFormWebViewController: UIViewController {
         progressView.trackTintColor = .white
         view.addSubview(progressView)
         
-        var back_nor_item: UIBarButtonItem?
-        var close_nor_item: UIBarButtonItem?
-        
-        if let imagePath = Bundle.formAssetBundle.path(forResource: "icon_back@2x", ofType: "png", inDirectory: "Images") {
-            let back_nor = UIImage(contentsOfFile: imagePath)
-            back_nor_item = UIBarButtonItem(image: back_nor, style: .plain, target: self, action: #selector(goBack))
-        }
-        
-        if let imagePath = Bundle.formAssetBundle.path(forResource: "icon_blackClose@2x", ofType: "png", inDirectory: "Images") {
-            let back_nor = UIImage(contentsOfFile: imagePath)
-            close_nor_item = UIBarButtonItem(image: back_nor, style: .plain, target: self, action: #selector(close))
-        }
-        
-        var leftItems = Array<UIBarButtonItem>()
-        
-        back_nor_item.flatMap({ leftItems.append($0) })
-        close_nor_item.flatMap({ leftItems.append($0) })
-
-        navigationItem.leftBarButtonItems = leftItems
+        navigationView = PostFormNavigationView(frame: .zero)
+        navigationView.backgroundColor = .white
+        navigationView.delegate = self
+        view.addSubview(navigationView)
     }
     
     private func setupConstraints() {
         
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        progressView.translatesAutoresizingMaskIntoConstraints = false
         
-        var p_top: NSLayoutConstraint {
-            if #available(iOS 11.0, *) {
-                return makeConstraint(target: progressView, attr: .top, toItem: view.safeAreaLayoutGuide, attr: .top, offset: 0)
-            } else {
-                return makeConstraint(target: progressView, attr: .top, toItem: topLayoutGuide, attr: .bottom, offset: 0)
-            }
-        }
         
-        let p_height = makeConstraint(target: progressView, attr: .height, offset: 3)
-        let p_leading = makeConstraint(target: progressView, attr: .leading, toItem: view, offset: 0)
-        let p_trailing = makeConstraint(target: progressView, attr: .trailing, toItem: view, offset: 0)
-        
-        let w_bottom = makeConstraint(target: webView, attr: .bottom, toItem: view, offset: 0)
-        let w_top = makeConstraint(target: webView, attr: .top, toItem: progressView, attr: .bottom, offset: 0)
-        let w_leading = makeConstraint(target: webView, attr: .leading, toItem: view, offset: 0)
-        let w_trailing = makeConstraint(target: webView, attr: .trailing, toItem: view, offset: 0)
-        
-        view.addConstraints([p_top, p_height, p_leading, p_trailing, w_top, w_bottom, w_trailing, w_leading])
+//        webView.translatesAutoresizingMaskIntoConstraints = false
+//        progressView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        var p_top: NSLayoutConstraint {
+//            if #available(iOS 11.0, *) {
+//                return makeConstraint(target: progressView, attr: .top, toItem: view.safeAreaLayoutGuide, attr: .top, offset: 0)
+//            } else {
+//                return makeConstraint(target: progressView, attr: .top, toItem: topLayoutGuide, attr: .bottom, offset: 0)
+//            }
+//        }
+//
+//        let p_height = makeConstraint(target: progressView, attr: .height, offset: 3)
+//        let p_leading = makeConstraint(target: progressView, attr: .leading, toItem: view, offset: 0)
+//        let p_trailing = makeConstraint(target: progressView, attr: .trailing, toItem: view, offset: 0)
+//
+//        let w_bottom = makeConstraint(target: webView, attr: .bottom, toItem: view, offset: 0)
+//        let w_top = makeConstraint(target: webView, attr: .top, toItem: progressView, attr: .bottom, offset: 0)
+//        let w_leading = makeConstraint(target: webView, attr: .leading, toItem: view, offset: 0)
+//        let w_trailing = makeConstraint(target: webView, attr: .trailing, toItem: view, offset: 0)
+//
+//        view.addConstraints([p_top, p_height, p_leading, p_trailing, w_top, w_bottom, w_trailing, w_leading])
         
     }
     
-    private func makeConstraint(target: UIView, attr targetAttr: NSLayoutConstraint.Attribute, toItem: Any? = nil, attr toAttr: NSLayoutConstraint.Attribute? = nil, offset: CGFloat) -> NSLayoutConstraint {
-        return NSLayoutConstraint(item: target, attribute: targetAttr, relatedBy: .equal, toItem: toItem, attribute: toAttr ?? targetAttr, multiplier: 1.0, constant: offset)
-    }
+//    private func makeConstraint(target: UIView, attr targetAttr: NSLayoutConstraint.Attribute, toItem: Any? = nil, attr toAttr: NSLayoutConstraint.Attribute? = nil, offset: CGFloat) -> NSLayoutConstraint {
+//        return NSLayoutConstraint(item: target, attribute: targetAttr, relatedBy: .equal, toItem: toItem, attribute: toAttr ?? targetAttr, multiplier: 1.0, constant: offset)
+//    }
     
-    /// 关闭操作
-    @objc
-    public func close() {
-        backAction?()
-    }
-    
-    /// 后退操作
-    @objc
-    public func goBack() {
-        if webView.canGoBack {
-            backNavigation = webView.goBack()
-            webView.reload()
-        } else {
-            backAction?()
-        }
-    }
     
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
@@ -166,6 +237,30 @@ public final class PostFormWebViewController: UIViewController {
             }
         }
     }
+    
+    private var iPhoneXTopInset: CGFloat {
+        if #available(iOS 11, *) {
+            guard UIScreen.main.nativeBounds.height == 2436 else { return 0 }
+            return view.safeAreaInsets.top
+        }
+        return 0
+    }
+}
+
+extension PostFormWebViewController: PostFormNavigationViewDelegate {
+    func didBackTapped() {
+        if webView.canGoBack {
+            backNavigation = webView.goBack()
+            webView.reload()
+        } else {
+            backAction?()
+        }
+    }
+    
+    func didCloseTapped() {
+        backAction?()
+    }
+    
 }
 
 extension PostFormWebViewController: WKNavigationDelegate {
@@ -205,7 +300,7 @@ extension PostFormWebViewController: WKNavigationDelegate {
         }
         
         if url.absoluteString == returnURLString {
-            self.close()
+            self.backAction?()
         }
         else if openURLRole(url) {
             openURLCompletion?(url)
