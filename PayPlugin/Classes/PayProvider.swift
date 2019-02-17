@@ -20,9 +20,12 @@ import Foundation
  
  */
 /*
-public typealias ResponseCompletion = (PayResponse) -> Void
+
 public typealias PaymentStatusCompletion = (PayResult<PaymentStatus>) -> Void
 */
+
+public typealias ResponseCompletion = () -> Void
+
 public enum PayPluginError: Error {
     //网络请求失败结果的输出
     case custom(String)
@@ -84,22 +87,29 @@ public enum PayTerminal {
 
 public struct PostFormProfile {
     
+    /// 发起网页请求
     public var loadHTMLString: String = ""
     public var baseURL: URL?
     
+    /// 在网页中,点击回退按钮可关闭网页,回到我们的App中,这里就需要和服务器约定好需要返回的urlString
     public var returnURLString: String = ""
     
+    /// 需要执行的js
     public var javeScript: String?
     
+    /// 网页的标题
     public var title: String = ""
     
+    /// 处理需要跳转打开App的url规则
     public var openURLRole: (URL) -> Bool = { url in
         return url.scheme != "https" && url.scheme != "http" && url.absoluteString != "about:blank"
     }
     
-    public init() {
-        
-    }
+    /// 检索到符合跳转的URL, 可以在这里处理行为
+    public var openURLCompletion: ((URL) -> Void)?
+    
+    
+    public init() { }
     
 }
 

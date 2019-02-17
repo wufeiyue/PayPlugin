@@ -7,34 +7,25 @@
 
 import Foundation
 import WebKit
-/*
+
 public final class PostFormWebViewController: UIViewController {
 
+    //初始化实现
     public var backAction: ResponseCompletion?
     
-    public var willOpenURL: ((URL) -> Void)?
-    
-    private var backNavigation: WKNavigation?
-    
-    private var needLoadJSPOST = true
+    public var loadHTMLString: String = ""
+    public var baseURL: URL?
+    public var returnURLString: String = ""
+    public var javeScript: String?
+    public var openURLRole: ((URL) -> Bool)!
+    public var openURLCompletion: ((URL) -> Void)?
 
-    private let configuration: WKWebViewConfiguration = WKWebViewConfiguration()
-    
+    private var backNavigation: WKNavigation?
     private var webView: WKWebView!
-    
-    private let formProfile: PostFormProfile
-    
+    private var needLoadJSPOST = true
+    private let configuration: WKWebViewConfiguration = WKWebViewConfiguration()
     /// 进度条
     private var progressView: UIProgressView!
-    
-    public init(formProfile: PostFormProfile) {
-        self.formProfile = formProfile
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +51,7 @@ public final class PostFormWebViewController: UIViewController {
         view.backgroundColor = .white
         
         webView = WKWebView(frame: .zero, configuration: configuration)
-        webView.loadHTMLString(formProfile.loadHTMLString, baseURL: formProfile.baseURL)
+        webView.loadHTMLString(loadHTMLString, baseURL: baseURL)
         view.addSubview(webView)
         
         progressView = UIProgressView()
@@ -122,10 +113,8 @@ public final class PostFormWebViewController: UIViewController {
     /// 关闭操作
     @objc
     public func close() {
-        backAction?(PayResponse())
-        navigationController?.popViewController(animated: true)
+        backAction?()
     }
-    
     
     /// 后退操作
     @objc
@@ -134,8 +123,7 @@ public final class PostFormWebViewController: UIViewController {
             backNavigation = webView.goBack()
             webView.reload()
         } else {
-            backAction?(PayResponse())
-            navigationController?.popViewController(animated: true)
+            backAction?()
         }
     }
     
@@ -168,7 +156,7 @@ public final class PostFormWebViewController: UIViewController {
     
     /// 调用JS发送POST请求
     private func postRequestWithJS() {
-        guard let js = formProfile.javeScript, js.isEmpty == false else {
+        guard let js = javeScript, js.isEmpty == false else {
             return
         }
         // 调用JS代码
@@ -216,12 +204,11 @@ extension PostFormWebViewController: WKNavigationDelegate {
             return
         }
         
-        if url.absoluteString == formProfile.returnURLString {
-            self.navigationController?.popViewController(animated: true)
+        if url.absoluteString == returnURLString {
+            self.close()
         }
-        else if formProfile.openURLRole(url) {
-            print(url)
-            willOpenURL?(url)
+        else if openURLRole(url) {
+            openURLCompletion?(url)
         }
         
         decisionHandler(.allow)
@@ -229,4 +216,3 @@ extension PostFormWebViewController: WKNavigationDelegate {
     
 }
 
-*/

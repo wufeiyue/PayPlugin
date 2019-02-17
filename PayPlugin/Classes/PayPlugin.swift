@@ -220,6 +220,8 @@ final public class PayPlugin: NSObject {
                                             sign: sign)
                 case .ccbpay(let orderInfo):
                     control = CCBPayControl(orderInfo: orderInfo)
+                case .web(let profile):
+                    control = WebControl(profile: profile)
                 }
 
                 //初始化参数配置
@@ -232,6 +234,8 @@ final public class PayPlugin: NSObject {
                     shared.syncCallback(control: control, provider: provider)
                 case .ccbpay:
                     shared.syncCallback(control: control, provider: provider)
+                case .web:
+                    shared.queryCallback(control: control, provider: provider)
                 }
                 
             case .failure(let error):
@@ -291,6 +295,48 @@ final public class PayPlugin: NSObject {
         }
     }
     
+    private func queryCallback(control: PaymentStrategy, provider: PaymentProvider) {
+        
+        //调起SDK打开网页也有可能跳转到第三方
+        control.payOrder()
+        
+        //得到支付结果
+        control.processCompletionHandler = { (_, dict) in
+            provider.query(result: {
+                if case let .failure(error) = $0, case .custom = error {
+                    //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
+                    self.payCompletionHandler?(.success)
+                    self.reset()
+                }
+                else {
+                    //将查询结果通知到外面, 整个支付过程结束
+                    self.payCompletionHandler?($0)
+                    self.reset()
+                }
+            })
+        }
+        
+        // 增加返回前台页面的监听
+        listenterManager.singleHandleForegroundNotification { [unowned self] in
+            //判断是否正在发起支付
+            guard self.active else { return }
+            
+            provider.query(result: {
+                if case let .failure(error) = $0, case .custom = error {
+                    //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
+                    self.payCompletionHandler?(.success)
+                    self.reset()
+                }
+                else {
+                    //将查询结果通知到外面, 整个支付过程结束
+                    self.payCompletionHandler?($0)
+                    self.reset()
+                }
+            })
+        }
+        
+    }
+    
     private func asyncCallback(control: PaymentStrategy, provider: PaymentProvider) {
         
         //调起SDK并跳转到第三方客户端
@@ -333,28 +379,6 @@ final public class PayPlugin: NSObject {
     }
 }
 
-/// 支付状态管理
-//class StatusManager {
-//
-//    /// 已经发起支付
-//    var active: Bool {
-//        return true
-//    }
-//
-//
-//
-//    //准备工作
-//    func prepare() {
-//
-//    }
-//
-//    /// 释放
-//    func free() {
-//
-//    }
-//
-//}
-
 extension PayPlugin {
     
     class func openURL(urlString: String, completionHandler completion: ((Bool) -> Swift.Void)? = nil) {
@@ -390,6 +414,8 @@ public enum PaymentBusiness {
     case wechat(openId: String, partnerId: String, prepayId: String, nonceStr: String, timeStamp: UInt32, package: String, sign: String)
     /// 建行
     case ccbpay(orderInfo: String)
+    /// 网页支付
+    case web(profile: PostFormProfile)
 }
 
 public enum VerifyResult {
@@ -398,17 +424,6 @@ public enum VerifyResult {
     //通过
     case pass
 }
-
-//protocol Requester {
-//    associatedtype ModelType
-//}
-//
-//class AnyRequester<ModelType>: Requester {
-//
-//    init<T: Requester>(_ requester: T) where T.ModelType == ModelType {
-//
-//    }
-//}
 
 open class PaymentProvider {
     
@@ -721,6 +736,73 @@ class CCBPayControl: PaymentStrategy {
     
 }
 
+class WebControl: PaymentStrategy {
+    
+    let profile: PostFormProfile
+    
+    init(profile: PostFormProfile) {
+        self.profile = profile
+    }
+    
+    override func payOrder() {
+        
+        let postFormWebViewController = PostFormWebViewController()
+        postFormWebViewController.baseURL = profile.baseURL
+        postFormWebViewController.javeScript = profile.javeScript
+        postFormWebViewController.loadHTMLString = profile.loadHTMLString
+        postFormWebViewController.returnURLString = profile.returnURLString
+        postFormWebViewController.openURLRole = profile.openURLRole
+        postFormWebViewController.title = profile.title
+        
+        func close() {
+            postFormWebViewController.view.removeFromSuperview()
+            postFormWebViewController.removeFromParent()
+        }
+        
+        postFormWebViewController.openURLCompletion = { url in
+            self.profile.openURLCompletion?(url)
+            close()
+        }
+        
+        postFormWebViewController.backAction = {
+            
+            // 关闭页面
+            close()
+            
+            //回调出去
+            self.processCompletionHandler?(.success, nil)
+            
+        }
+        
+        if let currentViewController = UIViewController.current() {
+            
+            if let current = currentViewController.navigationController {
+                current.view.addSubview(postFormWebViewController.view)
+                current.addChild(postFormWebViewController)
+            }
+            else {
+                currentViewController.view.addSubview(postFormWebViewController.view)
+                currentViewController.addChild(postFormWebViewController)
+            }
+        }
+        
+    }
+}
+
+extension UIViewController {
+    fileprivate class func current(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return current(base: nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            return current(base: tab.selectedViewController)
+        }
+        if let presented = base?.presentedViewController {
+            return current(base: presented)
+        }
+        return base
+    }
+}
 
 //MARK: - 银联充值
 class UnionRechargeControl: PaymentStrategy {
