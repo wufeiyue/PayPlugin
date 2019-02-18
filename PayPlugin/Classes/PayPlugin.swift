@@ -6,7 +6,6 @@
 //
 
 import Foundation
-//import Result
 import AlipaySDK
 import SYWechatOpenSDK
 import CCBNetPaySDK
@@ -16,6 +15,14 @@ public enum PaymentResult<T> {
     case success(T)
     case failure(String)
 }
+
+public enum VerifyResult {
+    //拒绝
+    case reject
+    //通过
+    case pass
+}
+
 
 final public class PayPlugin: NSObject {
     
@@ -133,7 +140,7 @@ final public class PayPlugin: NSObject {
                     //初始化参数配置
                     accountList?.forEach{ control.register($0) }
                     //添加同步逻辑回调
-                    shared.syncCallback(control: control, provider: provider)
+                    shared.asyncCallback(control: control, provider: provider)
                     
                 case .ccbpay(let orderInfo):
                     //建行签名成功
@@ -141,10 +148,18 @@ final public class PayPlugin: NSObject {
                     //初始化参数配置
                     accountList?.forEach{ control.register($0) }
                     //添加同步逻辑回调
-                    shared.syncCallback(control: control, provider: provider)
+                    shared.asyncCallback(control: control, provider: provider)
                     
+                case .unionRecharge(let orderInfo, let channel):
+                    //银联充值签名成功
+                    let control = UnionRechargeControl(orderInfo: orderInfo, payChannel: channel.unionRecharge)
+                    //初始化参数配置
+                    accountList?.forEach{ control.register($0) }
+                    //添加异步逻辑回调
+                    shared.asyncCallback(control: control, provider: provider)
+                 
                 case .web(let profile):
-                    let control = WebControl(profile: profile)
+                    let control = WebPayControl(profile: profile)
                     //添加异步查询逻辑
                     shared.queryCallback(control: control, provider: provider)
                     
@@ -207,6 +222,66 @@ final public class PayPlugin: NSObject {
         }
     }
     
+    private func asyncCallback(control: PaymentPlatformStrategy, provider: PaymentProvider) {
+        
+        //调起SDK并跳转到第三方客户端
+        control.payOrder()
+        
+        //第三方客户端回调的验签结果
+        control.processCompletionHandler = { (state, dict) in
+            
+            switch state {
+            case .success, .willPay: //本地SDK同步为支付成功/支付中
+                
+                //开始验签
+                provider.verify(dict: dict, result: { verifyResult in
+                    
+                    switch verifyResult {
+                    case .pass: //验签通过, 进入查询
+                        provider.query(result: {
+                            if case let .failure(error) = $0, case .custom = error {
+                                //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
+                                self.payCompletionHandler?(.success)
+                                self.reset()
+                            }
+                            else {
+                                //将查询结果通知到外面, 整个支付过程结束
+                                self.payCompletionHandler?($0)
+                                self.reset()
+                            }
+                        })
+                    case .reject: //验签未通过
+                        self.payCompletionHandler?(.failure(.verifyReject))
+                        self.reset()
+                    }
+                    
+                })
+            case .failure(let error): //本地sdk状态码显示处理失败
+                self.payCompletionHandler?(.failure(error))
+                self.reset()
+            }
+            
+        }
+        
+        // 增加返回前台页面的监听
+        listenterManager.withLatestFromOpenURLCompletion({ (url) in
+            
+            if let unwrappedURL = url {
+                //通过第三方客户端传回,需要传入SDK再做一次校对
+                control.processOrder(with: unwrappedURL)
+            }
+            else {
+                provider.query(result: {
+                    //将查询结果通知到外面, 整个支付过程结束
+                    self.payCompletionHandler?($0)
+                    self.reset()
+                })
+            }
+            
+        })
+        
+    }
+    
     private func queryCallback(control: PaymentWebStrategy, provider: PaymentProvider) {
         
         //调起SDK打开网页也有可能跳转到第三方
@@ -241,44 +316,9 @@ final public class PayPlugin: NSObject {
         
     }
     
-    private func asyncCallback(control: PaymentPlatformStrategy, provider: PaymentProvider) {
-        
-        //调起SDK并跳转到第三方客户端
-        control.payOrder()
-        
-        // 增加返回前台页面的监听
-        listenterManager.withLatestFromOpenURLCompletion({ (url) in
-            
-            if let unwrappedURL = url {
-                //通过第三方客户端传回,需要传入SDK再做一次校对
-                control.processOrder(with: unwrappedURL)
-            }
-            else {
-                //TODO: 进入查询
-                provider.query(result: { (result) in
-                    
-                    //整个支付过程结束
-                    
-                    switch result {
-                    case .success:
-                        //支付成功
-                        break
-                    case .willPay:
-                        //支付中
-                        break
-                    case .failure:
-                        //支付失败
-                        break
-                    }
-                })
-            }
-            
-        })
-        
-    }
-    
     /// 恢复成默认支付状态
     private func reset() {
+        payCompletionHandler = nil
         active = false
     }
 }
@@ -312,26 +352,21 @@ extension PayPlugin {
     
 }
 
-public enum PaymentBusiness {
-    /// 支付宝客户端
-    case alipayClient(orderInfo: String, scheme: String)
-    /// 微信客户端
-    case wechat(openId: String, partnerId: String, prepayId: String, nonceStr: String, timeStamp: UInt32, package: String, sign: String)
-    /// 建行
-    case ccbpay(orderInfo: String)
-    /// 网页支付
-    case web(profile: PostFormProfile)
-}
-
-public enum VerifyResult {
-    //拒绝
-    case reject
-    //通过
-    case pass
-}
-
 open class PaymentProvider {
     
+    public enum PaymentBusiness {
+        /// 支付宝客户端
+        case alipayClient(orderInfo: String, scheme: String)
+        /// 微信客户端
+        case wechat(openId: String, partnerId: String, prepayId: String, nonceStr: String, timeStamp: UInt32, package: String, sign: String)
+        /// 建行
+        case ccbpay(orderInfo: String)
+        /// 网页支付
+        case web(profile: PostFormProfile)
+        /// 银联充值 目前仅支持微信/支付宝
+        case unionRecharge(orderInfo: String, payChannel: PayPlugin.SupportedPlatform)
+    }
+
     //签名回调
     public typealias SignCompletionHandler = (PaymentResult<PaymentBusiness>) -> Void
     //验签回调
@@ -657,7 +692,7 @@ class CCBPayControl: PaymentPlatformStrategy {
     
 }
 
-class WebControl: PaymentWebStrategy {
+class WebPayControl: PaymentWebStrategy {
     
     let profile: PostFormProfile
     
@@ -728,8 +763,13 @@ extension UIViewController {
 //MARK: - 银联充值
 class UnionRechargeControl: PaymentPlatformStrategy {
     
-    var payChannel: String!
-    var orderInfo: String!
+    let payChannel: String
+    let orderInfo: String
+    
+    init(orderInfo: String, payChannel: String) {
+        self.orderInfo = orderInfo
+        self.payChannel = payChannel
+    }
     
     override func register(_ account: PayPlugin.Account) {
         if case .weChat(let id) = account {
@@ -740,8 +780,6 @@ class UnionRechargeControl: PaymentPlatformStrategy {
     override func payOrder() {
         
         UMSPPPayUnifyPayPlugin.pay(withPayChannel: payChannel, payData: orderInfo) { (code, info) in
-            
-            
             
         }
         
@@ -754,7 +792,7 @@ class UnionRechargeControl: PaymentPlatformStrategy {
 
 extension PayPlugin.SupportedPlatform {
     
-    var payChannel: String {
+    var unionRecharge: String {
         
         switch self {
         case .alipay:
@@ -788,22 +826,3 @@ extension URL {
         return infos
     }
 }
-
-
-////MARK: - 支付策略上下文
-//class PayControlContext {
-//
-//    var control: PaymentPlatformStrategy
-//
-//    init(control: PaymentPlatformStrategy) {
-//        self.control = control
-//    }
-//
-//    func payOrder() {
-//        control.payOrder()
-//    }
-//
-//    func processOrder(with url: URL) {
-//        control.processOrder(with: url)
-//    }
-//}

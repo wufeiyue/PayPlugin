@@ -37,9 +37,6 @@
 		7DAD79167935D7E1D679CAD62EF5871A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B530315C2DD192171B2A447CCA877C64 /* Foundation.framework */; };
 		85FD60F524E0CBC3C73A99B78339523C /* Result-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 14E0F7851AD25F95DA8CB20B50F6D409 /* Result-dummy.m */; };
 		8A863C4DFB0B862CE69BD483027A4C83 /* SYWechatOpenSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 98F111CBC382A9752137DE9BB6D956E3 /* SYWechatOpenSDK-dummy.m */; };
-		8C8B583004235379334F6D3D6C9C070E /* MultipartPayControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6706B801357D76136A078360CE2CB459 /* MultipartPayControl.swift */; };
-		8CA78241913D3EED5006114139EC711A /* MultipartPayResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B7F9A7D2EDA7BA41933A851F2ED88 /* MultipartPayResult.swift */; };
-		90321B4020657C4EDE9207DA912F7105 /* CCBPaymentControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DB55E0F02E83359573D1031518D896 /* CCBPaymentControl.swift */; };
 		999DD35423891B95ED0EE4C64563E234 /* PayProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDB5472D6D85FFE8AF799667D5CAAD44 /* PayProvider.swift */; };
 		9CDC8C21604E3107EC60704E3A994FFD /* PayResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928E5F60065EC851AB96EF39C15AEC49 /* PayResult.swift */; };
 		9F8F89B9E32FD83B8B68684DE7598D96 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FBF17FE62CE0D4E7BE58B1C845BCA8 /* Security.framework */; };
@@ -125,7 +122,6 @@
 		224F6DAF7286B907169C356A4369B845 /* UnionRechargePaymentControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnionRechargePaymentControl.swift; path = PayPlugin/Classes/UnionRechargePaymentControl.swift; sourceTree = "<group>"; };
 		22BD6D6B28F9029FB591B8A3D0BDA917 /* SYWechatOpenSDKDummp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYWechatOpenSDKDummp.h; path = SYWechatOpenSDK/SYWechatOpenSDKDummp.h; sourceTree = "<group>"; };
 		2464E5B82AD22109D868C5AC6460627B /* libUMSPosPayOnly.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libUMSPosPayOnly.a; path = PayPlugin/Framework/libUMSPosPayOnly.a; sourceTree = "<group>"; };
-		27DB55E0F02E83359573D1031518D896 /* CCBPaymentControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CCBPaymentControl.swift; path = PayPlugin/Classes/CCBPaymentControl.swift; sourceTree = "<group>"; };
 		3A222B400D28F361E1B5C0B2AD7D752C /* PostFormControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PostFormControl.swift; path = PayPlugin/Classes/PostFormControl.swift; sourceTree = "<group>"; };
 		3DA9F09A7F6AB6B98A587ACDC67092E4 /* SYWechatOpenSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SYWechatOpenSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		475946C778E70CFCB8851E0426219C34 /* Images */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = Images; path = PayPlugin/Assets/PayAssets.bundle/Images; sourceTree = "<group>"; };
@@ -137,7 +133,6 @@
 		54B538A0CA278180E61FF1380C7C40F9 /* PayPlugin.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayPlugin.swift; path = PayPlugin/Classes/PayPlugin.swift; sourceTree = "<group>"; };
 		58F0041107C8B25DEB228FEDD14CAEAD /* UnionpayPaymentControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnionpayPaymentControl.swift; path = PayPlugin/Classes/UnionpayPaymentControl.swift; sourceTree = "<group>"; };
 		669213247D38C789AC9533DB4E3A9F2F /* SYWechatOpenSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SYWechatOpenSDK.modulemap; sourceTree = "<group>"; };
-		6706B801357D76136A078360CE2CB459 /* MultipartPayControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartPayControl.swift; path = PayPlugin/Classes/MultipartPayControl.swift; sourceTree = "<group>"; };
 		691F74DD9C79DBFCBA4D7F7F52A74D76 /* Result-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Result-prefix.pch"; sourceTree = "<group>"; };
 		6F40DD90D27FD4C0C9299AA9C7804BC3 /* Result.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Result.swift; path = Result/Result.swift; sourceTree = "<group>"; };
 		7176E48745755F228F19C6B6E7052D55 /* PayControlManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayControlManager.swift; path = PayPlugin/Classes/PayControlManager.swift; sourceTree = "<group>"; };
@@ -165,7 +160,6 @@
 		992B9CFBD11F23DBC5650DC45F22D185 /* Pods_PayPlugin_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayPlugin_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		99DBC306536DBD1FBD2895AD18DD85B5 /* Pods-PayPlugin_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PayPlugin_Example.release.xcconfig"; sourceTree = "<group>"; };
 		A4DB02175C31AA5D68E8CE6F1F3DC620 /* Pods-PayPlugin_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PayPlugin_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		AB3B7F9A7D2EDA7BA41933A851F2ED88 /* MultipartPayResult.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultipartPayResult.swift; path = PayPlugin/Classes/MultipartPayResult.swift; sourceTree = "<group>"; };
 		AC233824C4F35A5675FED3B8C4CFDC3E /* PayPrepareManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayPrepareManager.swift; path = PayPlugin/Classes/PayPrepareManager.swift; sourceTree = "<group>"; };
 		ADE2E149AF0A1459920149406DE2C3B0 /* Result.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Result.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1159D7F5580068076F48D0F2A7EABA6 /* PayPlugin-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PayPlugin-dummy.m"; sourceTree = "<group>"; };
@@ -366,10 +360,7 @@
 			children = (
 				075212C078D8E8452E59475C65A4EC65 /* AlipayPaymentControl.swift */,
 				C9702A3A91B57D0A9255F5F57BCDEF7A /* Bundle+Extension.swift */,
-				27DB55E0F02E83359573D1031518D896 /* CCBPaymentControl.swift */,
 				8AA5A3470AA61DFCEF2233B6ACA3C657 /* ListenedPaymentManager.swift */,
-				6706B801357D76136A078360CE2CB459 /* MultipartPayControl.swift */,
-				AB3B7F9A7D2EDA7BA41933A851F2ED88 /* MultipartPayResult.swift */,
 				BEE8CFEF1E7871319A4E1662D9D5B908 /* PayConfig.swift */,
 				7176E48745755F228F19C6B6E7052D55 /* PayControlManager.swift */,
 				54B538A0CA278180E61FF1380C7C40F9 /* PayPlugin.swift */,
@@ -717,10 +708,7 @@
 			files = (
 				6B2F37281F205F3CB274E9767E5CA5C1 /* AlipayPaymentControl.swift in Sources */,
 				29933ABEF2B9830685EACB761CEFBEE5 /* Bundle+Extension.swift in Sources */,
-				90321B4020657C4EDE9207DA912F7105 /* CCBPaymentControl.swift in Sources */,
 				60AF2DC2E5FB438EB29398512ED373A5 /* ListenedPaymentManager.swift in Sources */,
-				8C8B583004235379334F6D3D6C9C070E /* MultipartPayControl.swift in Sources */,
-				8CA78241913D3EED5006114139EC711A /* MultipartPayResult.swift in Sources */,
 				36CDB68F4BC1EE812626CFB356E6A38B /* PayConfig.swift in Sources */,
 				2CA4F8510BFE0E6492637974EABE5621 /* PayControlManager.swift in Sources */,
 				D15BCB6B697F8A26AFCFDDA112E04C9F /* PayPlugin-dummy.m in Sources */,
