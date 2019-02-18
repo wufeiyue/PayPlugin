@@ -105,10 +105,6 @@ public struct PostFormProfile {
         return url.scheme != "https" && url.scheme != "http" && url.absoluteString != "about:blank"
     }
     
-    /// 检索到符合跳转的URL, 可以在这里处理行为
-    public var openURLCompletion: ((URL) -> Void)?
-    
-    
     public init() { }
     
 }

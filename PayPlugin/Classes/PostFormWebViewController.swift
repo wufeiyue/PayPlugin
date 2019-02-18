@@ -56,7 +56,7 @@ class PostFormNavigationView: UIView {
         
         let titleLab = UILabel()
         titleLab.textAlignment = .center
-        titleLab.font = UIFont.boldSystemFont(ofSize: 17)
+        titleLab.font = UIFont.boldSystemFont(ofSize: 18)
         titleLab.textColor = .black
         addSubview(titleLab)
         
@@ -68,7 +68,7 @@ class PostFormNavigationView: UIView {
         
         titleLab.frame.size = CGSize(width: 200, height: 20)
         titleLab.center.x = bounds.midX
-        titleLab.frame.origin.y = bounds.height - titleLab.bounds.height - 10
+        titleLab.frame.origin.y = bounds.height - titleLab.bounds.height - 9
         
         backBtn?.frame.size = CGSize(width: 30, height: 30)
         backBtn?.frame.origin = CGPoint(x: 10, y: bounds.height - 30 - 4)
@@ -164,6 +164,7 @@ public final class PostFormWebViewController: UIViewController {
         webView.loadHTMLString(loadHTMLString, baseURL: baseURL)
         webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
         webView.navigationDelegate = self
+        webView.backgroundColor = UIColor.init(red: 247/255.0, green: 247/255.0, blue: 247/255.0, alpha: 1)
         view.addSubview(webView)
         
         progressView = UIProgressView()
@@ -180,6 +181,10 @@ public final class PostFormWebViewController: UIViewController {
     }
     
     deinit {
+        print("已经释放")
+    }
+    
+    public func free() {
         webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
         webView.navigationDelegate = nil
     }

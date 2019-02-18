@@ -17,88 +17,6 @@ public enum PaymentResult<T> {
     case failure(String)
 }
 
-/*
-public final class oldPayPlugin {
-    
-    public static var `default` = oldPayPlugin()
-    
-    required public init() { }
-    
-    private let controlManager = PayControlManager()
-    
-    public func register(id: String) {
-        UnionRechargePaymentControl.register(model: id)
-    }
-    
-    /// 发起支付
-    ///
-    /// - Parameters:
-    ///   - target: 用于承载跳转的视图控制器
-    ///   - provider: 提供支付签名的配置类
-    ///   - result: 支付结果
-    public func pay<T: PayProviderCustomizer>(target: UIViewController, provider: T, result: @escaping (PayResult<T.Model>) -> Void) {
-        
-        let payResult = MultipartPayResult<T>(provider: provider, result: result)
-        
-        controlManager.queryResult = {
-            payResult.verify($0)
-        }
-        
-        controlManager.failureResult {
-            result(.failure($0))
-        }
-        
-        controlManager.progressResult {
-            result(.progress($0))
-        }
-        
-        prepare(provider: provider, target: target)
-    }
-    
-    private func prepare<T: PayProviderCustomizer>(provider: T, target viewController: UIViewController) {
-        
-        var payControl: MultipartPayControl?
-        
-        switch provider.payType {
-        case .alipay:
-            payControl = AlipayPaymentControl()
-        case .weixin:
-            payControl = WXPaymentControl()
-        case .ccb:
-            payControl = CCBPaymentControl()
-        case .unionpay:
-            payControl = UnionPayPaymentControl()
-        case .unionRecharge:
-            payControl = UnionRechargePaymentControl()
-        case .ywt:
-            payControl = YwtPaymentControl()
-        case .query:
-            break
-        }
-        
-        controlManager.payControl = payControl
-        controlManager.config(provider: provider, viewController: viewController)
-    }
-    
-    
-    /// 通知支付结果
-    ///
-    /// - Parameter url: 第三方客户端回传过来的URL地址
-    public func sendNotification(_ url: URL) {
-        if controlManager.payPrepare.checkURL(fromClient: url) {
-            NotificationCenter.default.post(name: .payManagerHandleOpenURL, object: url)
-        }
-    }
-    
-    public func removeListener() {
-        controlManager.removeListener()
-    }
-    
-}
-*/
-//////////////
-
-
 final public class PayPlugin: NSObject {
     
     //支付结果
@@ -202,7 +120,7 @@ final public class PayPlugin: NSObject {
 
                 //支付参数配置完成
                 
-                var control: PaymentStrategy
+                var control: PaymentPlatformStrategy
                 
                 switch business {
                 case .alipayClient(let orderInfo, let scheme):
@@ -247,7 +165,7 @@ final public class PayPlugin: NSObject {
     }
     
     // 依靠客户端同步回调拿到支付结果
-    private func syncCallback(control: PaymentStrategy, provider: PaymentProvider) {
+    private func syncCallback(control: PaymentPlatformStrategy, provider: PaymentProvider) {
         
         //调起SDK并跳转到第三方客户端
         control.payOrder()
@@ -295,13 +213,13 @@ final public class PayPlugin: NSObject {
         }
     }
     
-    private func queryCallback(control: PaymentStrategy, provider: PaymentProvider) {
+    private func queryCallback(control: PaymentWebStrategy, provider: PaymentProvider) {
         
         //调起SDK打开网页也有可能跳转到第三方
         control.payOrder()
         
         //得到支付结果
-        control.processCompletionHandler = { (_, dict) in
+        control.processCompletionHandler = {
             provider.query(result: {
                 //将查询结果通知到外面, 整个支付过程结束
                 self.payCompletionHandler?($0)
@@ -309,28 +227,33 @@ final public class PayPlugin: NSObject {
             })
         }
         
-        // 增加返回前台页面的监听
-        listenterManager.singleHandleForegroundNotification { [unowned self] in
-            //判断是否正在发起支付
-            guard self.active else { return }
+        control.openURLCompletion = { url in
             
-            provider.query(result: {
-                if case let .failure(error) = $0, case .custom = error {
-                    //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
-                    self.payCompletionHandler?(.success)
-                    self.reset()
+            //跳转到第三方平台
+            self.openURL(url: url, completionHandler: { (finished) in
+                
+                if finished {
+                    //仅跳转成功后, 才增加返回前台的监听
+                    self.listenterManager.singleHandleForegroundNotification { [unowned self] in
+                        //判断是否正在发起支付
+                        guard self.active else { return }
+                        
+                        provider.query(result: {
+                            //将查询结果通知到外面, 整个支付过程结束
+                            self.payCompletionHandler?($0)
+                            self.reset()
+                        })
+                    }
+                    
                 }
-                else {
-                    //将查询结果通知到外面, 整个支付过程结束
-                    self.payCompletionHandler?($0)
-                    self.reset()
-                }
+                
             })
+            
         }
         
     }
     
-    private func asyncCallback(control: PaymentStrategy, provider: PaymentProvider) {
+    private func asyncCallback(control: PaymentPlatformStrategy, provider: PaymentProvider) {
         
         //调起SDK并跳转到第三方客户端
         control.payOrder()
@@ -374,8 +297,8 @@ final public class PayPlugin: NSObject {
 
 extension PayPlugin {
     
-    class func openURL(urlString: String, completionHandler completion: ((Bool) -> Swift.Void)? = nil) {
-        guard let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) else {
+    func openURL(url: URL, completionHandler completion: ((Bool) -> Swift.Void)? = nil) {
+        guard UIApplication.shared.canOpenURL(url) else {
             completion?(false)
             return
         }
@@ -500,7 +423,7 @@ class ListenterManager {
     }
 }
 
-class PaymentStrategy {
+class PaymentPlatformStrategy {
     
     typealias ProcessCompletionHandler = (_ result: PaymentStatus, _ jsonDict: Dictionary<AnyHashable, Any?>?) -> Void
     
@@ -522,10 +445,26 @@ class PaymentStrategy {
     
 }
 
+class PaymentWebStrategy {
+    
+    typealias ProcessCompletionHandler = () -> Void
+    
+    /// 支付结果
+    var processCompletionHandler: ProcessCompletionHandler?
+    
+    // 打开客户端跳转回调
+    var openURLCompletion: ((URL) -> Void)?
+    
+    func payOrder() {
+        fatalError("由子类实现")
+    }
+}
+
+
 //MARK: - 策略模式
 
 //MARK:- 支付宝
-class AlipayControl: PaymentStrategy {
+class AlipayControl: PaymentPlatformStrategy {
     
     let orderInfo: String
     let scheme: String
@@ -570,7 +509,7 @@ class AlipayControl: PaymentStrategy {
 }
 
 //MARK:- 微信
-class WeChatControl: PaymentStrategy {
+class WeChatControl: PaymentPlatformStrategy {
     
     let payRequest: PayReq
     
@@ -623,7 +562,7 @@ class WeChatControl: PaymentStrategy {
 }
 
 //MARK: - 建行
-class CCBPayControl: PaymentStrategy {
+class CCBPayControl: PaymentPlatformStrategy {
     
     let orderInfo: String
     private var isFlag = true
@@ -729,7 +668,7 @@ class CCBPayControl: PaymentStrategy {
     
 }
 
-class WebControl: PaymentStrategy {
+class WebControl: PaymentWebStrategy {
     
     let profile: PostFormProfile
     
@@ -748,23 +687,22 @@ class WebControl: PaymentStrategy {
         postFormWebViewController.navigationItemTitle = profile.title
         
         func close() {
+            postFormWebViewController.free()
             postFormWebViewController.view.removeFromSuperview()
             postFormWebViewController.removeFromParent()
         }
         
         postFormWebViewController.openURLCompletion = { url in
-            self.profile.openURLCompletion?(url)
+            self.openURLCompletion?(url)
+            // 通过webview检索到url跳转到第三方客户端后,就关闭此网页
             close()
         }
         
         postFormWebViewController.backAction = {
-            
             // 关闭页面
             close()
-            
             //回调出去
-            self.processCompletionHandler?(.success, nil)
-            
+            self.processCompletionHandler?()
         }
         
         if let currentViewController = UIViewController.current() {
@@ -798,7 +736,7 @@ extension UIViewController {
 }
 
 //MARK: - 银联充值
-class UnionRechargeControl: PaymentStrategy {
+class UnionRechargeControl: PaymentPlatformStrategy {
     
     var payChannel: String!
     var orderInfo: String!
@@ -865,9 +803,9 @@ extension URL {
 ////MARK: - 支付策略上下文
 //class PayControlContext {
 //
-//    var control: PaymentStrategy
+//    var control: PaymentPlatformStrategy
 //
-//    init(control: PaymentStrategy) {
+//    init(control: PaymentPlatformStrategy) {
 //        self.control = control
 //    }
 //
