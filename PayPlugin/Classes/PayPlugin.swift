@@ -222,27 +222,21 @@ final public class PayPlugin: NSObject {
         }
         
         control.openURLCompletion = { url in
-            
             //跳转到第三方平台
-            self.openURL(url: url, completionHandler: { (finished) in
-                
-                if finished {
-                    //仅跳转成功后, 才增加返回前台的监听
-                    self.listenterManager.singleHandleForegroundNotification { [unowned self] in
-                        //判断是否正在发起支付
-                        guard self.active else { return }
-                        
-                        provider.query(result: {
-                            //将查询结果通知到外面, 整个支付过程结束
-                            self.payCompletionHandler?($0)
-                            self.reset()
-                        })
-                    }
+            return self.openURL(url: url, completionHandler: { (finished) in
+                guard finished else { return }
+                //仅跳转成功后, 才增加返回前台的监听
+                self.listenterManager.singleHandleForegroundNotification { [unowned self] in
+                    //判断是否正在发起支付
+                    guard self.active else { return }
                     
+                    provider.query(result: {
+                        //将查询结果通知到外面, 整个支付过程结束
+                        self.payCompletionHandler?($0)
+                        self.reset()
+                    })
                 }
-                
             })
-            
         }
         
     }
@@ -291,10 +285,10 @@ final public class PayPlugin: NSObject {
 
 extension PayPlugin {
     
-    func openURL(url: URL, completionHandler completion: ((Bool) -> Swift.Void)? = nil) {
+    func openURL(url: URL, completionHandler completion: ((Bool) -> Swift.Void)? = nil) -> Bool {
         guard UIApplication.shared.canOpenURL(url) else {
             completion?(false)
-            return
+            return false
         }
         if #available(iOS 10.0, *) {
             UIApplication.shared.open(url, options: [:]) { flag in
@@ -303,6 +297,7 @@ extension PayPlugin {
         } else {
             completion?(UIApplication.shared.openURL(url))
         }
+        return true
     }
     
     class func openURL(urlString: String) -> Bool {
@@ -447,7 +442,7 @@ class PaymentWebStrategy {
     var processCompletionHandler: ProcessCompletionHandler?
     
     // 打开客户端跳转回调
-    var openURLCompletion: ((URL) -> Void)?
+    var openURLCompletion: ((URL) -> Bool)?
     
     func payOrder() {
         fatalError("由子类实现")
@@ -687,9 +682,10 @@ class WebControl: PaymentWebStrategy {
         }
         
         postFormWebViewController.openURLCompletion = { url in
-            self.openURLCompletion?(url)
-            // 通过webview检索到url跳转到第三方客户端后,就关闭此网页
-            close()
+            if self.openURLCompletion?(url) == true {
+                // 通过webview检索到url跳转到第三方客户端后,就关闭此网页
+                close()
+            }
         }
         
         postFormWebViewController.backAction = {
