@@ -303,16 +303,9 @@ final public class PayPlugin: NSObject {
         //得到支付结果
         control.processCompletionHandler = { (_, dict) in
             provider.query(result: {
-                if case let .failure(error) = $0, case .custom = error {
-                    //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
-                    self.payCompletionHandler?(.success)
-                    self.reset()
-                }
-                else {
-                    //将查询结果通知到外面, 整个支付过程结束
-                    self.payCompletionHandler?($0)
-                    self.reset()
-                }
+                //将查询结果通知到外面, 整个支付过程结束
+                self.payCompletionHandler?($0)
+                self.reset()
             })
         }
         

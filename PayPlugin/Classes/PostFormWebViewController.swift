@@ -56,7 +56,7 @@ class PostFormNavigationView: UIView {
         
         let titleLab = UILabel()
         titleLab.textAlignment = .center
-        titleLab.font = UIFont.systemFont(ofSize: 16)
+        titleLab.font = UIFont.boldSystemFont(ofSize: 17)
         titleLab.textColor = .black
         addSubview(titleLab)
         
@@ -68,18 +68,18 @@ class PostFormNavigationView: UIView {
         
         titleLab.frame.size = CGSize(width: 200, height: 20)
         titleLab.center.x = bounds.midX
-        titleLab.frame.origin.y = bounds.height - titleLab.bounds.height - 12
+        titleLab.frame.origin.y = bounds.height - titleLab.bounds.height - 10
         
         backBtn?.frame.size = CGSize(width: 30, height: 30)
-        backBtn?.frame.origin = CGPoint(x: 15, y: bounds.height - 30 - 4)
+        backBtn?.frame.origin = CGPoint(x: 10, y: bounds.height - 30 - 4)
         
         closeBtn?.frame.size = CGSize(width: 30, height: 30)
         
         if let backBtn = backBtn {
-            closeBtn?.frame.origin = CGPoint(x: backBtn.frame.maxX + 15, y: bounds.height - 30 - 4)
+            closeBtn?.frame.origin = CGPoint(x: backBtn.frame.maxX + 10, y: bounds.height - 30 - 4)
         }
         else {
-            closeBtn?.frame.origin = CGPoint(x: 15, y: bounds.height - 30 - 4)
+            closeBtn?.frame.origin = CGPoint(x: 10, y: bounds.height - 30 - 4)
         }
     }
     
