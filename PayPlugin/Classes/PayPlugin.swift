@@ -118,44 +118,38 @@ final public class PayPlugin: NSObject {
             switch result {
             case .success(let business):
 
-                //支付参数配置完成
-                
-                var control: PaymentPlatformStrategy
-                
                 switch business {
                 case .alipayClient(let orderInfo, let scheme):
                     //支付宝客户端签名成功
-                    control = AlipayControl(orderInfo: orderInfo, scheme: scheme)
+                    let control = AlipayControl(orderInfo: orderInfo, scheme: scheme)
+                    //初始化参数配置
+                    accountList?.forEach{ control.register($0) }
+                    //添加同步逻辑回调
+                    shared.syncCallback(control: control, provider: provider)
                     
                 case let .wechat(openId, partnerId, prepayId, nonceStr, timeStamp, package, sign):
                     //微信客户端签名成功
-                    control = WeChatControl(package: package,
-                                            partnerid: partnerId,
-                                            noncestr: nonceStr,
-                                            prepayid: prepayId,
-                                            openId: openId,
-                                            timestamp: timeStamp,
-                                            sign: sign)
+                    let control = WeChatControl(package: package, partnerid: partnerId, noncestr: nonceStr, prepayid: prepayId, openId: openId, timestamp: timeStamp, sign: sign)
+                    //初始化参数配置
+                    accountList?.forEach{ control.register($0) }
+                    //添加同步逻辑回调
+                    shared.syncCallback(control: control, provider: provider)
+                    
                 case .ccbpay(let orderInfo):
-                    control = CCBPayControl(orderInfo: orderInfo)
+                    //建行签名成功
+                    let control = CCBPayControl(orderInfo: orderInfo)
+                    //初始化参数配置
+                    accountList?.forEach{ control.register($0) }
+                    //添加同步逻辑回调
+                    shared.syncCallback(control: control, provider: provider)
+                    
                 case .web(let profile):
-                    control = WebControl(profile: profile)
+                    let control = WebControl(profile: profile)
+                    //添加异步查询逻辑
+                    shared.queryCallback(control: control, provider: provider)
+                    
                 }
 
-                //初始化参数配置
-                accountList?.forEach{ control.register($0) }
-                
-                switch business {
-                case .alipayClient:
-                    shared.syncCallback(control: control, provider: provider)
-                case .wechat:
-                    shared.syncCallback(control: control, provider: provider)
-                case .ccbpay:
-                    shared.syncCallback(control: control, provider: provider)
-                case .web:
-                    shared.queryCallback(control: control, provider: provider)
-                }
-                
             case .failure(let error):
                 //网络请求失败,直接抛出异常
                 shared.payCompletionHandler?(.failure(.custom(error)))
