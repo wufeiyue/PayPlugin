@@ -51,7 +51,7 @@ class PostFormNavigationView: UIView {
                 
                 self.closeBtn = closeBtn
             }
-        
+            
         }
         
         let titleLab = UILabel()
@@ -68,18 +68,18 @@ class PostFormNavigationView: UIView {
         
         titleLab.frame.size = CGSize(width: 200, height: 20)
         titleLab.center.x = bounds.midX
-        titleLab.frame.origin.y = bounds.height - titleLab.bounds.height - 6
+        titleLab.frame.origin.y = bounds.height - titleLab.bounds.height - 12
         
         backBtn?.frame.size = CGSize(width: 30, height: 30)
-        backBtn?.frame.origin = CGPoint(x: 15, y: bounds.height - 30 - 10)
+        backBtn?.frame.origin = CGPoint(x: 15, y: bounds.height - 30 - 4)
         
         closeBtn?.frame.size = CGSize(width: 30, height: 30)
         
         if let backBtn = backBtn {
-            closeBtn?.frame.origin = CGPoint(x: backBtn.frame.maxX + 15, y: bounds.height - 30 - 10)
+            closeBtn?.frame.origin = CGPoint(x: backBtn.frame.maxX + 15, y: bounds.height - 30 - 4)
         }
         else {
-            closeBtn?.frame.origin = CGPoint(x: 15, y: bounds.height - 30 - 10)
+            closeBtn?.frame.origin = CGPoint(x: 15, y: bounds.height - 30 - 4)
         }
     }
     
@@ -99,7 +99,7 @@ class PostFormNavigationView: UIView {
 }
 
 public final class PostFormWebViewController: UIViewController {
-
+    
     //初始化实现
     public var backAction: ResponseCompletion?
     
@@ -109,7 +109,8 @@ public final class PostFormWebViewController: UIViewController {
     public var javeScript: String?
     public var openURLRole: ((URL) -> Bool)!
     public var openURLCompletion: ((URL) -> Void)?
-
+    public var navigationItemTitle: String = ""
+    
     private var backNavigation: WKNavigation?
     private var webView: WKWebView!
     private var needLoadJSPOST = true
@@ -118,31 +119,40 @@ public final class PostFormWebViewController: UIViewController {
     private var progressView: UIProgressView!
     private var navigationView: PostFormNavigationView!
     
+    private var isFirst: Bool = true
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        setupConstraints()
     }
     
-    override public func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
-        webView.navigationDelegate = self
-        
-        let navigationRect = CGRect(x: 0, y: 0, width: view.bounds.width, height: iPhoneXTopInset + 64)
-        navigationView.frame = navigationRect
-        
-        let progressRect = CGRect(x: 0, y: navigationRect.maxY, width: view.bounds.width, height: 3)
-        progressView.frame = progressRect
-        
-        let webViewRect = CGRect(x: 0, y: progressRect.maxY, width: view.bounds.width, height: view.bounds.height - progressRect.maxY )
-        webView.frame = webViewRect
+        print("viewWillAppear")
     }
     
-    override public func viewWillDisappear(_ animated: Bool) {
+    public override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
-        webView.navigationDelegate = nil
+        print("viewWillDisappear")
+    }
+    
+    public override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        if isFirst {
+            isFirst = false
+            
+            let navigationRect = CGRect(x: 0, y: 0, width: view.bounds.width, height: iPhoneXTopInset + 64)
+            navigationView.frame = navigationRect
+            
+            let progressRect = CGRect(x: 0, y: navigationRect.maxY, width: view.bounds.width, height: 3)
+            progressView.frame = progressRect
+            
+            let webViewRect = CGRect(x: 0, y: progressRect.maxY, width: view.bounds.width, height: view.bounds.height - progressRect.maxY )
+            webView.frame = webViewRect
+            
+        }
+        
     }
     
     private func setupViews() {
@@ -152,6 +162,8 @@ public final class PostFormWebViewController: UIViewController {
         
         webView = WKWebView(frame: .zero, configuration: configuration)
         webView.loadHTMLString(loadHTMLString, baseURL: baseURL)
+        webView.addObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress), options: .new, context: nil)
+        webView.navigationDelegate = self
         view.addSubview(webView)
         
         progressView = UIProgressView()
@@ -162,42 +174,15 @@ public final class PostFormWebViewController: UIViewController {
         navigationView = PostFormNavigationView(frame: .zero)
         navigationView.backgroundColor = .white
         navigationView.delegate = self
+        navigationView.titleLab.text = navigationItemTitle
         view.addSubview(navigationView)
-    }
-    
-    private func setupConstraints() {
-        
-        
-        
-//        webView.translatesAutoresizingMaskIntoConstraints = false
-//        progressView.translatesAutoresizingMaskIntoConstraints = false
-//
-//        var p_top: NSLayoutConstraint {
-//            if #available(iOS 11.0, *) {
-//                return makeConstraint(target: progressView, attr: .top, toItem: view.safeAreaLayoutGuide, attr: .top, offset: 0)
-//            } else {
-//                return makeConstraint(target: progressView, attr: .top, toItem: topLayoutGuide, attr: .bottom, offset: 0)
-//            }
-//        }
-//
-//        let p_height = makeConstraint(target: progressView, attr: .height, offset: 3)
-//        let p_leading = makeConstraint(target: progressView, attr: .leading, toItem: view, offset: 0)
-//        let p_trailing = makeConstraint(target: progressView, attr: .trailing, toItem: view, offset: 0)
-//
-//        let w_bottom = makeConstraint(target: webView, attr: .bottom, toItem: view, offset: 0)
-//        let w_top = makeConstraint(target: webView, attr: .top, toItem: progressView, attr: .bottom, offset: 0)
-//        let w_leading = makeConstraint(target: webView, attr: .leading, toItem: view, offset: 0)
-//        let w_trailing = makeConstraint(target: webView, attr: .trailing, toItem: view, offset: 0)
-//
-//        view.addConstraints([p_top, p_height, p_leading, p_trailing, w_top, w_bottom, w_trailing, w_leading])
         
     }
     
-//    private func makeConstraint(target: UIView, attr targetAttr: NSLayoutConstraint.Attribute, toItem: Any? = nil, attr toAttr: NSLayoutConstraint.Attribute? = nil, offset: CGFloat) -> NSLayoutConstraint {
-//        return NSLayoutConstraint(item: target, attribute: targetAttr, relatedBy: .equal, toItem: toItem, attribute: toAttr ?? targetAttr, multiplier: 1.0, constant: offset)
-//    }
-    
-    
+    deinit {
+        webView.removeObserver(self, forKeyPath: #keyPath(WKWebView.estimatedProgress))
+        webView.navigationDelegate = nil
+    }
     
     override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == #keyPath(WKWebView.estimatedProgress) {
@@ -212,18 +197,6 @@ public final class PostFormWebViewController: UIViewController {
             }
         }
     }
-    
-//    private func loadJSPOST() {
-//        // 获取JS路径
-//        let path = Bundle.main.path(forResource: "JSPOST", ofType: "html")
-//        // 获得html内容
-//        do {
-//            let html = try String(contentsOfFile: path!, encoding: String.Encoding.utf8)
-//            // 加载js
-//            webView.loadHTMLString(html, baseURL: Bundle.main.bundleURL)
-//        } catch { }
-//    }
-    
     
     /// 调用JS发送POST请求
     private func postRequestWithJS() {
@@ -272,12 +245,12 @@ extension PostFormWebViewController: WKNavigationDelegate {
     
     /// 即将白屏
     public func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
-//        printLogDebug("------ 白屏了")
+        //        printLogDebug("------ 白屏了")
     }
     
     // 完成加载
     public func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        printLogDebug("----- H5页面加载完成")
+        //        printLogDebug("----- H5页面加载完成")
         if needLoadJSPOST {
             // 调用使用JS发送POST请求的方法
             postRequestWithJS()

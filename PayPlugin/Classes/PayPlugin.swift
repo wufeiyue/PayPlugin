@@ -752,7 +752,7 @@ class WebControl: PaymentStrategy {
         postFormWebViewController.loadHTMLString = profile.loadHTMLString
         postFormWebViewController.returnURLString = profile.returnURLString
         postFormWebViewController.openURLRole = profile.openURLRole
-        postFormWebViewController.title = profile.title
+        postFormWebViewController.navigationItemTitle = profile.title
         
         func close() {
             postFormWebViewController.view.removeFromSuperview()
