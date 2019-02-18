@@ -185,29 +185,46 @@ final public class PayPlugin: NSObject {
             switch state {
             case .success, .willPay: //本地SDK同步为支付成功/支付中
                 
-                //开始验签
-                provider.verify(dict: dict, result: { verifyResult in
-                    
-                    switch verifyResult {
-                    case .pass: //验签通过, 进入查询
-                        provider.query(result: {
-                            if case let .failure(error) = $0, case .custom = error {
-                                //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
-                                self.payCompletionHandler?(.success)
-                                self.reset()
-                            }
-                            else {
-                                //将查询结果通知到外面, 整个支付过程结束
-                                self.payCompletionHandler?($0)
-                                self.reset()
-                            }
-                        })
-                    case .reject: //验签未通过
-                        self.payCompletionHandler?(.failure(.verifyReject))
-                        self.reset()
-                    }
-                    
-                })
+                if let unwrappedDict = dict {
+                    //开始验签
+                    provider.verify(dict: unwrappedDict, result: { verifyResult in
+                        
+                        switch verifyResult {
+                        case .pass: //验签通过, 进入查询
+                            provider.query(result: {
+                                if case let .failure(error) = $0, case .custom = error {
+                                    //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
+                                    self.payCompletionHandler?(.success)
+                                    self.reset()
+                                }
+                                else {
+                                    //将查询结果通知到外面, 整个支付过程结束
+                                    self.payCompletionHandler?($0)
+                                    self.reset()
+                                }
+                            })
+                        case .reject: //验签未通过
+                            self.payCompletionHandler?(.failure(.verifyReject))
+                            self.reset()
+                        }
+                        
+                    })
+                }
+                else {
+                    provider.query(result: {
+                        if case let .failure(error) = $0, case .custom = error {
+                            //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
+                            self.payCompletionHandler?(.success)
+                            self.reset()
+                        }
+                        else {
+                            //将查询结果通知到外面, 整个支付过程结束
+                            self.payCompletionHandler?($0)
+                            self.reset()
+                        }
+                    })
+                }
+                
             case .failure(let error): //本地sdk状态码显示处理失败
                 self.payCompletionHandler?(.failure(error))
                 self.reset()
@@ -233,29 +250,47 @@ final public class PayPlugin: NSObject {
             switch state {
             case .success, .willPay: //本地SDK同步为支付成功/支付中
                 
-                //开始验签
-                provider.verify(dict: dict, result: { verifyResult in
-                    
-                    switch verifyResult {
-                    case .pass: //验签通过, 进入查询
-                        provider.query(result: {
-                            if case let .failure(error) = $0, case .custom = error {
-                                //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
-                                self.payCompletionHandler?(.success)
-                                self.reset()
-                            }
-                            else {
-                                //将查询结果通知到外面, 整个支付过程结束
-                                self.payCompletionHandler?($0)
-                                self.reset()
-                            }
-                        })
-                    case .reject: //验签未通过
-                        self.payCompletionHandler?(.failure(.verifyReject))
-                        self.reset()
-                    }
-                    
-                })
+                if let unwrappedDict = dict {
+                    //开始验签
+                    provider.verify(dict: unwrappedDict, result: { verifyResult in
+                        
+                        switch verifyResult {
+                        case .pass: //验签通过也可能没有重载方法直接通过的, 进入查询, 已查询结果为准
+                            provider.query(result: {
+                                if case let .failure(error) = $0, case .custom = error {
+                                    //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
+                                    self.payCompletionHandler?(.success)
+                                    self.reset()
+                                }
+                                else {
+                                    //将查询结果通知到外面, 整个支付过程结束
+                                    self.payCompletionHandler?($0)
+                                    self.reset()
+                                }
+                            })
+                        case .reject: //验签未通过
+                            self.payCompletionHandler?(.failure(.verifyReject))
+                            self.reset()
+                        }
+                        
+                    })
+                }
+                else {
+                    //不需要验签,直接去查询结果
+                    provider.query(result: {
+                        if case let .failure(error) = $0, case .custom = error {
+                            //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
+                            self.payCompletionHandler?(.success)
+                            self.reset()
+                        }
+                        else {
+                            //将查询结果通知到外面, 整个支付过程结束
+                            self.payCompletionHandler?($0)
+                            self.reset()
+                        }
+                    })
+                }
+                
             case .failure(let error): //本地sdk状态码显示处理失败
                 self.payCompletionHandler?(.failure(error))
                 self.reset()
@@ -382,7 +417,7 @@ open class PaymentProvider {
     }
     
     /// 验签
-    open func verify(dict: Dictionary<AnyHashable, Any?>?, result: @escaping VerifyCompletionHandler) {
+    open func verify(dict: Dictionary<AnyHashable, Any?>, result: @escaping VerifyCompletionHandler) {
         result(.pass)
     }
     
@@ -745,19 +780,17 @@ class WebPayControl: PaymentWebStrategy {
     }
 }
 
-extension UIViewController {
-    fileprivate class func current(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
-        if let nav = base as? UINavigationController {
-            return current(base: nav.visibleViewController)
-        }
-        if let tab = base as? UITabBarController {
-            return current(base: tab.selectedViewController)
-        }
-        if let presented = base?.presentedViewController {
-            return current(base: presented)
-        }
-        return base
-    }
+//{\"extraMsg\":\"\",\"resultMsg\":\"用户取消支付\",\"rawMsg\":\"{\\\"errCode\\\":\\\"-2\\\",\\\"type\\\":\\\"0\\\",\\\"errStr\\\":\\\"用户点击取消并返回\\\"}\"}
+struct UnionRechargeResult: Codable {
+    var extraMsg: String
+    var resultMsg: String
+    var rawMsg: UnionRechargeMsg
+}
+
+struct UnionRechargeMsg: Codable {
+    var errCode: String
+    var type: String
+    var errStr: String
 }
 
 //MARK: - 银联充值
@@ -779,8 +812,33 @@ class UnionRechargeControl: PaymentPlatformStrategy {
     
     override func payOrder() {
         
-        UMSPPPayUnifyPayPlugin.pay(withPayChannel: payChannel, payData: orderInfo) { (code, info) in
+        UMSPPPayUnifyPayPlugin.pay(withPayChannel: payChannel, payData: orderInfo) { [weak self](code, info) in
             
+            guard let unwrappedInfo = info else {
+                self?.processCompletionHandler?(.failure(.lossData), nil)
+                return
+            }
+            
+            do {
+                let coder = JSONDecoder()
+                let data = try JSONSerialization.data(withJSONObject: unwrappedInfo, options: [])
+                let params = try coder.decode(UnionRechargeResult.self, from: data)
+            
+                switch params.rawMsg.errCode {
+                case "-2":
+                    //取消支付
+                    self?.processCompletionHandler?(.failure(.userDidCancel), nil)
+                case "0":
+                    //支付成功
+                    self?.processCompletionHandler?(.success, nil)
+                default:
+                    //未知
+                    self?.processCompletionHandler?(.failure(.unknown), nil)
+                }
+            }
+            catch {
+                self?.processCompletionHandler?(.failure(.custom(error.localizedDescription)), nil)
+            }
         }
         
     }
@@ -806,6 +864,21 @@ extension PayPlugin.SupportedPlatform {
         }
     }
     
+}
+
+extension UIViewController {
+    fileprivate class func current(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        if let nav = base as? UINavigationController {
+            return current(base: nav.visibleViewController)
+        }
+        if let tab = base as? UITabBarController {
+            return current(base: tab.selectedViewController)
+        }
+        if let presented = base?.presentedViewController {
+            return current(base: presented)
+        }
+        return base
+    }
 }
 
 //MARK: - Helper
