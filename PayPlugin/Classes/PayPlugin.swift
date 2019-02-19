@@ -23,6 +23,18 @@ public enum VerifyResult {
     case pass
 }
 
+public class Cancelable {
+    
+    let action: () -> Void
+    
+    init(_ action: @escaping () -> Void) {
+        self.action = action
+    }
+    
+    public func dispose() {
+        action()
+    }
+}
 
 final public class PayPlugin: NSObject {
     
@@ -114,122 +126,120 @@ final public class PayPlugin: NSObject {
         return true
     }
     
-    public class func deliver(provider: PaymentProvider, result: @escaping PaymentCompletionHandler) {
+    
+    /// 恢复成默认支付状态
+    private func reset() {
+        payCompletionHandler = nil
+        active = false
+    }
+    
+    @discardableResult
+    public class func deliver(provider: PaymentProvider, result: @escaping PaymentCompletionHandler) -> Cancelable {
         
         shared.payCompletionHandler = result
         shared.active = true
         
-        let accountList = shared.accountList
+        var cancelable: (() -> Void)?
         
         provider.sign { (result) in
             switch result {
             case .success(let business):
-
-                switch business {
-                case .alipayClient(let orderInfo, let scheme):
-                    //支付宝客户端签名成功
-                    let control = AlipayControl(orderInfo: orderInfo, scheme: scheme)
-                    //初始化参数配置
-                    accountList?.forEach{ control.register($0) }
-                    //添加同步逻辑回调
-                    shared.syncCallback(control: control, provider: provider)
-                    
-                case let .wechat(openId, partnerId, prepayId, nonceStr, timeStamp, package, sign):
-                    //微信客户端签名成功
-                    let control = WeChatControl(package: package, partnerid: partnerId, noncestr: nonceStr, prepayid: prepayId, openId: openId, timestamp: timeStamp, sign: sign)
-                    //初始化参数配置
-                    accountList?.forEach{ control.register($0) }
-                    //添加同步逻辑回调
-                    shared.asyncCallback(control: control, provider: provider)
-                    
-                case .ccbpay(let orderInfo):
-                    //建行签名成功
-                    let control = CCBPayControl(orderInfo: orderInfo)
-                    //初始化参数配置
-                    accountList?.forEach{ control.register($0) }
-                    //添加同步逻辑回调
-                    shared.asyncCallback(control: control, provider: provider)
-                    
-                case .unionRecharge(let orderInfo, let channel):
-                    //银联充值签名成功
-                    let control = UnionRechargeControl(orderInfo: orderInfo, payChannel: channel.unionRecharge)
-                    //初始化参数配置
-                    accountList?.forEach{ control.register($0) }
-                    //添加异步逻辑回调
-                    shared.asyncCallback(control: control, provider: provider)
-                 
-                case .web(let profile):
-                    let control = WebPayControl(profile: profile)
-                    //添加异步查询逻辑
-                    shared.queryCallback(control: control, provider: provider)
-                    
-                }
-
+                cancelable = shared.configuration(business: business, provider: provider)
             case .failure(let error):
                 //网络请求失败,直接抛出异常
                 shared.payCompletionHandler?(.failure(.custom(error)))
                 shared.reset()
             }
         }
+        
+        return Cancelable({
+            cancelable?()
+            shared.payCompletionHandler = nil
+            shared.active = false
+        })
+    }
+    
+    func configuration(business: PaymentProvider.PaymentBusiness, provider: PaymentProvider) -> (() -> Void) {
+        switch business {
+        case .alipayClient(let orderInfo, let scheme):
+            //支付宝客户端签名成功
+            let control = AlipayControl(orderInfo: orderInfo, scheme: scheme)
+            //初始化参数配置
+            accountList?.forEach{ control.register($0) }
+            //添加同步逻辑回调
+            return syncCallback(control: control, provider: provider)
+            
+        case let .wechat(openId, partnerId, prepayId, nonceStr, timeStamp, package, sign):
+            //微信客户端签名成功
+            let control = WeChatControl(package: package, partnerid: partnerId, noncestr: nonceStr, prepayid: prepayId, openId: openId, timestamp: timeStamp, sign: sign)
+            //初始化参数配置
+            accountList?.forEach{ control.register($0) }
+            //添加同步逻辑回调
+            return asyncCallback(control: control, provider: provider)
+            
+        case .ccbpay(let orderInfo):
+            //建行签名成功
+            let control = CCBPayControl(orderInfo: orderInfo)
+            //初始化参数配置
+            accountList?.forEach{ control.register($0) }
+            //添加同步逻辑回调
+            return asyncCallback(control: control, provider: provider)
+            
+        case .unionRecharge(let orderInfo, let channel):
+            //银联充值签名成功
+            let control = UnionRechargeControl(orderInfo: orderInfo, payChannel: channel.unionRecharge)
+            //初始化参数配置
+            accountList?.forEach{ control.register($0) }
+            //添加异步逻辑回调
+            return asyncCallback(control: control, provider: provider)
+            
+        case .web(let profile):
+            let control = WebPayControl(profile: profile)
+            //添加异步查询逻辑
+            return queryCallback(control: control, provider: provider)
+            
+        }
     }
     
     // 依靠客户端同步回调拿到支付结果
-    private func syncCallback(control: PaymentPlatformStrategy, provider: PaymentProvider) {
+    private func syncCallback(control: PaymentPlatformStrategy, provider: PaymentProvider) -> (() -> Void) {
         
         //调起SDK并跳转到第三方客户端
         control.payOrder()
         
         //得到支付结果
         control.processCompletionHandler = { (state, dict) in
-            
             switch state {
             case .success, .willPay: //本地SDK同步为支付成功/支付中
-                
-                if let unwrappedDict = dict {
-                    //开始验签
-                    provider.verify(dict: unwrappedDict, result: { verifyResult in
-                        
-                        switch verifyResult {
-                        case .pass: //验签通过, 进入查询
-                            provider.query(result: {
-                                if case let .failure(error) = $0, case .custom = error {
-                                    //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
-                                    self.payCompletionHandler?(.success)
-                                    self.reset()
-                                }
-                                else {
-                                    //将查询结果通知到外面, 整个支付过程结束
-                                    self.payCompletionHandler?($0)
-                                    self.reset()
-                                }
-                            })
-                        case .reject: //验签未通过
-                            self.payCompletionHandler?(.failure(.verifyReject))
-                            self.reset()
-                        }
-                        
-                    })
+                guard let unwrappedDict = dict else {
+                    self.query(provider)
+                    return
                 }
-                else {
-                    provider.query(result: {
-                        if case let .failure(error) = $0, case .custom = error {
-                            //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
-                            self.payCompletionHandler?(.success)
-                            self.reset()
-                        }
-                        else {
-                            //将查询结果通知到外面, 整个支付过程结束
-                            self.payCompletionHandler?($0)
-                            self.reset()
-                        }
-                    })
-                }
-                
+                //开始验签
+                provider.verify(dict: unwrappedDict, result: { verifyResult in
+                    switch verifyResult {
+                    case .pass: //验签通过, 进入查询
+                        provider.query(result: {
+                            if case let .failure(error) = $0, case .custom = error {
+                                //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
+                                self.payCompletionHandler?(.success)
+                                self.reset()
+                            }
+                            else {
+                                //将查询结果通知到外面, 整个支付过程结束
+                                self.payCompletionHandler?($0)
+                                self.reset()
+                            }
+                        })
+                    case .reject: //验签未通过
+                        self.payCompletionHandler?(.failure(.verifyReject))
+                        self.reset()
+                    }
+                })
             case .failure(let error): //本地sdk状态码显示处理失败
                 self.payCompletionHandler?(.failure(error))
                 self.reset()
             }
-            
         }
         
         // 增加返回第三方客户端的监听
@@ -237,70 +247,44 @@ final public class PayPlugin: NSObject {
             //通过第三方客户端传回,需要传入SDK再做一次校对
             control.processOrder(with: url)
         }
+        
+        return {
+            //TODO:取消回调
+            
+        }
     }
     
-    private func asyncCallback(control: PaymentPlatformStrategy, provider: PaymentProvider) {
+    private func asyncCallback(control: PaymentPlatformStrategy, provider: PaymentProvider) -> (() -> Void) {
         
         //调起SDK并跳转到第三方客户端
         control.payOrder()
         
         //第三方客户端回调的验签结果
         control.processCompletionHandler = { (state, dict) in
-            
             switch state {
             case .success, .willPay: //本地SDK同步为支付成功/支付中
-                
-                if let unwrappedDict = dict {
-                    //开始验签
-                    provider.verify(dict: unwrappedDict, result: { verifyResult in
-                        
-                        switch verifyResult {
-                        case .pass: //验签通过也可能没有重载方法直接通过的, 进入查询, 已查询结果为准
-                            provider.query(result: {
-                                if case let .failure(error) = $0, case .custom = error {
-                                    //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
-                                    self.payCompletionHandler?(.success)
-                                    self.reset()
-                                }
-                                else {
-                                    //将查询结果通知到外面, 整个支付过程结束
-                                    self.payCompletionHandler?($0)
-                                    self.reset()
-                                }
-                            })
-                        case .reject: //验签未通过
-                            self.payCompletionHandler?(.failure(.verifyReject))
-                            self.reset()
-                        }
-                        
-                    })
+                guard let unwrappedDict = dict else {
+                    self.query(provider)
+                    return
                 }
-                else {
-                    //不需要验签,直接去查询结果
-                    provider.query(result: {
-                        if case let .failure(error) = $0, case .custom = error {
-                            //如果本地签名成功,遇到服务器请求失败时,可返回成功状态
-                            self.payCompletionHandler?(.success)
-                            self.reset()
-                        }
-                        else {
-                            //将查询结果通知到外面, 整个支付过程结束
-                            self.payCompletionHandler?($0)
-                            self.reset()
-                        }
-                    })
-                }
-                
+                //获取到dict, 准备验签
+                provider.verify(dict: unwrappedDict, result: { verifyResult in
+                    switch verifyResult {
+                    case .pass: //验签通过也可能没有重载方法直接通过的, 进入查询, 已查询结果为准
+                        self.query(provider)
+                    case .reject: //验签未通过
+                        self.payCompletionHandler?(.failure(.verifyReject))
+                        self.reset()
+                    }
+                })
             case .failure(let error): //本地sdk状态码显示处理失败
                 self.payCompletionHandler?(.failure(error))
                 self.reset()
             }
-            
         }
         
-        // 增加返回前台页面的监听
-        listenterManager.withLatestFromOpenURLCompletion({ (url) in
-            
+        // 增加监听
+        return listenterManager.withLatestFromOpenURLCompletion({ (url) in
             if let unwrappedURL = url {
                 //通过第三方客户端传回,需要传入SDK再做一次校对
                 control.processOrder(with: unwrappedURL)
@@ -309,53 +293,56 @@ final public class PayPlugin: NSObject {
                 provider.query(result: {
                     //将查询结果通知到外面, 整个支付过程结束
                     self.payCompletionHandler?($0)
-                    self.reset()
                 })
             }
-            
         })
         
     }
     
-    private func queryCallback(control: PaymentWebStrategy, provider: PaymentProvider) {
+    private func query(_ provider: PaymentProvider) {
+        provider.query(result: {
+            //将查询结果通知到外面, 整个支付过程结束
+            self.payCompletionHandler?($0)
+            self.reset()
+        })
+    }
+    
+    private func queryCallback(control: PaymentWebStrategy, provider: PaymentProvider) -> (() -> Void) {
         
         //调起SDK打开网页也有可能跳转到第三方
         control.payOrder()
         
         //得到支付结果
         control.processCompletionHandler = {
-            provider.query(result: {
-                //将查询结果通知到外面, 整个支付过程结束
-                self.payCompletionHandler?($0)
-                self.reset()
-            })
+            self.query(provider)
         }
         
         control.openURLCompletion = { url in
             //跳转到第三方平台
             return self.openURL(url: url, completionHandler: { (finished) in
-                guard finished else { return }
+                
+                guard finished else {
+                    return
+                }
+                
                 //仅跳转成功后, 才增加返回前台的监听
                 self.listenterManager.singleHandleForegroundNotification { [unowned self] in
-                    //判断是否正在发起支付
-                    guard self.active else { return }
                     
-                    provider.query(result: {
-                        //将查询结果通知到外面, 整个支付过程结束
-                        self.payCompletionHandler?($0)
-                        self.reset()
-                    })
+                    //判断是否正在发起支付
+                    guard self.active else {
+                        return
+                    }
+                    
+                    self.query(provider)
                 }
             })
         }
         
+        return {
+            //TODO:取消回调
+        }
     }
     
-    /// 恢复成默认支付状态
-    private func reset() {
-        payCompletionHandler = nil
-        active = false
-    }
 }
 
 extension PayPlugin {
@@ -443,6 +430,15 @@ class ListenterManager {
         }
     }
     
+    func multipleHandleForegroundNotification(_ result: @escaping () -> Void) -> (() -> Void){
+        applicationWillEnterForeground = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { (notification) in
+            result()
+        }
+        return {
+            self.applicationWillEnterForeground = nil
+        }
+    }
+    
     /// 仅接收一次来自第三方客户端的回调,如果后面切回前台的通知过来将不处理
     func singleHandleOpenURLCompletion(_ result: @escaping (URL) -> Void) {
         didReceiveHandleOpenURLCompletion = { [weak self] in
@@ -458,12 +454,11 @@ class ListenterManager {
     }
     
     /// 前台和第三方客户端都有可能回调时,依第三方客户端为准的回调通知. 同时有个超时时间,如果在前台收到通知以后,超出规定时间内没有收到客户端的回调就依前台通知为准
-    func withLatestFromOpenURLCompletion(_ result: @escaping (URL?) -> Void, timeout: TimeInterval = 1) {
+    func withLatestFromOpenURLCompletion(_ result: @escaping (URL?) -> Void, timeout: TimeInterval = 1) -> (() -> Void) {
         
         var isReceivedOpenURLCompletion: Bool = false
         
-        singleHandleForegroundNotification {
-            
+        let cancelable = multipleHandleForegroundNotification {
             if isReceivedOpenURLCompletion == false {
                 DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
                     if isReceivedOpenURLCompletion == false {
@@ -471,14 +466,15 @@ class ListenterManager {
                     }
                 }
             }
-            
         }
         
         singleHandleOpenURLCompletion { (url) in
             result(url)
+            cancelable()
             isReceivedOpenURLCompletion = true
         }
         
+        return cancelable
     }
 }
 
@@ -814,27 +810,40 @@ class UnionRechargeControl: PaymentPlatformStrategy {
         
         UMSPPPayUnifyPayPlugin.pay(withPayChannel: payChannel, payData: orderInfo) { [weak self](code, info) in
             
-            guard let unwrappedInfo = info else {
+            /*
+             {\"extraMsg\":\"\",\"resultMsg\":\"用户取消支付\",\"rawMsg\":\"{\\\"errCode\\\":\\\"-2\\\",\\\"type\\\":\\\"0\\\",\\\"errStr\\\":\\\"用户点击取消并返回\\\"}\"}
+             */
+            
+            guard let data = info?.data(using: .utf8) else {
                 self?.processCompletionHandler?(.failure(.lossData), nil)
                 return
             }
             
             do {
-                let coder = JSONDecoder()
-                let data = try JSONSerialization.data(withJSONObject: unwrappedInfo, options: [])
-                let params = try coder.decode(UnionRechargeResult.self, from: data)
-            
-                switch params.rawMsg.errCode {
-                case "-2":
-                    //取消支付
-                    self?.processCompletionHandler?(.failure(.userDidCancel), nil)
-                case "0":
-                    //支付成功
-                    self?.processCompletionHandler?(.success, nil)
-                default:
-                    //未知
-                    self?.processCompletionHandler?(.failure(.unknown), nil)
+                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+                let dict = json as? Dictionary<String, String>
+                if let rawMsg = dict?["rawMsg"], let subData = rawMsg.data(using: .utf8) {
+                    let subJson = try JSONSerialization.jsonObject(with: subData, options: .mutableContainers)
+                    let subDict = subJson as? Dictionary<String, String>
+                    if let code = subDict?["errCode"] {
+                        switch code {
+                        case "-2":
+                            //取消支付
+                            self?.processCompletionHandler?(.failure(.userDidCancel), nil)
+                            return
+                        case "0":
+                            //支付成功
+                            self?.processCompletionHandler?(.success, nil)
+                            return
+                        default:
+                            //未知
+                            self?.processCompletionHandler?(.failure(.unknown), nil)
+                            return
+                        }
+                    }
                 }
+                
+                self?.processCompletionHandler?(.failure(.unknown), nil)
             }
             catch {
                 self?.processCompletionHandler?(.failure(.custom(error.localizedDescription)), nil)
