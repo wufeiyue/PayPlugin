@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 public struct PayPrepareManager {
     
     private var payClient: PayClient?
@@ -58,3 +58,4 @@ public struct PayPrepareManager {
     
     
 }
+*/

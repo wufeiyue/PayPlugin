@@ -24,7 +24,7 @@ import Foundation
 public typealias PaymentStatusCompletion = (PayResult<PaymentStatus>) -> Void
 */
 
-public typealias ResponseCompletion = () -> Void
+
 
 public enum PayPluginError: Error {
     //网络请求失败结果的输出
@@ -75,16 +75,6 @@ public enum PaymentStatus {
     case failure(PayPluginError)
 }
 
-
-/// 支付终端类型
-///
-/// - client: 第三方客户端
-/// - web: 网页H5
-public enum PayTerminal {
-    case client
-    case web
-}
-
 public struct PostFormProfile {
     
     /// 发起网页请求
@@ -108,6 +98,21 @@ public struct PostFormProfile {
     public init() { }
     
 }
+
+
+/*
+
+
+/// 支付终端类型
+///
+/// - client: 第三方客户端
+/// - web: 网页H5
+public enum PayTerminal {
+    case client
+    case web
+}
+
+
 
 public struct OrderInfoProfile {
     public var orderInfo: String = ""
@@ -173,3 +178,4 @@ extension Notification.Name {
     //不给外部暴露
     internal static let payManagerHandleOpenURL = Notification.Name("payManagerHandleOpenURL")
 }
+*/

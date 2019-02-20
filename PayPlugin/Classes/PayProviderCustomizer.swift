@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+/*
 public protocol PayProviderCustomizer: class {
     
     //查询或验签的数据模型, 遵守协议的类具体实现后, 在Paymanger.default.pay()成功回调结果中, 会传递出去
@@ -65,3 +65,4 @@ public extension PayProviderCustomizer {
     }
 }
 
+*/

@@ -1,8 +1,6 @@
 PODS:
   - PayPlugin (0.2.0):
-    - Result
     - SYWechatOpenSDK
-  - Result (4.1.0)
   - SYWechatOpenSDK (1.7.9)
 
 DEPENDENCIES:
@@ -10,7 +8,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Result
     - SYWechatOpenSDK
 
 EXTERNAL SOURCES:
@@ -18,8 +15,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  PayPlugin: e12fca26cf832a438c50e0d34da4f646fcfffe11
-  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
+  PayPlugin: aae6ddcaf6ad404d8e2ace47464347f93ae01f50
   SYWechatOpenSDK: f93b2e77a3ea8cdb70d535ec1605a5612bac72d6
 
 PODFILE CHECKSUM: d4cf45c9a417143618ce2be51838be080929f4d1

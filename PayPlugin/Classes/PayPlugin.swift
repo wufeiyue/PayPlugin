@@ -6,10 +6,6 @@
 //
 
 import Foundation
-import AlipaySDK
-import SYWechatOpenSDK
-import CCBNetPaySDK
-import UMSPPPayUnifyPayPlugin
 
 public enum PaymentResult<T> {
     case success(T)
@@ -103,7 +99,7 @@ final public class PayPlugin: NSObject {
     }
     
     private var payCompletionHandler: PaymentCompletionHandler?
-    private var listenterManager = ListenterManager()
+    private var listenterManager: ListenterManager?
     /// 支付状态
     public private(set) var active: Bool = false
     public private(set) var accountList: Set<Account>?
@@ -120,7 +116,7 @@ final public class PayPlugin: NSObject {
         //判断是否正在发起支付
         guard shared.active else { return false }
         //将回调传入listenterManager内部处理
-        shared.listenterManager.didReceiveHandleOpenURLCompletion?(url)
+        shared.listenterManager?.didReceiveHandleOpenURLCompletion?(url)
         
         //FIXME: - 判断url是否可以激活App
         return true
@@ -136,9 +132,6 @@ final public class PayPlugin: NSObject {
     @discardableResult
     public class func deliver(provider: PaymentProvider, result: @escaping PaymentCompletionHandler) -> Cancelable {
         
-        shared.payCompletionHandler = result
-        shared.active = true
-        
         var cancelable: (() -> Void)?
         
         provider.sign { (result) in
@@ -152,14 +145,22 @@ final public class PayPlugin: NSObject {
             }
         }
         
+        defer {
+            shared.payCompletionHandler = result
+            shared.active = true
+            shared.listenterManager = ListenterManager()
+        }
+        
         return Cancelable({
             cancelable?()
+            shared.listenterManager?.didReceiveHandleOpenURLCompletion = nil
+            shared.listenterManager = nil
             shared.payCompletionHandler = nil
             shared.active = false
         })
     }
     
-    func configuration(business: PaymentProvider.PaymentBusiness, provider: PaymentProvider) -> (() -> Void) {
+    func configuration(business: PaymentProvider.PaymentBusiness, provider: PaymentProvider) -> (() -> Void)? {
         switch business {
         case .alipayClient(let orderInfo, let scheme):
             //支付宝客户端签名成功
@@ -243,7 +244,7 @@ final public class PayPlugin: NSObject {
         }
         
         // 增加返回第三方客户端的监听
-        listenterManager.singleHandleOpenURLCompletion { (url) in
+        listenterManager?.singleHandleOpenURLCompletion { (url) in
             //通过第三方客户端传回,需要传入SDK再做一次校对
             control.processOrder(with: url)
         }
@@ -254,7 +255,7 @@ final public class PayPlugin: NSObject {
         }
     }
     
-    private func asyncCallback(control: PaymentPlatformStrategy, provider: PaymentProvider) -> (() -> Void) {
+    private func asyncCallback(control: PaymentPlatformStrategy, provider: PaymentProvider) -> (() -> Void)? {
         
         //调起SDK并跳转到第三方客户端
         control.payOrder()
@@ -284,27 +285,19 @@ final public class PayPlugin: NSObject {
         }
         
         // 增加监听
-        return listenterManager.withLatestFromOpenURLCompletion({ (url) in
+        return listenterManager?.withLatestFromOpenURLCompletion({ [weak self] url in
             if let unwrappedURL = url {
                 //通过第三方客户端传回,需要传入SDK再做一次校对
                 control.processOrder(with: unwrappedURL)
             }
             else {
-                provider.query(result: {
+                provider.query(result: { [weak self] in
                     //将查询结果通知到外面, 整个支付过程结束
-                    self.payCompletionHandler?($0)
+                    self?.payCompletionHandler?($0)
                 })
             }
         })
         
-    }
-    
-    private func query(_ provider: PaymentProvider) {
-        provider.query(result: {
-            //将查询结果通知到外面, 整个支付过程结束
-            self.payCompletionHandler?($0)
-            self.reset()
-        })
     }
     
     private func queryCallback(control: PaymentWebStrategy, provider: PaymentProvider) -> (() -> Void) {
@@ -326,7 +319,7 @@ final public class PayPlugin: NSObject {
                 }
                 
                 //仅跳转成功后, 才增加返回前台的监听
-                self.listenterManager.singleHandleForegroundNotification { [unowned self] in
+                self.listenterManager?.singleHandleForegroundNotification { [unowned self] in
                     
                     //判断是否正在发起支付
                     guard self.active else {
@@ -341,6 +334,15 @@ final public class PayPlugin: NSObject {
         return {
             //TODO:取消回调
         }
+    }
+    
+    
+    private func query(_ provider: PaymentProvider) {
+        provider.query(result: {
+            //将查询结果通知到外面, 整个支付过程结束
+            self.payCompletionHandler?($0)
+            self.reset()
+        })
     }
     
 }
@@ -372,522 +374,6 @@ extension PayPlugin {
         return UIApplication.shared.canOpenURL(url)
     }
     
-}
-
-open class PaymentProvider {
-    
-    public enum PaymentBusiness {
-        /// 支付宝客户端
-        case alipayClient(orderInfo: String, scheme: String)
-        /// 微信客户端
-        case wechat(openId: String, partnerId: String, prepayId: String, nonceStr: String, timeStamp: UInt32, package: String, sign: String)
-        /// 建行
-        case ccbpay(orderInfo: String)
-        /// 网页支付
-        case web(profile: PostFormProfile)
-        /// 银联充值 目前仅支持微信/支付宝
-        case unionRecharge(orderInfo: String, payChannel: PayPlugin.SupportedPlatform)
-    }
-
-    //签名回调
-    public typealias SignCompletionHandler = (PaymentResult<PaymentBusiness>) -> Void
-    //验签回调
-    public typealias VerifyCompletionHandler = (VerifyResult) -> Void
-    //查询回调
-    public typealias QueryCompletionHandler = (PaymentStatus) -> Void
-    
-    public init() { }
-    
-    /// 签名
-    open func sign(result: @escaping SignCompletionHandler) {
-        fatalError("需由子类实现")
-    }
-    
-    /// 验签
-    open func verify(dict: Dictionary<AnyHashable, Any?>, result: @escaping VerifyCompletionHandler) {
-        result(.pass)
-    }
-    
-    /// 查询
-    open func query(result: @escaping QueryCompletionHandler) {
-        result(.success)
-    }
-    
-}
-
-class ListenterManager {
-    
-    /// 已经接收到第三方客户端发来的回调
-    var didReceiveHandleOpenURLCompletion: ((URL) -> Void)?
-    
-    private var applicationWillEnterForeground: NSObjectProtocol?
-    
-    /// 仅接收一次来自切回前台的通知,如果后面收到第三方客户端的回调将不处理
-    func singleHandleForegroundNotification(_ result: @escaping () -> Void) {
-        applicationWillEnterForeground = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { [weak self](notification) in
-            result()
-            self?.applicationWillEnterForeground = nil
-        }
-    }
-    
-    func multipleHandleForegroundNotification(_ result: @escaping () -> Void) -> (() -> Void){
-        applicationWillEnterForeground = NotificationCenter.default.addObserver(forName: UIApplication.willEnterForegroundNotification, object: nil, queue: .main) { (notification) in
-            result()
-        }
-        return {
-            self.applicationWillEnterForeground = nil
-        }
-    }
-    
-    /// 仅接收一次来自第三方客户端的回调,如果后面切回前台的通知过来将不处理
-    func singleHandleOpenURLCompletion(_ result: @escaping (URL) -> Void) {
-        didReceiveHandleOpenURLCompletion = { [weak self] in
-            result($0)
-            self?.didReceiveHandleOpenURLCompletion = nil
-        }
-    }
-    
-    /// 无论前台或第三方客户端哪一方,只要有回调过来都会调用此方法,因此这个方法会多次调用
-    func combinLatest(_ result: @escaping (URL?) -> Void) {
-        singleHandleForegroundNotification { result(nil) }
-        singleHandleOpenURLCompletion(result)
-    }
-    
-    /// 前台和第三方客户端都有可能回调时,依第三方客户端为准的回调通知. 同时有个超时时间,如果在前台收到通知以后,超出规定时间内没有收到客户端的回调就依前台通知为准
-    func withLatestFromOpenURLCompletion(_ result: @escaping (URL?) -> Void, timeout: TimeInterval = 1) -> (() -> Void) {
-        
-        var isReceivedOpenURLCompletion: Bool = false
-        
-        let cancelable = multipleHandleForegroundNotification {
-            if isReceivedOpenURLCompletion == false {
-                DispatchQueue.main.asyncAfter(deadline: .now() + timeout) {
-                    if isReceivedOpenURLCompletion == false {
-                        result(nil)
-                    }
-                }
-            }
-        }
-        
-        singleHandleOpenURLCompletion { (url) in
-            result(url)
-            cancelable()
-            isReceivedOpenURLCompletion = true
-        }
-        
-        return cancelable
-    }
-}
-
-class PaymentPlatformStrategy {
-    
-    typealias ProcessCompletionHandler = (_ result: PaymentStatus, _ jsonDict: Dictionary<AnyHashable, Any?>?) -> Void
-    
-    /// 支付结果
-    var processCompletionHandler: ProcessCompletionHandler?
-    
-    //注册
-    func register(_ account: PayPlugin.Account) { }
-    
-    /// 传入签名,调起客户端
-    func payOrder() {
-        fatalError("由子类实现")
-    }
-    
-    /// 从客户端回调App
-    func processOrder(with url: URL) {
-        fatalError("由子类实现")
-    }
-    
-}
-
-class PaymentWebStrategy {
-    
-    typealias ProcessCompletionHandler = () -> Void
-    
-    /// 支付结果
-    var processCompletionHandler: ProcessCompletionHandler?
-    
-    // 打开客户端跳转回调
-    var openURLCompletion: ((URL) -> Bool)?
-    
-    func payOrder() {
-        fatalError("由子类实现")
-    }
-}
-
-
-//MARK: - 策略模式
-
-//MARK:- 支付宝
-class AlipayControl: PaymentPlatformStrategy {
-    
-    let orderInfo: String
-    let scheme: String
-    
-    init(orderInfo: String, scheme: String) {
-        self.orderInfo = orderInfo
-        self.scheme = scheme
-    }
-    
-    override func payOrder() {
-        AlipaySDK.defaultService().payOrder(orderInfo, fromScheme: scheme) { _ in
-            //用于wab跳转支付成功或失败的回调
-        }
-    }
-    
-    override func processOrder(with url: URL) {
-        AlipaySDK.defaultService().processOrder(withPaymentResult: url) { dict in
-            
-            guard let payStatus = dict?["resultStatus"] as? String else {
-                self.processCompletionHandler?(.failure(.lossData), dict)
-                return
-            }
-            
-            switch payStatus {
-            case "9000":
-                //支付成功
-                self.processCompletionHandler?(.success, dict)
-            case "8000":
-                //支付中
-                self.processCompletionHandler?(.willPay, dict)
-            case "6001":
-                //用户取消
-                self.processCompletionHandler?(.failure(.userDidCancel), dict)
-            default:
-                //未知状态
-                self.processCompletionHandler?(.failure(.unknown), dict)
-            }
-            
-        }
-    }
-    
-}
-
-//MARK:- 微信
-class WeChatControl: PaymentPlatformStrategy {
-    
-    let payRequest: PayReq
-    
-    init(package: String, partnerid: String, noncestr: String, prepayid: String, openId: String, timestamp: UInt32, sign: String) {
-        
-        let req = PayReq()
-        req.openID = openId
-        req.partnerId = partnerid
-        req.prepayId = prepayid
-        req.nonceStr = noncestr
-        req.timeStamp = timestamp
-        req.package = package
-        req.sign = sign
-        
-        self.payRequest = req
-    }
-    
-    override func register(_ account: PayPlugin.Account) {
-        if case .weChat(let id) = account {
-            WXApi.registerApp(id)
-        }
-    }
-    
-    override func payOrder() {
-        WXApi.send(payRequest)
-    }
-    
-    override func processOrder(with url: URL) {
-        
-        let queryDictionary = url.queryDictionary
-        guard let ret = queryDictionary["ret"] as? String else {
-            //TODO: 处理失败结果
-            processCompletionHandler?(.failure(.lossData), queryDictionary)
-            return
-        }
-        
-        switch ret {
-        case "0":
-            //支付成功
-            processCompletionHandler?(.success, queryDictionary)
-        case "-2":
-            //用户取消支付
-            processCompletionHandler?(.failure(.userDidCancel), queryDictionary)
-        default:
-            //支付失败
-            processCompletionHandler?(.failure(.unknown), queryDictionary)
-        }
-    }
-    
-}
-
-//MARK: - 建行
-class CCBPayControl: PaymentPlatformStrategy {
-    
-    let orderInfo: String
-    private var isFlag = true
-    
-    init(orderInfo: String) {
-        self.orderInfo = orderInfo
-    }
-    
-    override func payOrder() {
-        
-        CCBNetPay.defaultService().payOrder(orderInfo) { dict in
-            //支付完成回调方法，该方法回调结果需要在processOrderWithPaymentResult方法实现的前提下才能在completionBlock拿到支付结果。将在支付结果获取与处理中详细说明
-            if self.isFlag {
-                self.singleProcessCompletionHandler(dict: dict)
-                self.isFlag = false
-            }
-        }
-        
-        //去掉建行加载loading
-        let windows = UIApplication.shared.windows
-        for window in windows {
-            for j in window.subviews {
-                if j.classForCoder == NSClassFromString("CCBProgressHUD") {
-                    j.isHidden = true
-                }
-            }
-        }
-    }
-    
-    override func processOrder(with url: URL) {
-        
-        CCBNetPay.defaultService().processOrder(withPaymentResult: url) { dict in
-            if self.isFlag {
-                self.singleProcessCompletionHandler(dict: dict)
-                self.isFlag = false
-            }
-        }
-        
-    }
-    
-    private func singleProcessCompletionHandler(dict: [AnyHashable: Any]?) {
-        
-        /*
-         返回状态，以dic为：
-         1.code = -1。H5支付（龙支付H5、支付宝支付、银联支付） 取消支付。
-         2.epayStatus = ”” 为手机银行APP支付取消
-         3.epayStatus = Y 为手机银行APP支付成功，未开商户通知
-         4.有返回。以字段SUCCESS为“Y”支付成功，“N”支付失败，ERRORMSG字段为错误信息。
-         nil。手机银行无返回信息 订单状态请商户以异步服务器通知为准
-         */
-        
-        guard let unwrappedDict = dict else {
-            self.processCompletionHandler?(.failure(.lossData), dict)
-            return
-        }
-        
-        if let status = unwrappedDict["SUCCESS"] as? String, status.isEmpty == false {
-            switch status {
-            case "Y":
-                //支付成功
-                self.processCompletionHandler?(.success, dict)
-                return
-            case "N":
-                //支付失败, 返回错误
-                var error: PayPluginError {
-                    //是否存在错误码
-                    if let message = unwrappedDict["ERRORMSG"] as? String {
-                        return .custom(message)
-                    }
-                    return .unknown
-                }
-                self.processCompletionHandler?(.failure(error), dict)
-                return
-            default:
-                break
-            }
-        }
-        
-        if let epayStatus = unwrappedDict["epayStatus"] as? String {
-            switch epayStatus {
-            case "Y":
-                //支付成功
-                self.processCompletionHandler?(.success, dict)
-                return
-            case "":
-                //手机银行取消支付
-                self.processCompletionHandler?(.failure(.userDidCancel), dict)
-                return
-            default:
-                break
-            }
-        }
-        
-        if let status = unwrappedDict["code"] as? String, status == "-1" {
-            //h5取消支付
-            self.processCompletionHandler?(.failure(.userDidCancel), dict)
-            return
-        }
-        
-        self.processCompletionHandler?(.failure(.unknown), dict)
-        
-    }
-    
-}
-
-class WebPayControl: PaymentWebStrategy {
-    
-    let profile: PostFormProfile
-    
-    init(profile: PostFormProfile) {
-        self.profile = profile
-    }
-    
-    override func payOrder() {
-        
-        let postFormWebViewController = PostFormWebViewController()
-        postFormWebViewController.baseURL = profile.baseURL
-        postFormWebViewController.javeScript = profile.javeScript
-        postFormWebViewController.loadHTMLString = profile.loadHTMLString
-        postFormWebViewController.returnURLString = profile.returnURLString
-        postFormWebViewController.openURLRole = profile.openURLRole
-        postFormWebViewController.navigationItemTitle = profile.title
-        
-        func close() {
-            postFormWebViewController.free()
-            postFormWebViewController.view.removeFromSuperview()
-            postFormWebViewController.removeFromParent()
-        }
-        
-        postFormWebViewController.openURLCompletion = { url in
-            if self.openURLCompletion?(url) == true {
-                // 通过webview检索到url跳转到第三方客户端后,就关闭此网页
-                close()
-            }
-        }
-        
-        postFormWebViewController.backAction = {
-            // 关闭页面
-            close()
-            //回调出去
-            self.processCompletionHandler?()
-        }
-        
-        if let currentViewController = UIViewController.current() {
-            
-            if let current = currentViewController.navigationController {
-                current.view.addSubview(postFormWebViewController.view)
-                current.addChild(postFormWebViewController)
-            }
-            else {
-                currentViewController.view.addSubview(postFormWebViewController.view)
-                currentViewController.addChild(postFormWebViewController)
-            }
-        }
-        
-    }
-}
-
-//{\"extraMsg\":\"\",\"resultMsg\":\"用户取消支付\",\"rawMsg\":\"{\\\"errCode\\\":\\\"-2\\\",\\\"type\\\":\\\"0\\\",\\\"errStr\\\":\\\"用户点击取消并返回\\\"}\"}
-struct UnionRechargeResult: Codable {
-    var extraMsg: String
-    var resultMsg: String
-    var rawMsg: UnionRechargeMsg
-}
-
-struct UnionRechargeMsg: Codable {
-    var errCode: String
-    var type: String
-    var errStr: String
-}
-
-//MARK: - 银联充值
-class UnionRechargeControl: PaymentPlatformStrategy {
-    
-    let payChannel: String
-    let orderInfo: String
-    
-    init(orderInfo: String, payChannel: String) {
-        self.orderInfo = orderInfo
-        self.payChannel = payChannel
-    }
-    
-    override func register(_ account: PayPlugin.Account) {
-        if case .weChat(let id) = account {
-            UMSPPPayUnifyPayPlugin.registerApp(id)
-        }
-    }
-    
-    override func payOrder() {
-        
-        UMSPPPayUnifyPayPlugin.pay(withPayChannel: payChannel, payData: orderInfo) { [weak self](code, info) in
-            
-            /*
-             {\"extraMsg\":\"\",\"resultMsg\":\"用户取消支付\",\"rawMsg\":\"{\\\"errCode\\\":\\\"-2\\\",\\\"type\\\":\\\"0\\\",\\\"errStr\\\":\\\"用户点击取消并返回\\\"}\"}
-             */
-            
-            guard let data = info?.data(using: .utf8) else {
-                self?.processCompletionHandler?(.failure(.lossData), nil)
-                return
-            }
-            
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-                let dict = json as? Dictionary<String, String>
-                if let rawMsg = dict?["rawMsg"], let subData = rawMsg.data(using: .utf8) {
-                    let subJson = try JSONSerialization.jsonObject(with: subData, options: .mutableContainers)
-                    let subDict = subJson as? Dictionary<String, String>
-                    if let code = subDict?["errCode"] {
-                        switch code {
-                        case "-2":
-                            //取消支付
-                            self?.processCompletionHandler?(.failure(.userDidCancel), nil)
-                            return
-                        case "0":
-                            //支付成功
-                            self?.processCompletionHandler?(.success, nil)
-                            return
-                        default:
-                            //未知
-                            self?.processCompletionHandler?(.failure(.unknown), nil)
-                            return
-                        }
-                    }
-                }
-                
-                self?.processCompletionHandler?(.failure(.unknown), nil)
-            }
-            catch {
-                self?.processCompletionHandler?(.failure(.custom(error.localizedDescription)), nil)
-            }
-        }
-        
-    }
-    
-    override func processOrder(with url: URL) {
-        UMSPPPayUnifyPayPlugin.handleOpen(url)
-    }
-}
-
-extension PayPlugin.SupportedPlatform {
-    
-    var unionRecharge: String {
-        
-        switch self {
-        case .alipay:
-            return "02" //支付宝支付
-        case .weChat:
-            return "01" //微信支付
-        case .unionpay:
-            return "03" //银商钱包
-        default:
-            fatalError("不支持的类型")
-        }
-    }
-    
-}
-
-extension UIViewController {
-    fileprivate class func current(base: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
-        if let nav = base as? UINavigationController {
-            return current(base: nav.visibleViewController)
-        }
-        if let tab = base as? UITabBarController {
-            return current(base: tab.selectedViewController)
-        }
-        if let presented = base?.presentedViewController {
-            return current(base: presented)
-        }
-        return base
-    }
 }
 
 //MARK: - Helper

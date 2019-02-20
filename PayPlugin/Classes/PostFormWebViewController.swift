@@ -100,6 +100,8 @@ class PostFormNavigationView: UIView {
 
 public final class PostFormWebViewController: UIViewController {
     
+    public typealias ResponseCompletion = () -> Void
+    
     //初始化实现
     public var backAction: ResponseCompletion?
     

@@ -1,10 +1,10 @@
 ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
-FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/PayPlugin" "${PODS_CONFIGURATION_BUILD_DIR}/Result" "${PODS_CONFIGURATION_BUILD_DIR}/SYWechatOpenSDK" "${PODS_ROOT}/../../PayPlugin/Framework"
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/PayPlugin" "${PODS_CONFIGURATION_BUILD_DIR}/SYWechatOpenSDK" "${PODS_ROOT}/../../PayPlugin/Framework"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
 LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../../PayPlugin/Framework" "${PODS_ROOT}/SYWechatOpenSDK/SYWechatOpenSDK"
-OTHER_CFLAGS = $(inherited) -iquote "${PODS_CONFIGURATION_BUILD_DIR}/PayPlugin/PayPlugin.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/Result/Result.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/SYWechatOpenSDK/SYWechatOpenSDK.framework/Headers"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"PaymentControl" -l"UMSPosPayOnly" -l"WeChatSDK" -l"c++" -l"sqlite3" -l"sqlite3.0" -l"z" -framework "CFNetwork" -framework "CoreMotion" -framework "CoreTelephony" -framework "PayPlugin" -framework "Result" -framework "SYWechatOpenSDK" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
+OTHER_CFLAGS = $(inherited) -iquote "${PODS_CONFIGURATION_BUILD_DIR}/PayPlugin/PayPlugin.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/SYWechatOpenSDK/SYWechatOpenSDK.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"PaymentControl" -l"UMSPosPayOnly" -l"WeChatSDK" -l"c++" -l"sqlite3" -l"sqlite3.0" -l"z" -framework "CFNetwork" -framework "CoreMotion" -framework "CoreTelephony" -framework "PayPlugin" -framework "SYWechatOpenSDK" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
 OTHER_SWIFT_FLAGS = $(inherited) -D COCOAPODS
 PODS_BUILD_DIR = ${BUILD_DIR}
 PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
