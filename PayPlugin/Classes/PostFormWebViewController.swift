@@ -13,7 +13,7 @@ protocol PostFormNavigationViewDelegate: class {
     func didCloseTapped()
 }
 
-class PostFormNavigationView: UIView {
+final class PostFormNavigationView: UIView {
     
     weak var delegate: PostFormNavigationViewDelegate?
     

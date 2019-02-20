@@ -32,7 +32,6 @@
 		6D0B5BC979FD2EEC2A9A3D52C83046F6 /* WeChatControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B702C08FC365E6FA72A574060B41A12 /* WeChatControl.swift */; };
 		714E9E2A5DD446ECB80C097C1D618C4B /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 825005EB2EBA2C70A9FD0680A9ABA0B6 /* CoreTelephony.framework */; };
 		7179384A2B8240EACE05187DBBAD913D /* PostFormWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7286039E5325B71152AF866F27C71B65 /* PostFormWebViewController.swift */; };
-		76E3932D08A51DD9E9A26DB19D9528D4 /* PayControlManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26D9407BC79D958132614D647B5D2C73 /* PayControlManager.swift */; };
 		7F58394AB36B8AA82F39FA1AB94CC72F /* AlipayControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25ADD0A3CE77823E6DB88F6FBF7B83CD /* AlipayControl.swift */; };
 		90AA970FB56E421D198EA3B591984E38 /* WXApiObject.h in Headers */ = {isa = PBXBuildFile; fileRef = ADD7178995265FB405A18A4C63987DDA /* WXApiObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		94DD2DEF72980C9BB0C418B115FBD2DD /* PaymentPlatformStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94530933D3ADB5AA0CD8EBAF55CF48B9 /* PaymentPlatformStrategy.swift */; };
@@ -42,7 +41,6 @@
 		AE2550C55BEF3740BAB404A7DC057054 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FD8A257CB56B64D6D0B5809EA17CB65 /* SystemConfiguration.framework */; };
 		B2CC7F0948C6AB5218C2D652BAC11150 /* PayPlugin-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BCDA1591D81798DB8FC2BDAC5B300C /* PayPlugin-dummy.m */; };
 		B4BD59BDFEF5717730183FC05AF65648 /* PayPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB528D13EC52EC0A5F6633A96C0A54F /* PayPlugin.swift */; };
-		BB69BA13628C5484A6E6DEB6AB721D2F /* PayResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746EE1173AF6223B339009D1FA0D2CF7 /* PayResponse.swift */; };
 		BDDD8B3AEE353F4B1F9591699EA153A9 /* Bundle+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF35A53E123DBF721AED436DA3C111A4 /* Bundle+Extension.swift */; };
 		C7928B0019AB1E34323B0521055D4A5D /* WebPayControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3EEEDBD53294EE2E53305679B232E0 /* WebPayControl.swift */; };
 		C923D83C6CC5A809F671DD0A8F41F72F /* PostFormControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7ED42082BA191CD0681ADE2F80D8602 /* PostFormControl.swift */; };
@@ -93,39 +91,37 @@
 		0B702C08FC365E6FA72A574060B41A12 /* WeChatControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WeChatControl.swift; path = PayPlugin/Classes/WeChatControl.swift; sourceTree = "<group>"; };
 		0B7478CDEE22A067E7F1D26204119526 /* Pods-PayPlugin_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PayPlugin_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		0D3EEEDBD53294EE2E53305679B232E0 /* WebPayControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebPayControl.swift; path = PayPlugin/Classes/WebPayControl.swift; sourceTree = "<group>"; };
-		0F8537C3D810C4B4529A0ED8C310227F /* PayPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = PayPlugin.framework; path = PayPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F8537C3D810C4B4529A0ED8C310227F /* PayPlugin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PayPlugin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		10F48F16CFF34DC5F961687D20D52194 /* SYWechatOpenSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SYWechatOpenSDK-dummy.m"; sourceTree = "<group>"; };
 		132042042A4D9CD6CF365C3321E2A369 /* SYWechatOpenSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SYWechatOpenSDK-prefix.pch"; sourceTree = "<group>"; };
 		211364EA6B44B0B833873C7D19616E55 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreMotion.framework; sourceTree = DEVELOPER_DIR; };
 		23D3ECCE1C80CEABBDC1D3591511B348 /* ResourceBundle-PayAssets-PayPlugin-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "ResourceBundle-PayAssets-PayPlugin-Info.plist"; sourceTree = "<group>"; };
 		251364FDE6637C76E17415959BF880A5 /* SYWechatOpenSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SYWechatOpenSDK.xcconfig; sourceTree = "<group>"; };
 		25ADD0A3CE77823E6DB88F6FBF7B83CD /* AlipayControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = AlipayControl.swift; path = PayPlugin/Classes/AlipayControl.swift; sourceTree = "<group>"; };
-		26D9407BC79D958132614D647B5D2C73 /* PayControlManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayControlManager.swift; path = PayPlugin/Classes/PayControlManager.swift; sourceTree = "<group>"; };
 		291366141A80EB25E30EBDC25040D658 /* PayProviderCustomizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayProviderCustomizer.swift; path = PayPlugin/Classes/PayProviderCustomizer.swift; sourceTree = "<group>"; };
 		2F1B505A8D861A7BE13AFCDDDB7D9743 /* CCBPayControl.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = CCBPayControl.swift; path = PayPlugin/Classes/CCBPayControl.swift; sourceTree = "<group>"; };
 		314ECBE84150FF1789723DA4C0304DBC /* libWeChatSDK.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libWeChatSDK.a; path = SYWechatOpenSDK/libWeChatSDK.a; sourceTree = "<group>"; };
 		31F3877CD877D284B42A031D3E83B192 /* PayPrepareManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayPrepareManager.swift; path = PayPlugin/Classes/PayPrepareManager.swift; sourceTree = "<group>"; };
-		3359A085E1477A64C08294F7E8104060 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		3359A085E1477A64C08294F7E8104060 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		41EC9D9544DC5995D23A7D9B6E91179A /* PayPlugin-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "PayPlugin-umbrella.h"; sourceTree = "<group>"; };
 		476F9346611F0AF95A8271D90C7C06D3 /* PayPlugin.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = PayPlugin.modulemap; sourceTree = "<group>"; };
-		486248EAD918EB5841FD8349CE693816 /* PayPlugin.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; path = PayPlugin.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		486248EAD918EB5841FD8349CE693816 /* PayPlugin.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; path = PayPlugin.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		564F1BE33F15EF97ACF92AA6E2AEF630 /* SYWechatOpenSDKDummp.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SYWechatOpenSDKDummp.m; path = SYWechatOpenSDK/SYWechatOpenSDKDummp.m; sourceTree = "<group>"; };
 		575B5FE5F986366B10F830D162ACD1AB /* WechatAuthSDK.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WechatAuthSDK.h; path = SYWechatOpenSDK/WechatAuthSDK.h; sourceTree = "<group>"; };
 		58124F3C82F32285D662536BDBBB989E /* ListenterManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ListenterManager.swift; path = PayPlugin/Classes/ListenterManager.swift; sourceTree = "<group>"; };
 		67E0F6A0DBC69B2E3A6586E6A6414BA6 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		6CA386CC3E451EB254EF0DE07BF5ACC1 /* PayPlugin-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "PayPlugin-Info.plist"; sourceTree = "<group>"; };
-		6E0A67DF9F6B7B3DD19EFFC1695B686D /* Images */ = {isa = PBXFileReference; includeInIndex = 1; name = Images; path = PayPlugin/Assets/PayAssets.bundle/Images; sourceTree = "<group>"; };
+		6E0A67DF9F6B7B3DD19EFFC1695B686D /* Images */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = Images; path = PayPlugin/Assets/PayAssets.bundle/Images; sourceTree = "<group>"; };
 		7286039E5325B71152AF866F27C71B65 /* PostFormWebViewController.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PostFormWebViewController.swift; path = PayPlugin/Classes/PostFormWebViewController.swift; sourceTree = "<group>"; };
 		73C880D17E83419CF7B0D65634506D91 /* SYWechatOpenSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SYWechatOpenSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		746EE1173AF6223B339009D1FA0D2CF7 /* PayResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayResponse.swift; path = PayPlugin/Classes/PayResponse.swift; sourceTree = "<group>"; };
 		77B38D136CA95599B29F920FE93F214A /* SYWechatOpenSDKDummp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SYWechatOpenSDKDummp.h; path = SYWechatOpenSDK/SYWechatOpenSDKDummp.h; sourceTree = "<group>"; };
-		79B3EF7E8DA9FFA0306261840207E11F /* Pods_PayPlugin_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_PayPlugin_Example.framework; path = "Pods-PayPlugin_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		79B3EF7E8DA9FFA0306261840207E11F /* Pods_PayPlugin_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PayPlugin_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		825005EB2EBA2C70A9FD0680A9ABA0B6 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/CoreTelephony.framework; sourceTree = DEVELOPER_DIR; };
 		8279F1F6D106DA50616C51431F966A21 /* Pods-PayPlugin_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-PayPlugin_Example.modulemap"; sourceTree = "<group>"; };
 		85756595BCE72D6B80189A5AEB23FF6C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		8FD8A257CB56B64D6D0B5809EA17CB65 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS11.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
 		92B05E66AC11C02C70C779144D7EF3C2 /* CCBNetPaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CCBNetPaySDK.framework; path = PayPlugin/Framework/CCBNetPaySDK.framework; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		94530933D3ADB5AA0CD8EBAF55CF48B9 /* PaymentPlatformStrategy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PaymentPlatformStrategy.swift; path = PayPlugin/Classes/PaymentPlatformStrategy.swift; sourceTree = "<group>"; };
 		94EBE7B7AFB8C0E7714D313F9218FD56 /* libUMSPosPayOnly.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libUMSPosPayOnly.a; path = PayPlugin/Framework/libUMSPosPayOnly.a; sourceTree = "<group>"; };
 		984DB11F3EFE818399BF36617E90B4E5 /* Pods-PayPlugin_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PayPlugin_Example-Info.plist"; sourceTree = "<group>"; };
@@ -136,7 +132,7 @@
 		ACD70746EDF3C9466FA4B7CBC3831585 /* PaymentWebStrategy.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PaymentWebStrategy.swift; path = PayPlugin/Classes/PaymentWebStrategy.swift; sourceTree = "<group>"; };
 		ADD7178995265FB405A18A4C63987DDA /* WXApiObject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WXApiObject.h; path = SYWechatOpenSDK/WXApiObject.h; sourceTree = "<group>"; };
 		AE6295A837F958852AA52CFF46F870FE /* PayPlugin.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = PayPlugin.xcconfig; sourceTree = "<group>"; };
-		B2DF58348331DAEDA771AE94E4359D2A /* PayAssets.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = PayAssets.bundle; path = "PayPlugin-PayAssets.bundle"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2DF58348331DAEDA771AE94E4359D2A /* PayAssets.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PayAssets.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		B56002B84E883C266D382E35D32F1DAE /* WXApi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = WXApi.h; path = SYWechatOpenSDK/WXApi.h; sourceTree = "<group>"; };
 		B9A2DFA7001E972EBFCA4BCD85516171 /* Pods-PayPlugin_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PayPlugin_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		BE656430236F380475FB6B5088395927 /* SYWechatOpenSDK-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SYWechatOpenSDK-Info.plist"; sourceTree = "<group>"; };
@@ -150,10 +146,10 @@
 		E0C4D7AFA2D9F6A20A57AD81B8D0D9DE /* PaymentProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PaymentProvider.swift; path = PayPlugin/Classes/PaymentProvider.swift; sourceTree = "<group>"; };
 		E1BCDA1591D81798DB8FC2BDAC5B300C /* PayPlugin-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "PayPlugin-dummy.m"; sourceTree = "<group>"; };
 		E495B560FF23AC66D99BF0A147CC0DBB /* PayConfig.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = PayConfig.swift; path = PayPlugin/Classes/PayConfig.swift; sourceTree = "<group>"; };
-		EA0783454DC43C3AC18A98F7CAD80CDA /* SYWechatOpenSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SYWechatOpenSDK.framework; path = SYWechatOpenSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA0783454DC43C3AC18A98F7CAD80CDA /* SYWechatOpenSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SYWechatOpenSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE5BAACF4A433AA8B05C25AE6339E306 /* Pods-PayPlugin_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-PayPlugin_Example-umbrella.h"; sourceTree = "<group>"; };
 		F088825A5E6D9B1D67ACC2DEF5073DD6 /* Pods-PayPlugin_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PayPlugin_Example-dummy.m"; sourceTree = "<group>"; };
-		F81B8536BFCDFBA934BFCB96151D4F91 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		F81B8536BFCDFBA934BFCB96151D4F91 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		FF35A53E123DBF721AED436DA3C111A4 /* Bundle+Extension.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Bundle+Extension.swift"; path = "PayPlugin/Classes/Bundle+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -229,7 +225,6 @@
 				2F1B505A8D861A7BE13AFCDDDB7D9743 /* CCBPayControl.swift */,
 				58124F3C82F32285D662536BDBBB989E /* ListenterManager.swift */,
 				E495B560FF23AC66D99BF0A147CC0DBB /* PayConfig.swift */,
-				26D9407BC79D958132614D647B5D2C73 /* PayControlManager.swift */,
 				94530933D3ADB5AA0CD8EBAF55CF48B9 /* PaymentPlatformStrategy.swift */,
 				E0C4D7AFA2D9F6A20A57AD81B8D0D9DE /* PaymentProvider.swift */,
 				ACD70746EDF3C9466FA4B7CBC3831585 /* PaymentWebStrategy.swift */,
@@ -237,7 +232,6 @@
 				31F3877CD877D284B42A031D3E83B192 /* PayPrepareManager.swift */,
 				0206A33CBC0E5ECC806670C4441D9877 /* PayProvider.swift */,
 				291366141A80EB25E30EBDC25040D658 /* PayProviderCustomizer.swift */,
-				746EE1173AF6223B339009D1FA0D2CF7 /* PayResponse.swift */,
 				A7ED42082BA191CD0681ADE2F80D8602 /* PostFormControl.swift */,
 				7286039E5325B71152AF866F27C71B65 /* PostFormWebViewController.swift */,
 				D9EC62EF77291C7646E5BCCBBD48B545 /* UnionRechargeControl.swift */,
@@ -263,7 +257,6 @@
 				7DCBE0C17328F759E19C66C11EF96404 /* Frameworks */,
 				E3642C54F0A04C4B992D2B75F67E6F49 /* Support Files */,
 			);
-			name = SYWechatOpenSDK;
 			path = SYWechatOpenSDK;
 			sourceTree = "<group>";
 		};
@@ -518,7 +511,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 0930;
+				LastUpgradeCheck = 1010;
 			};
 			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -583,7 +576,6 @@
 				F4E46355431DC05B727966943442D5F2 /* CCBPayControl.swift in Sources */,
 				30E2192C710EF7E47CC674E97D41B0B5 /* ListenterManager.swift in Sources */,
 				643A49AA49653AEEC547E87F9C7E06ED /* PayConfig.swift in Sources */,
-				76E3932D08A51DD9E9A26DB19D9528D4 /* PayControlManager.swift in Sources */,
 				94DD2DEF72980C9BB0C418B115FBD2DD /* PaymentPlatformStrategy.swift in Sources */,
 				48FBDE738CFD02D18AC2FAC5EB8D590A /* PaymentProvider.swift in Sources */,
 				5CE7E05CBEFEBF119C42324E44FE85F8 /* PaymentWebStrategy.swift in Sources */,
@@ -592,7 +584,6 @@
 				CDB7D147F1468FA54CA84831D70BA9E6 /* PayPrepareManager.swift in Sources */,
 				25F93E43C40CB2C14E7317A9753C87FD /* PayProvider.swift in Sources */,
 				E9C46C3DE5B7320535D01DCCB7E9B162 /* PayProviderCustomizer.swift in Sources */,
-				BB69BA13628C5484A6E6DEB6AB721D2F /* PayResponse.swift in Sources */,
 				C923D83C6CC5A809F671DD0A8F41F72F /* PostFormControl.swift in Sources */,
 				7179384A2B8240EACE05187DBBAD913D /* PostFormWebViewController.swift in Sources */,
 				2D5D475A68B68BC109AC3ABDB1540333 /* UnionRechargeControl.swift in Sources */,
@@ -727,8 +718,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -792,6 +782,7 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
@@ -886,8 +877,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";

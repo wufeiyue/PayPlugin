@@ -8,7 +8,7 @@
 import Foundation
 import CCBNetPaySDK
 
-class CCBPayControl: PaymentPlatformStrategy {
+final class CCBPayControl: PaymentPlatformStrategy {
     
     let orderInfo: String
     private var isFlag = true

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class WebPayControl: PaymentWebStrategy {
+final class WebPayControl: PaymentWebStrategy {
     
     let profile: PostFormProfile
     

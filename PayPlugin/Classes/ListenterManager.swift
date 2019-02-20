@@ -7,7 +7,7 @@
 
 import Foundation
 
-class ListenterManager {
+final class ListenterManager {
     
     /// 已经接收到第三方客户端发来的回调
     var didReceiveHandleOpenURLCompletion: ((URL) -> Void)?

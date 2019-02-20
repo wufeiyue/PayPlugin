@@ -8,7 +8,7 @@
 import Foundation
 import SYWechatOpenSDK
 
-class WeChatControl: PaymentPlatformStrategy {
+final class WeChatControl: PaymentPlatformStrategy {
     
     let payRequest: PayReq
     

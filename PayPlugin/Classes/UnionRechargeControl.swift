@@ -8,7 +8,7 @@
 import Foundation
 import UMSPPPayUnifyPayPlugin
 
-class UnionRechargeControl: PaymentPlatformStrategy {
+final class UnionRechargeControl: PaymentPlatformStrategy {
     
     let payChannel: String
     let orderInfo: String
