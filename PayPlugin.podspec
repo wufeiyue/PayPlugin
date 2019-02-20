@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'PayPlugin'
-  s.version          = '0.2.0'
+  s.version          = '0.3.0'
   s.summary          = '集成有支付宝,微信,银联,建行支付渠道的开源库'
 
   s.description      = <<-DESC
